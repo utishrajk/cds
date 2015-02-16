@@ -1,0 +1,134 @@
+
+<div ng-include="headnavbar" ng-cloak></div>
+
+<div class="main-container" id="main-container" ng-class="{'display': enableDropDownMenu}" >
+        <script type="text/javascript">
+            try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        </script>
+
+        <div class="main-container-inner">
+            <div class="menu-toggler" id="menu-toggler" ng-click="toggleDropDownMenu()">
+                <span class="menu-text" ></span>
+            </div>
+
+            <div ng-include="sidenavbar" ng-cloak ></div>
+
+            <div class="main-content">
+
+                <div ng-include="breadcrums" ng-cloak></div>
+
+                <div class="inflexxion-page-content">
+                    <h1 class="inflexxion-page-header">
+                        Recommendations
+                    </h1>
+
+                    <div class="row inflexxion-arial-14">
+                        <div class="col-xs-12">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="recommendation-info-header">
+                                For <span><i>{{dataElements.note1}}</i></span> <span> <i>{{dataElements.uniqueClientNumber}}</i></span> on <span><i>{{today | date:'MM/dd/yyyy HH:mm:ss'}}</i></span>
+                            </div>
+
+                            <!--RECOMMENDATIONS-->
+                            <span>
+                                <a href="" scroll-to="dataelementsTable">Review data elements used</a>
+                            </span>
+
+                            <br/>
+
+                            <span class="inflexxion-arial-12">
+                                {{recommendationsObject.description}}
+                            </span>
+
+                            <br/><br/>
+
+                            <label class="inflexxion-input-lable">Recommendations for this kind of patient group:</label><br/>
+
+                            <label class="inflexxion-arial-12">Pay special attention to potential:</label><br/>
+                            <ul class="inflexxion-arial-12">
+                                <li ng-repeat="recommendation in recommendationsObject.recommendations">{{recommendation}}</li>
+                            </ul>
+                            <br/>
+
+                            <label class="inflexxion-input-lable">Services / Treatment for this kind of patient group:</label><br/>
+
+                            <label>You should consider:</label><br/>
+                            <ul class="inflexxion-arial-12">
+                                <li ng-repeat="service in recommendationsObject.services">{{service}}</li>
+                            </ul>
+
+                            <br/>
+
+                            <label class="inflexxion-input-lable">Individuals in this group profile tended to do best with the following services:</label><br/>
+
+                            <ul class="inflexxion-arial-12">
+                                <li ng-repeat="treatment in recommendationsObject.treatments">{{treatment}}</li>
+                            </ul>
+                            <br/>
+                            <!--button-->
+                            <div class="col-sm-12 no-padding-left inflexxion-arial-14 inflexxion-form-actions rec-pdf-btn-container" >
+                                <span class="rec-pdf-btn">
+                                    <a class="btn btn-primary"  style="width:150px;" type="button" href="recommendations/downloadPDF/{{dataElements.requestId}}" target="_blank">
+                                        Print Page as PDF
+                                    </a>
+                                </span>
+                            </div>
+
+                            <br/><br/><br/><br/>
+
+                            <div class="hr"></div>
+
+                            <!--DATA ELEMENTS-->
+
+                            <span class="rec-dataelements-table-label">
+                                <span class="left">
+                                    <label class="inflexxion-input-lable" id="dataelementsTable">Data elements used for the above recommendations:</label>
+                                </span>
+                                <span class="float-right">
+                                    <span class="red">*</span> Edited by <b>{{account.userName}}</b> , Date: <b> {{today| date:'MM/dd/yyyy'}}</b>
+                                </span>
+                            </span>
+
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-6  control-label inflexxion-input-lable" for="dataelementsTable">-->
+                                    <!--<label class="inflexxion-input-lable" id="dataelementsTable">Data elements used for the above recommendations:</label>-->
+                                <!--</label>-->
+                                <!--<div class=" col-sm-6 no-padding-left">-->
+                                    <!--<span class="red">*</span> Edited by:{{account.userName}} , Date: {{today| date:'MM/dd/yyyy'}}-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                            <div ng-switch="assessment">
+                                <div ng-switch-when="true">
+                                    <div ng-include="asiRecDataElementsTableTemplate" ng-cloak ></div>
+                                </div>
+                                <div ng-switch-when="false">
+                                    <div ng-include="gpraRecDataElementsTableTemplate" ng-cloak ></div>
+                                </div>
+                            </div>
+
+                            <br/><br/>
+                            <!--button-->
+                            <div class="col-sm-12 no-padding-left inflexxion-arial-14 inflexxion-form-actions rec-pdf-btn-container" >
+                                <span class="rec-pdf-btn">
+                                    <a class="btn btn-primary"  style="width:150px;" type="button" href="recommendations/downloadPDF/{{dataElements.requestId}}" target="_blank">
+                                        Print Page as PDF
+                                    </a>
+                                </span>
+                            </div>
+
+                            <!-- PAGE CONTENT ENDS -->
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.page-content -->
+
+                <!--<div ng-include="loginpage" ></div>-->
+
+            </div><!-- /.main-content -->
+
+        </div><!-- /.main-container-inner -->
+
+    </div><!-- /.main-container -->
+
+<div ng-include="footer" ng-cloak></div>

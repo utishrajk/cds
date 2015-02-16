@@ -1,0 +1,641 @@
+<!--Drug Use-->
+<div class="hr"></div>
+<div class="form-group" >
+
+
+
+    <label class="col-sm-12 control-label inflexxion-input-lable ">
+        <div class="inflexxion-label-align data-element-subheader">Drug Use</div>
+    </label>
+
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">3. During the past 30 days, how many days have you used any of the following:</div>
+    </label>
+    <br/>
+
+    <div class="dataElement-input inflexxion-label-align red">
+
+        <span ng-show=" isValidHeroinDayCount"> Heroin (smack, H, Junk, Skag) should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isValidMorphineCount "> Morphine should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isValidDiluadidCount"> Diluadid should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isValidDemerolCount "> Demerol should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isValidPercocetCount "> Percocet should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isValidDarvonCount"> Darvon should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isValidCodeineCount "> Codeine should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isValidTylenolCount "> Tylenol 2, 3, 4 should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isValidOxycontinCount"> Oxycontin/Oxycodone should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isValidMethadoneCount "> Non-prescription methadone should be a number between 0 and 30.<br/></span>
+
+        <!--ROUTE-->
+
+        <span ng-show="isInvalidHeroinRoute"> Heroin (smack, H, Junk, Skag) route is required.<br/></span>
+        <span ng-show="isInvalidMorphineRoute"> Morphine route is required.<br/></span>
+        <span ng-show="isInvalidDiluadidRoute"> Diluadid route is required.<br/></span>
+        <span ng-show="isInvalidDemerolRoute"> Demerol route is required.<br/></span>
+        <span ng-show="isInvalidPercocetRoute"> Percocet route is required.<br/></span>
+        <span ng-show="isInvalidDarvonRoute"> Darvon route is required.<br/></span>
+        <span ng-show="isInvalidCodeineRoute"> Codeine route is required.<br/></span>
+        <span ng-show="isInvalidTylenolRoute"> Tylenol 2, 3, 4 route is required.<br/></span>
+        <span ng-show="isInvalidOxycontinRoute"> Oxycontin/Oxycodone route is required.<br/></span>
+        <span ng-show="isInvalidMethadoneRoute"> Non-prescription methadone route is required.<br/></span>
+    </div>
+
+    <div class="dataElement-input inflexxion-label-align">
+        * Note the usual route. For more than one route, choose the most severe. The routes are listed from least severe (1) to most severe (5).
+    </div>
+
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <table class="table-striped table-hover no-bottom-margin">
+                <thead>
+                <tr>
+                    <th style="width:330px;">Opiates:</th>
+                    <th style="width:85px;">Number of Days</th>
+                    <th style="width:90px; " class="center">Refuse</th>
+                    <th style="width:90px;" class="center" >Don't know</th>
+                    <th style="width:90px;" class="td-vertical-line">Route *</th>
+                    <th style="width:90px;" class="center">Refuse</th>
+                    <th style="width:90px;" class="center" >Don't know</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable ">
+                        <span ng-class="{red: (isValidHeroinDayCount || isInvalidHeroinRoute)}">Heroin (smack, H, Junk, Skag)</span>
+                    </td>
+                    <td class="td-padding">
+                        <input type="text" ng-model="patient.heroinDayCount" name="heroinDayCount" class="input-in-table"  ng-change="onNumberOfDaysChange('heroinDayCount')" />
+                    </td>
+                    <td class="row-error-highlight">
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.heroinDayCount"   class="ace"  name="heroinDayCountR" value="-7" ng-change="onRadioButtonChange('heroinDayCount')" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td  >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.heroinDayCount"  class="ace"  name="heroinDayCountR" value="-8" ng-change="onRadioButtonChange('heroinDayCount')" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td class="td-vertical-line" >
+                        <select ng-model="patient.heroinRouteCode" name="heroinRouteCode" ng-change="onRouteChange('heroinRouteCode')" required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in routeOfDrugUse" value="{{r.code}}" ng-selected="r.code == patient.heroinRouteCode"  >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.heroinRouteCode" class="ace"  name="heroinRouteR" ng-change="onRadioButtonChange('heroinRouteCode')" value="-7" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.heroinRouteCode" class="ace"  name="heroinRouteR" ng-change="onRadioButtonChange('heroinRouteCode')" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable" >
+                        <span ng-class="{red: (isValidMorphineCount || isInvalidMorphineRoute)}">Morphine</span>
+                    </td>
+                    <td class="td-padding"><input type="text" ng-model="patient.morphineCount" name="morphineCount" class="input-in-table" ng-change="onNumberOfDaysChange('morphineCount')" /></td>
+                    <td><label class="inline  dataElement-input">
+                        <input type="radio" ng-model="drugUse.morphineCount" class="ace"  name="morphineCountR" ng-change="onRadioButtonChange('morphineCount')" value="-7" />
+                        <span class="lbl"> </span>
+                    </label>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.morphineCount" class="ace"  name="morphineCountR" ng-change="onRadioButtonChange('morphineCount')" value="-8" />
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td class="td-vertical-line">
+                        <select ng-model="patient.morphineRouteCode" name="morphineRouteCode"  ng-change="onRouteChange('morphineRouteCode')" required >
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in routeOfDrugUse" value="{{r.code}}" ng-selected="r.code == patient.morphineRouteCode"  >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.morphineRouteCode" class="ace"  name="morphineRouteR" ng-change="onRadioButtonChange('morphineRouteCode')"  value="-7" />
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.morphineRouteCode" class="ace"  name="morphineRouteR" ng-change="onRadioButtonChange('morphineRouteCode')"  value="-8" />
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable"> <span ng-class="{red: (isValidDiluadidCount || isInvalidDiluadidRoute)}">Diluadid </span></td>
+                    <td class="td-padding"><input type="text" ng-model="patient.diluadidCount" name="diluadidCount" ng-change="onNumberOfDaysChange('diluadidCount')" class="input-in-table"/></td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.diluadidCount" class="ace"  name="diluadidCountR" ng-change="onRadioButtonChange('diluadidCount')"   value="-7" />
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.diluadidCount" class="ace"  name="diluadidCountR" ng-change="onRadioButtonChange('diluadidCount')"  value="-8" />
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td class="td-vertical-line">
+                        <select ng-model="patient.diluadidRouteCode" name="diluadidRouteCode" ng-change="onRouteChange('diluadidRouteCode')" required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in routeOfDrugUse" value="{{r.code}}" ng-selected="r.code == patient.diluadidRouteCode" >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.diluadidRouteCode" class="ace"  name="diluadidRouteR"  ng-change="onRadioButtonChange('diluadidRouteCode')" value="-7" />
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.diluadidRouteCode" class="ace"  name="diluadidRouteR" ng-change="onRadioButtonChange('diluadidRouteCode')"  value="-8" />
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable" > <span ng-class="{red: (isValidDemerolCount || isInvalidDemerolRoute)}">Demerol </span></td>
+                    <td class="td-padding"><input type="text" ng-model="patient.demerolCount" name="demerolCount" ng-change="onNumberOfDaysChange('demerolCount')" class="input-in-table"/></td>
+                    <td>   <label class="inline  dataElement-input">
+                        <input type="radio" ng-model="drugUse.demerolCount" class="ace" name="demerolCountR" ng-change="onRadioButtonChange('demerolCount')" value="-7" required/>
+                        <span class="lbl"> </span>
+                    </label>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.demerolCount" class="ace"  name="demerolCountR" ng-change="onRadioButtonChange('demerolCount')"  value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td class="td-vertical-line">
+                        <select ng-model="patient.demerolRouteCode" name="demerolRouteCode"  ng-change="onRouteChange('demerolRouteCode')"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in routeOfDrugUse" value="{{r.code}}" ng-selected="r.code == patient.demerolRouteCode" >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.demerolRouteCode" class="ace"  name="demerolRouteR" ng-change="onRadioButtonChange('demerolRouteCode')" value="-7" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.demerolRouteCode" class="ace"  name="demerolRouteR" ng-change="onRadioButtonChange('demerolRouteCode')" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable" >  <span ng-class="{red: (isValidPercocetCount || isInvalidPercocetRoute)}">Percocet </span> </td>
+                    <td class="td-padding"><input type="text" ng-model="patient.percocetCount" name="percocetCount"  ng-change="onNumberOfDaysChange('percocetCount')" class="input-in-table"/></td>
+                    <td>   <label class="inline  dataElement-input">
+                        <input type="radio" ng-model="drugUse.percocetCount" class="ace" name="percocetCountR" ng-change="onRadioButtonChange('percocetCount')"   value="-7" required/>
+                        <span class="lbl"> </span>
+                    </label>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.percocetCount" class="ace"  name="percocetCountR" ng-change="onRadioButtonChange('percocetCount')"  value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td class="td-vertical-line" >
+                        <select ng-model="patient.percocetRouteCode" name="percocetRouteCode"  ng-change="onRouteChange('percocetRouteCode')"   required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in routeOfDrugUse" value="{{r.code}}" ng-selected="r.code == patient.percocetRouteCode" >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.percocetRouteCode" class="ace"  ng-change="onRadioButtonChange('percocetRouteCode')" name="percocetRouteR" value="-7" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.percocetRouteCode" class="ace"  ng-change="onRadioButtonChange('percocetRouteCode')" name="percocetRouteR" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable" > <span ng-class="{red: (isValidDarvonCount || isInvalidDarvonRoute)}">Darvon </span> </td>
+                    <td class="td-padding"><input type="text" ng-model="patient.darvonCount" name="darvonCount"  ng-change="onNumberOfDaysChange('darvonCount')" class="input-in-table"/></td>
+                    <td>   <label class="inline  dataElement-input">
+                        <input type="radio" ng-model="drugUse.darvonCount" class="ace" name="darvonCountR" ng-change="onRadioButtonChange('darvonCount')"  value="-7" required/>
+                        <span class="lbl"> </span>
+                    </label>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.darvonCount" class="ace" name="darvonCountR" ng-change="onRadioButtonChange('darvonCount')" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td class="td-vertical-line">
+                        <select ng-model="patient.darvonRouteCode" name="darvonRouteCode" ng-change="onRouteChange('darvonRouteCode')"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in routeOfDrugUse" value="{{r.code}}" ng-selected="r.code == patient.darvonRouteCode"  >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.darvonRouteCode"  class="ace"  ng-change="onRadioButtonChange('darvonRouteCode')" name="darvonRouteR" value="-7" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.darvonRouteCode" class="ace"  ng-change="onRadioButtonChange('darvonRouteCode')" name="darvonRouteR" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable" > <span ng-class="{red: (isValidCodeineCount || isInvalidCodeineRoute)}">Codeine </span></td>
+                    <td class="td-padding"><input type="text" ng-model="patient.codeineCount" name="codeineCount"  ng-change="onNumberOfDaysChange('codeineCount')"class="input-in-table"/></td>
+                    <td>   <label class="inline  dataElement-input">
+                        <input type="radio" ng-model="drugUse.codeineCount" class="ace" name="codeineCountR" ng-change="onRadioButtonChange('codeineCount')"  value="-7" required/>
+                        <span class="lbl"> </span>
+                    </label>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.codeineCount" class="ace"  name="codeineCountR" ng-change="onRadioButtonChange('codeineCount')" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td class="td-vertical-line">
+                        <select ng-model="patient.codeineRouteCode" name="codeineRouteCode" ng-change="onRouteChange('codeineRouteCode')"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in routeOfDrugUse" value="{{r.code}}" ng-selected="r.code == patient.codeineRouteCode" >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.codeineRouteCode" class="ace"  ng-change="onRadioButtonChange('codeineRouteCode')" name="codeineRouteR" value="-7" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.codeineRouteCode" class="ace"  ng-change="onRadioButtonChange('codeineRouteCode')" name="codeineRouteR" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable" > <span ng-class="{red: (isValidTylenolCount || isInvalidTylenolRoute)}">Tylenol 2, 3, 4 </span> </td>
+                    <td class="td-padding"><input type="text" ng-model="patient.tylenolCount" name="tylenolCount"  ng-change="onNumberOfDaysChange('tylenolCount')" class="input-in-table"/></td>
+                    <td>   <label class="inline  dataElement-input">
+                        <input type="radio" ng-model="drugUse.tylenolCount"  class="ace" name="tylenolCountR" ng-change="onRadioButtonChange('tylenolCount')"  value="-7" required/>
+                        <span class="lbl"> </span>
+                    </label>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.tylenolCount" class="ace" name="tylenolCountR" ng-change="onRadioButtonChange('tylenolCount')" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td class="td-vertical-line">
+                        <select ng-model="patient.tylenolRouteCode" name="tylenolRouteCode" ng-change="onRouteChange('tylenolRouteCode')"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in routeOfDrugUse" value="{{r.code}}" ng-selected="r.code == patient.tylenolRouteCode" >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.tylenolRouteCode" class="ace"  ng-change="onRadioButtonChange('tylenolRouteCode')" name="tylenolRouteR" value="-7" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.tylenolRouteCode" class="ace"  ng-change="onRadioButtonChange('tylenolRouteCode')" name="tylenolRouteR" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable" >  <span ng-class="{red: (isValidOxycontinCount || isInvalidOxycontinRoute)}">Oxycontin/Oxycodone</span> </td>
+                    <td class="td-padding"><input type="text" ng-model="patient.oxycontinCount" name="oxycontinCount"  ng-change="onNumberOfDaysChange('oxycontinCount')" class="input-in-table"/></td>
+                    <td>   <label class="inline  dataElement-input">
+                        <input type="radio" ng-model="drugUse.oxycontinCount" class="ace" name="oxycontinCountR" ng-change="onRadioButtonChange('oxycontinCount')"  value="-7" required/>
+                        <span class="lbl"> </span>
+                    </label>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.oxycontinCount" class="ace"  name="oxycontinCountR" ng-change="onRadioButtonChange('oxycontinCount')" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td class="td-vertical-line" >
+                        <select ng-model="patient.oxycontinRouteCode" name="oxycontinRouteCode" ng-change="onRouteChange('oxycontinRouteCode')" required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in routeOfDrugUse" value="{{r.code}}" ng-selected="r.code == patient.oxycontinRouteCode"  >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.oxycontinRouteCode"  class="ace"   ng-change="onRadioButtonChange('oxycontinRouteCode')" name="oxycontinRouteR" value="-7" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.oxycontinRouteCode"  class="ace"   ng-change="onRadioButtonChange('oxycontinRouteCode')" name="oxycontinRouteR" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable" > <span ng-class="{red: (isValidMethadoneCount || isInvalidMethadoneRoute)}">Non-prescription methadone </span> </td>
+                    <td class="td-padding"><input type="text" ng-model="patient.methadoneCount" name="methadoneCount"  ng-change="onNumberOfDaysChange('methadoneCount')" class="input-in-table"/></td>
+                    <td>   <label class="inline  dataElement-input">
+                        <input type="radio" ng-model="drugUse.methadoneCount" class="ace" name="methadoneCountR" ng-change="onRadioButtonChange('methadoneCount')"  value="-7" required/>
+                        <span class="lbl"> </span>
+                    </label>
+                    </td>
+                    <td >
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.methadoneCount" class="ace"  name="methadoneCountR" ng-change="onRadioButtonChange('methadoneCount')" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td class="td-vertical-line" >
+                        <select ng-model="patient.methadoneRouteCode"  name="methadoneRouteCode" ng-change="onRouteChange('methadoneRouteCode')"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in routeOfDrugUse" value="{{r.code}}" ng-selected="r.code == patient.methadoneRouteCode" >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.methadoneRouteCode" class="ace"  ng-change="onRadioButtonChange('methadoneRouteCode')" name="methadoneRouteR" value="-7" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="drugUse.methadoneRouteCode"  class="ace"  ng-change="onRadioButtonChange('methadoneRouteCode')" name="methadoneRouteR" value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<!--Mental and Physical Health Problems        -->
+<div class="hr"></div>
+
+<div class="form-group" >
+
+    <label class="col-sm-12 control-label inflexxion-input-lable ">
+        <div class="inflexxion-label-align data-element-subheader">Mental and Physical Health Problems</div>
+    </label>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">
+            4. How would you rate your overall health right now?
+            <span ng-show="showError(patientForm.healthIndicatorCode, 'required')" class="red nobold">This question is required</span>
+        </div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14">
+        <label class="inline dataElement-input">
+            <input type="radio" ng-model="patient.healthIndicatorCode" class="ace"  name="healthIndicatorCode" value="1" required/>
+            <span class="lbl inflexxion-arial-14 "> Excellent</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio" ng-model="patient.healthIndicatorCode"  class="ace"  name="healthIndicatorCode" value="2" required/>
+            <span class="lbl inflexxion-arial-14 "> Very good</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio" ng-model="patient.healthIndicatorCode" class="ace"  name="healthIndicatorCode" value="3" required/>
+            <span class="lbl inflexxion-arial-14 "> Good</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio" ng-model="patient.healthIndicatorCode"  class="ace"  name="healthIndicatorCode" value="4" required/>
+            <span class="lbl inflexxion-arial-14 "> Fair</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio" ng-model="patient.healthIndicatorCode"  class="ace"  name="healthIndicatorCode" value="5" required/>
+            <span class="lbl inflexxion-arial-14 "> Poor</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio" ng-model="patient.healthIndicatorCode"  class="ace"  name="healthIndicatorCode" value="-7" required/>
+            <span class="lbl inflexxion-arial-14 "> Refused</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio" ng-model="patient.healthIndicatorCode"  class="ace"  name="healthIndicatorCode" value="-8" required/>
+            <span class="lbl inflexxion-arial-14 "> Don't Know</span>
+        </label>
+    </div>
+
+
+</div>
+
+<div class="hr"></div>
+
+<div class="form-group" >
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">5. In the past 30 days, not due to your alcohol or drug use, how many days have you:</div>
+    </label>
+
+    <div class="dataElement-input inflexxion-label-align red">
+
+        <span ng-show=" isInValidDepressionCount"> Experienced serious depression? should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isInValidAnxietyCount "> Experienced serious anxiety or tension? should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isInValidViolentCount"> Experienced trouble controlling violent behavior including episodes of rage, or violence? should be a number between 0 and 30.<br/></span>
+        <span ng-show=" isInValidPsychMedicationCount "> Been prescribed medication for psychological and emotional problems? should be a number between 0 and 30.<br/></span>
+
+    </div>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <table class="table-striped table-hover no-bottom-margin">
+                <thead>
+                <tr>
+                    <th style="width:430px;"></th>
+                    <th style="width:85px;">Number of Days</th>
+                    <th style="width:90px;" class="center">Refuse</th>
+                    <th style="width:90px;" class="center">Don't know</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable">
+                        <span ng-class="{red: isInValidDepressionCount}">Experienced serious depression? </span>
+                    </td>
+                    <td class="td-padding"><input type="text" ng-model="patient.depressionCount" name="depressionCount" ng-change="onNumberOfDaysChange('depressionCount')" class="input-in-table"/></td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="mentalPhysicalProblem.depressionCount"  class="ace"  name="depressionCountR" ng-change="onRadioButtonChange('depressionCount')"  value="-7" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="mentalPhysicalProblem.depressionCount"  class="ace"  name="depressionCountR" ng-change="onRadioButtonChange('depressionCount')"  value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable" >
+                        <span ng-class="{red: isInValidAnxietyCount}">Experienced serious anxiety or tension?  </span>
+                    </td>
+                    <td class="td-padding"><input type="text" ng-model="patient.anxietyCount" name="anxietyCount" ng-change="onNumberOfDaysChange('anxietyCount')" class="input-in-table"/></td>
+                    <td><label class="inline  dataElement-input">
+                        <input type="radio" ng-model="mentalPhysicalProblem.anxietyCount"  class="ace"  name="anxietyCountR" ng-change="onRadioButtonChange('anxietyCount')"   value="-7" required/>
+                        <span class="lbl"> </span>
+                    </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="mentalPhysicalProblem.anxietyCount"  class="ace"  name="anxietyCountR" ng-change="onRadioButtonChange('anxietyCount')"  value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable">
+                        <span ng-class="{red: isInValidViolentCount}">Experienced trouble controlling violent behavior including episodes of rage, or violence? </span>
+                    </td>
+                    <td class="td-padding"><input type="text" ng-model="patient.violentCount" name="violentCount" ng-change="onNumberOfDaysChange('violentCount')" class="input-in-table"/></td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="mentalPhysicalProblem.violentCount"  class="ace"  name="violentCountR" ng-change="onRadioButtonChange('violentCount')"  value="-7" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="mentalPhysicalProblem.violentCount"  class="ace"  name="violentCountR" ng-change="onRadioButtonChange('violentCount')"  value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="inflexxion-label-align inflexxion-input-lable" >
+                        <span ng-class="{red: isInValidPsychMedicationCount}">Been prescribed medication for psychological and emotional problems? </span>
+                    </td>
+                    <td class="td-padding"><input type="text" ng-model="patient.psychMedicationCount" name="psychMedicationCount" ng-change="onNumberOfDaysChange('psychMedicationCount')" class="input-in-table"/></td>
+                    <td>   <label class="inline  dataElement-input">
+                        <input type="radio" ng-model="mentalPhysicalProblem.psychMedicationCount" class="ace" name="psychMedicationCountR"  ng-change="onRadioButtonChange('psychMedicationCount')"  value="-7" required/>
+                        <span class="lbl"> </span>
+                    </label>
+                    </td>
+                    <td>
+                        <label class="inline  dataElement-input">
+                            <input type="radio" ng-model="mentalPhysicalProblem.psychMedicationCount" class="ace"  name="psychMedicationCountR" ng-change="onRadioButtonChange('psychMedicationCount')"  value="-8" required/>
+                            <span class="lbl"> </span>
+                        </label>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="inflexxion-label-align inflexxion-arial-14 ">
+            <label class="col-sm-12 control-label inflexxion-input-lable" >
+                <div class="inflexxion-label-align">
+                    5a. How much have you been bothered by these psychological or emotional problems in the past 30 days?
+                    <span ng-show="showError(patientForm.psychologicalOrEemotional, 'required')" class="red nobold">This question is required</span>
+                </div>
+
+            </label>
+
+
+            <div class="col-sm-12 no-padding-left inflexxion-arial-14">
+                <label class="inline dataElement-input">
+                    <input type="radio" ng-model="patient.emotionalProblemsCode" name="psychologicalOrEemotional " class="ace "  value="1" required/>
+                    <span class="lbl inflexxion-arial-14 "> Not at all</span>
+                </label>
+                <br />
+                <label class="inline  dataElement-input">
+                    <input type="radio" ng-model="patient.emotionalProblemsCode"  name="psychologicalOrEemotional" class="ace"  value="2" required/>
+                    <span class="lbl inflexxion-arial-14 "> Slightly</span>
+                </label>
+                <br />
+                <label class="inline  dataElement-input">
+                    <input type="radio" ng-model="patient.emotionalProblemsCode" name="psychologicalOrEemotional" class="ace"  value="3" required/>
+                    <span class="lbl inflexxion-arial-14 "> Moderately</span>
+                </label>
+                <br />
+                <label class="inline  dataElement-input">
+                    <input type="radio" ng-model="patient.emotionalProblemsCode" name="psychologicalOrEemotional" class="ace"  value="4" required/>
+                    <span class="lbl inflexxion-arial-14 "> Considerably</span>
+                </label>
+                <br />
+                <label class="inline  dataElement-input">
+                    <input type="radio" ng-model="patient.emotionalProblemsCode"  name="psychologicalOrEemotional" class="ace"  value="5" required/>
+                    <span class="lbl inflexxion-arial-14 "> Extremely</span>
+                </label>
+                <br />
+                <label class="inline  dataElement-input">
+                    <input type="radio" ng-model="patient.emotionalProblemsCode"  name="radio5a" class="ace"  value="-7" required/>
+                    <span class="lbl inflexxion-arial-14 "> Refused</span>
+                </label>
+                <br />
+                <label class="inline  dataElement-input">
+                    <input type="radio" ng-model="patient.emotionalProblemsCode" name="radio5a" class="ace"  value="-8" required/>
+                    <span class="lbl inflexxion-arial-14 "> Don't Know</span>
+                </label>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12 no-padding-left inflexxion-arial-14">
+    <span class="red" ng-show="isRecommendationNotAvailable">Error getting Recommendations.</span>
+</div>
+<!--button-->
+<div class="col-sm-6 no-padding-left inflexxion-arial-14 inflexxion-form-actions ">
+    <a class="btn btn-primary"  style="width:190px;" type="button" ng-click="getGPRARecommendations()" ng-disabled="canSaveGPRA()" id="patient-save-btn">
+        GET RECOMMENDATIONS
+    </a>
+    <a class="btn btn-secondary" ng-click="reset()" id="patient-back-btn">
+        CLEAR
+    </a>
+</div>

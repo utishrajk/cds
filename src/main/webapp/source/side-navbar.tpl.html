@@ -1,0 +1,79 @@
+<div class="sidebar" id="sidebar" ng-class="{'display': enableDropDownMenu}">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('sidebar', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+            <span class="btn btn-success"></span>
+
+            <span class="btn btn-info"></span>
+
+            <span class="btn btn-warning"></span>
+
+            <span class="btn btn-danger"></span>
+        </div>
+    </div>
+    <!-- #sidebar-shortcuts -->
+
+    <ul class="nav nav-list">
+
+        <li ng-class="{'active': activeMenuItem == 'patientdataelements'}" ng-click="setActiveMenuItem('patientdataelements')" class="inflexxion-header-font" >
+            <a href="#/dataelements" id="navbar-dataelements-lnk">
+                <span class="menu-text">  Patient Data Elements </span>
+            </a>
+        </li>
+
+
+        <li ng-class="{'active': activeMenuItem == 'reminders'}" ng-click="setActiveMenuItem('reminders')" class="inflexxion-header-font" >
+            <a href="#/reminders" id="navbar-reminders-lnk">
+                <span class="menu-text"> Reminders </span>
+            </a>
+        </li>
+
+        <li ng-class="{'open': activeSubMenuItem, 'active':  highlightMenu}" class="inflexxion-header-font">
+            <a href="" class="dropdown-toggle" ng-click="toggleToolsMenuItem('toolsandresources')" >
+                <span class="menu-text"> Tools & Resources </span>
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu" >
+                <li ng-class="{'active': activeMenuItem == 'documentLibrary'}" ng-click="selectToolsSubMenu('documentLibrary')"  class="inflexxion-header-font" >
+                    <a href="#/documentlibrary">
+                        Document Library
+                    </a>
+                </li>
+
+                <li ng-class="{'active': activeMenuItem == 'training'}" ng-click="selectToolsSubMenu('training')"   class="inflexxion-header-font" style="border-bottom: 1px solid #335c65;">
+                    <a href="#/training">
+                        Training Video
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li ng-class="{'active': activeMenuItem == 'myAccount'}" ng-click="setActiveMenuItem('myAccount')" class="inflexxion-header-font">
+            <a href="#/myaccount"  >
+                <span class="menu-text"> My Account</span>
+            </a>
+        </li>
+
+        <li ng-class="{'active': activeMenuItem == 'organization'}" ng-click="setActiveMenuItem('organization')" class="inflexxion-header-font" ng-show="isAdmin()">
+
+            <a href="#/organization" id="navbar-organization-lnk">
+                <span class="menu-text"> Organization Profile </span>
+            </a>
+        </li>
+
+    </ul>
+
+    <script type="text/javascript">
+        try {
+            ace.settings.check('sidebar', 'collapsed')
+        } catch (e) {
+        }
+    </script>
+</div>

@@ -1,0 +1,301 @@
+
+<div ng-include="headnavbar" ng-cloak></div>
+
+<div class="main-container" id="main-container">
+
+<script type="text/javascript">
+    try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+</script>
+
+<div class="main-container-inner">
+
+    <a class="menu-toggler" id="menu-toggler" href="" ng-class="{'display': enableDropDownMenu}"  ng-click="toggleDropDownMenu()">
+        <span class="menu-text"></span>
+    </a>
+
+    <div ng-include="sidenavbar" ng-cloak ></div>
+
+    <div class="main-content">
+
+    <div ng-include="breadcrums" ng-cloak></div>
+
+    <div class="inflexxion-page-content">
+    <h1 class="inflexxion-page-header">
+        My Account
+    </h1>
+
+    <div class="row">
+    <div class="col-xs-12">
+
+<!-- PAGE CONTENT BEGINS -->
+
+    <form novalidate name="caremanagerForm" class="formValidation form-horizontal field-height" >
+
+        <div growl></div>
+
+        <p class="inflexxion-arial-14">All fields are required unless noted.</p>
+
+        <div class="form-group">
+            <div class=" col-sm-12 inflexxion-dataelements-description" >
+                <strong>Personal Information:</strong> This information helps identify you in the system.
+            </div>
+        </div>
+
+        <fieldset class="inflexxion-arial-14">
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable " for="firstname">
+                    <div class="inflexxion-label-align">First Name</div>
+                </label>
+                <div class="col-sm-6 no-padding-left">
+                    <input type="text"  name="firstname" id="firstname" ng-model="caremanager.firstName" required placeholder="First Name"/>
+                    <span ng-show="caremanagerForm.firstname.$error.required" class="common-form-error">This field is required.</span>
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable" for="lastname">
+                    <div class="inflexxion-label-align">Last Name</div>
+                </label>
+                <div class="col-sm-6 no-padding-left">
+                    <input type="text"  name="lastname" id="lastname"  ng-model="caremanager.lastName" required placeholder="Last Name"/>
+                    <span ng-show="caremanagerForm.lastname.$error.required" class="common-form-error">This field is required.</span>
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable" for="caremanagerPhone">
+                    <div class="inflexxion-label-align">Phone Number</div>
+                </label>
+                <div class="col-sm-6 no-padding-left">
+                    <input type="text" id="caremanagerPhone" required name="caremanagerPhone" ng-model="caremanager.mailingAddressTelephoneNumber" />
+                    <span ng-show="caremanagerForm.caremanagerPhone.$error.required" class="patient-form-error">This field is required.</span>
+                    <span ng-hide="isPhoneNumber" class="patient-form-error">Invalid phone number. </span>
+                    <span ng-hide="isValidPhoneNumberLength" class="patient-form-error">US Phone number must be 10-digit number.</span>
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable" for="caremanagerOrganization">
+                    <div class="inflexxion-label-align">Organization</div>
+                </label>
+                <div class=" col-sm-6 no-padding-left">
+                    <input class="input-medium input-mask-phone" type="text" id="caremanagerOrganization" required name="caremanagerOrganization" ng-model="caremanager.orgName" />
+                    <span ng-show="caremanagerForm.caremanagerOrganization.$error.required" class="patient-form-error">This field is required.</span>
+                </div>
+            </div>
+
+            <div class="space-10"></div>
+
+            <div class="form-group">
+                <div class=" col-sm-12 inflexxion-dataelements-description" >
+                    <strong>Login Information:</strong> This information is required in order for you to create your account.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable" for="email">
+                    <div class="inflexxion-label-align">Email</div>
+                </label>
+                <div class=" col-sm-6 no-padding-left">
+                    <input type="email"   name="email" id="email"  ng-pattern="emailPattern" ng-model="caremanager.userName"  ng-minlength="5" ng-maxlength="30" required placeholder="Username" />
+                    <span ng-show="isDirty(caremanagerForm.email) && showError(caremanagerForm.email, 'required')" class="patient-form-error">Enter your email address.</span>
+                    <span ng-show="isDirty(caremanagerForm.email) && caremanagerForm.email.$error['pattern']" class="patient-form-error">Use the format you@email.com.</span>
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable" for="credential">
+                    <div class="inflexxion-label-align">Password</div>
+                </label>
+                <div class=" col-sm-6 no-padding-left">
+                    <input type="password" id="credential" name="credential" value="credential" ng-disabled="true"/>
+                </div>
+            </div>
+
+            <div class="space-10"></div>
+
+            <div class="form-group">
+                <div class=" col-sm-12 inflexxion-dataelements-description" >
+                    Only use the New Password and Confirm Password fields below if you wish to change your password. If you leave the fields blank, your current password will remain active.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable" for="password1">
+                    <div class="inflexxion-label-align">Create Password</div>
+                </label>
+                <div class=" col-sm-6 no-padding-left">
+                    <input type="password" id="password1" name="password1" ng-pattern="passwordPattern" ng-minlength="12" ng-model="caremanager.credential"/>
+                    <span ng-show="isDirty(caremanagerForm.password1) && caremanagerForm.password1.$error['pattern']"
+                         class="patient-form-error">Password should have a minimum of twelve characters, and at least one each of upper-case letters, lower-case letters, numbers, and special characters.</span>
+
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable " for="password2">
+                    <div class="inflexxion-label-align">Confirm Password</div>
+                </label>
+                <div class=" col-sm-6 no-padding-left">
+                    <input type="password" id="password2" name="password2" pw-check="password1" ng-minlength="12" ng-model="caremanager.confirmPassword"/>
+                    <span data-ng-show="isDirty(caremanagerForm.password2) && caremanagerForm.password2.$error.pwmatch" class="common-form-error">The Passwords you entered do not match.</span>
+                    <span ng-show="isDirty(caremanagerForm.password2) && caremanagerForm.password2.$error['pattern']"
+                          class="patient-form-error">Password should have a minimum of twelve characters, and at least one each of upper-case letters, lower-case letters, numbers, and special characters.</span>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class=" col-sm-12 inflexxion-dataelements-description" >
+                    <strong>Security Information:</strong> This information is required to help you reset your password if you forget it.
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable       " for="securityQuestion1">
+                    <div class="inflexxion-label-align">Security Question 1</div>
+                </label>
+                <div class=" col-sm-6 no-padding-left">
+                    <select ng-model="caremanager.securityQuestion1Code" name="securityQuestion1"  ng-required="false" id="securityQuestion1" ng-change="onSecurityQuestion1Change()">
+                        <option value="">-- Choose Security Question 1 --</option>
+                        <option ng-repeat="s in tempSecurityQuestions1" value="{{s.code}}" ng-selected="s.code == caremanager.securityQuestion1Code"  >{{s.displayName}}</option>
+                    </select>
+                    <span ng-show="isSecurityQuestion1Required " class="patient-form-error">This field is required.</span>
+                    <!--<span ng-show="questionsMatch" class="patient-form-error">Security questions must be different</span>-->
+                </div>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable " for="securityAnswer1"> </label>
+                <div class=" col-sm-6 no-padding-left">
+                    <input type="password"  id="securityAnswer1" name="securityAnswer1" data-ng-model="caremanager.securityAnswer1"  ng-required="enableSecurityAnswer1IsRequired"  ng-disabled="isSecurityQuestion1Required"/>
+                    <span ng-show="showError(caremanagerForm.securityAnswer1, 'required')" class="patient-form-error">This field is required</span>
+                </div>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable" for="securityQuestion2">
+                    <div class="inflexxion-label-align">Security Question 2</div>
+                </label>
+                <div class=" col-sm-6 no-padding-left">
+                    <select ng-model="caremanager.securityQuestion2Code" name="securityQuestion2" ng-required="false" id="securityQuestion2" ng-change="onSecurityQuestion2Change()"  ng-required="enableRequiredForSecurityQuestion2">
+                        <option value="">-- Choose Security Question 2 --</option>
+                        <option ng-repeat="s in tempSecurityQuestions2" value="{{s.code}}" ng-selected="s.code == caremanager.securityQuestion2Code" >{{s.displayName}}</option>
+                    </select>
+                    <span ng-show="isSecurityQuestion2Required" class="patient-form-error">This field is required.</span>
+                    <!--<span ng-show="questionsMatch" class="patient-form-error">Security questions must be different</span>-->
+                </div>
+                </label>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable " for="securityAnswer2"> </label>
+                <div class=" col-sm-6 no-padding-left">
+                    <input type="password"    id="securityAnswer2" name="securityAnswer2" data-ng-model="caremanager.securityAnswer2" ng-required="enableSecurityAnswer2IsRequired" ng-disabled="isSecurityQuestion2Required"/>
+                    <span ng-show="showError(caremanagerForm.securityAnswer2, 'required')" class="patient-form-error">This field is required</span>
+                </div>
+                </label>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable ">
+                    <div class="inflexxion-label-align">Date of birth</div>
+                </label>
+                <div class=" col-sm-6 no-padding-left">
+                    <datedropdown ng-model="caremanager.dateOfBirth" isrequired="true" futuredatevalidation="true" agevalidation="true" isvaliddate="isvaliddate"></datedropdown>
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+
+            <div class="form-group">
+                <label class="col-sm-2  control-label inflexxion-input-lable" for="">
+
+                </label>
+
+                <div class=" col-sm-6 no-padding-left inflexxion-form-actions">
+                    <button class="btn btn-primary" type="button" ng-click="open(caremanager)" ng-disabled="!canSave()">
+                        SUBMIT
+                    </button>
+                    <button class="btn btn-secondary" type="reset" ng-click="reset()">
+                        CANCEL
+                    </button>
+                </div>
+                </label>
+
+            </div>
+
+        </fieldset>
+
+    </form>
+
+<br/><br/>
+
+<!-- PAGE CONTENT ENDS -->
+</div><!-- /.col -->
+</div><!-- /.row -->
+</div><!-- /.page-content -->
+
+</div><!-- /.main-content -->
+
+</div><!-- /.main-container-inner -->
+
+<!--<a href="" id="btn-scroll-up" class="btn-scroll-up btn-sm btn-inverse btn" style="position: fixed" ng-click="gotoTop()">-->
+<!--<i class="icon-double-angle-up icon-only bigger-110"></i>-->
+<!--</a>-->
+
+</div><!-- /.main-container -->
+
+<div ng-include="footer" ng-cloak></div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3>Verify Identity</h3>
+    </div>
+
+    <form novalidate name="caremanagerVerificationModalForm" autocomplete="off" class="formValidation form-horizontal field-height">
+        <fieldset>
+            <div class="modal-body">
+                <label class="block clearfix">User name
+                    <span class="block input-icon input-icon-right">
+                        <input type="email" ng-pattern="emailPattern" ng-model="user.username" class="form-control" name="email" required/>
+                        <i class="icon-user"></i>
+                    </span>
+                    <span ng-show="caremanagerVerificationModalForm.email.$dirty && caremanagerVerificationModalForm.email.$error['required']" class="common-form-error">Enter your email address.</span>
+                    <span ng-show="caremanagerVerificationModalForm.email.$error['pattern']" class="patient-form-error">Use the format you@email.com</span>
+                </label>
+                <label class="block clearfix"> Password
+                    <span class="block input-icon input-icon-right">
+                        <input type="password" ng-model="user.credential" class="form-control" name="password" required/>
+                        <i class="icon-lock"></i>
+                    </span>
+                    <span ng-show="caremanagerVerificationModalForm.password.$dirty && caremanagerVerificationModalForm.password.$error['required']" class="common-form-error">This field is required.</span>
+                </label>
+                <div ng-show="loginerror" class="red">{{loginErrorMsg}}</div>
+            </div>
+        </fieldset>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-disabled="!(caremanagerVerificationModalForm.$dirty && caremanagerVerificationModalForm.$valid)" ng-click="verify()">Verify</button>
+            <button class="btn btn-secondary" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</script>

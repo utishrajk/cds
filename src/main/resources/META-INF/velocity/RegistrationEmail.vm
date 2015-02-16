@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Your account has been created</title>
+  </head>
+  <body>
+        <table>
+          <tr>
+            <td>
+              <p>
+                  Welcome!
+                  <br><br>
+                  Your Behavioral Health: Clinical Decision Support Tool account has been successfully created. You can log in with this email address and your password to get started.
+                  <br>
+                  <br>
+                  ## Commenting until we find a way to get rid of port number from the URL.
+                  ## <a href="http://${model.getHostNameUrl()}/app/public/verify/${model.getEncodedToken()}">https://${model.getHostNameUrl()}/app/public/verify/${model.getEncodedToken()}</a>                   
+                  <a href="https://www.bhcds.com:8443/bham/app/public/verify/${model.getEncodedToken()}">https://www.bhcds.com:8443/bham/app/public/verify/${model.getEncodedToken()}</a>
+                  <br>
+                  <br>
+                  Thank you,
+                  <br>
+                  <br>
+                  The Behavioral Health: Clinical Decision Support (BHCDS) Support Team
+                  <br>
+              </p>
+            </td>
+          </tr>
+        </table>
+  </body>
+</html>

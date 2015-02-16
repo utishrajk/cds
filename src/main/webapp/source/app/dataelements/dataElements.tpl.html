@@ -1,0 +1,182 @@
+<div ng-include="headnavbar" ng-cloak></div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="" ng-class="{'display': enableDropDownMenu}" ng-click="toggleDropDownMenu()">
+            <span class="menu-text" ></span>
+        </a>
+
+        <div ng-include="sidenavbar" ng-cloak ></div>
+
+        <div class="main-content">
+
+            <div ng-include="breadcrums" ng-cloak></div>
+
+            <div class="inflexxion-page-content">
+
+                <h1 class="inflexxion-page-header">
+                   Patient Data Elements
+                </h1>
+
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div id="add-patient-form">
+
+                                <form novalidate class="formValidation form-horizontal field-height" name="patientForm" novalidate>
+                                    <div class="form-group">
+                                        <div class="col-sm-12 inflexxion-dataelements-description" >
+                                            Below are the specific questions that Behavioral Health Solutions Clinical Decision Support (BHCDS) uses
+                                            <br/> to recommend treatment options for your patient.
+                                        </div>
+                                        <br/><br/><br/>
+                                        <div class="col-sm-12 inflexxion-dataelements-description" >
+                                            If there are any fields not populated with answer data from your electronic health record (EHR), you can manually
+                                            <br/> answer them and then click “Get Recommendations” to view the BHCDS results
+                                        </div>
+                                    </div>
+
+                                    All fields are required
+
+                                    <div class="hr"></div>
+
+                                    <ng-form name="loadDataForm" novalidate>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-1  control-label inflexxion-input-lable" >
+                                                <div class="inflexxion-label-align">Request ID</div>
+                                            </label>
+                                            <div class="col-sm-7 no-padding-left">
+                                                <input type="text"   ng-model="requestId" name="requestId" placeholder="Request ID"  ng-keypress="($event.which === 13)?getPatientDataElements():0" />
+                                                <a class="btn btn-primary"  style="width:110px;" type="submit" ng-disabled="!loadDataForm.requestId.$dirty" ng-click="getPatientDataElements()">
+                                                    LOAD DATA
+                                                </a>
+                                                <span class="red inflexxion-label-align" ng-show="isDataNotElementAvailable">Error getting Data elements.</span>
+                                            </div>
+                                        </div>
+                                    </ng-form>
+
+                                    <div class="hr"></div>
+
+                                    <div ng-show="showDataelementForm">
+                                    <!--Demographics-->
+                                        <div class="form-group">
+                                            <div class="col-sm-8  control-label  " >
+                                                <div class="leftAlignNoPadding">
+                                                    <span class=" inflexxion-input-lable noleftpadding" >Client reference notes:</span>
+                                                    <input type="text"   ng-model="patient.note1" name="clientReferenceNotes" placeholder="Client reference notes"  required />
+                                                    <span ng-show="showError(patientForm.clientReferenceNotes, 'required')" class="red" > This question is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <div class="col-sm-8  control-label  " >
+                                                <div class="leftAlignNoPadding">
+                                                    <span class="inflexxion-label-align inflexxion-input-lable noleftpadding" >Unique client number:</span>
+                                                    <span >{{patient.uniqueClientNumber}}</span>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="hr"></div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 control-label inflexxion-input-lable ">
+                                               <div class="inflexxion-label-align data-element-subheader">Demographics</div>
+                                            </label>
+
+                                            <div class="col-sm-12 control-label inflexxion-input-lable " >
+                                                <div class="inflexxion-label-align">
+                                                    <span for="age" > 1. What is your age? </span> &nbsp;
+                                                    <span class="normal">
+                                                        <input type="text"  id="age" ng-model="patient.age"  class="input-small-width " name="age" required ng-change="isValidAge()"/>
+                                                        <span ng-show="((!isAgeOk )|| (patient.age == null)) && (!isOverAge)" class="red">This question is required.</span>
+                                                        <span ng-show="isOverAge && (patient.age != null)" class="red">Please enter your current age in number of years(not more than 89).</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 control-label inflexxion-input-lable" >
+                                                <div class="inflexxion-label-align">
+                                                    2. What is your gender?
+                                                    <span ng-show="showError(patientForm.genderCode, 'required')  " class="red nobold">This question is required.</span>
+
+                                                    <!--<span ng-show="patient.genderCode == null " class="red nobold">This question is required. {{patient.genderCode}}</span>-->
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-sm-12 no-padding-left inflexxion-arial-14">
+                                                <label class="inline dataElement-input">
+                                                    <input type="radio"  ng-model="patient.genderCode" name="genderCode" class="ace " required  value="MA" ng-change="validateGender()" />
+                                                    <span class="lbl inflexxion-arial-14 "> Male</span>
+                                                </label>
+                                                <br />
+                                                <label class="inline  dataElement-input">
+                                                    <input type="radio"  ng-model="patient.genderCode"   name="genderCode" class="ace" required  value="FE" ng-change="validateGender()" />
+                                                    <span class="lbl inflexxion-arial-14 "> Female</span>
+                                                </label>
+                                                <br />
+                                                <label class="inline  dataElement-input">
+                                                    <input type="radio"  ng-model="patient.genderCode"  name="genderCode" class="ace" required  value="TG" ng-change="validateGender()"  />
+                                                    <span class="lbl inflexxion-arial-14 "> Transgender</span>
+                                                </label>
+                                                <br />
+                                                <label class="inline  dataElement-input">
+                                                    <input type="radio" ng-model="patient.genderCode"   name="genderCode" class="ace" value="" required  ng-change="validateGender()" />
+                                                    <span class="lbl inflexxion-arial-14 "> Other (specify)</span>
+                                                    <input type="text" ng-model="patient.otherDescription" ng-disabled="disableOtherGender" ng-change="ValidateOther()"/>
+                                                    <span ng-show="isOtherGenderInvalid" class="red"> Enter gender.</span>
+                                                </label>
+                                                <br />
+                                                <label class="inline  dataElement-input">
+                                                    <input type="radio" ng-model="patient.genderCode"   name="genderCode" class="ace" required  value="-7" ng-change="validateGender()" />
+                                                    <span class="lbl inflexxion-arial-14 "> Refused</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div ng-switch="assesstment">
+                                            <!--GPRA-->
+                                            <div ng-switch-when="false">
+                                                <div ng-include="asiDataElementTemplate" ng-cloak ></div>
+                                            </div>
+                                            <!--ASI-->
+                                            <div ng-switch-when="true">
+                                                <div ng-include="gpraDataElementTemplate" ng-cloak ></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <!--Form: <pre ng-bind="toJSON(patientForm)"></pre>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="footer" ng-cloak></div>
+
+
+<script type="text/ng-template" id="pdePrompt">
+    <div class="modal-header">
+        <h3>Are you sure you want to clear all data from the fields?</h3>
+    </div>
+    <form novalidate name="pdePromptForm" autocomplete="off" class="formValidation form-horizontal field-height">
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="clearAll()">Ok</button>
+            <button class="btn btn-secondary" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</script>

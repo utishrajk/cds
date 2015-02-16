@@ -1,0 +1,54 @@
+
+<div ng-include="contactnavbar" ng-cloak></div>
+
+<div class="inflexxion-public-pages" id="main-container" ng-class="{'display': enableDropDownMenu}">
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="error-container">
+                <div class="well">
+                    <h1 class="grey lighter smaller">
+                        <span class="blue bigger-125">
+                            <!--<i class="icon-sitemap"></i>-->
+                           Error in submiting feedback.
+                        </span>
+                        <!--Page Not Found-->
+                    </h1>
+
+                    <hr />
+
+                    <div>
+                        <div class="space"></div>
+                        <!--<ul class="list-unstyled spaced inline bigger-110 margin-15">-->
+                            <!--<li>-->
+                                <!--<i class="icon-hand-right blue"></i>-->
+                                <!--Re-check the url for typos-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    </div>
+
+                    <hr />
+                    <div class="space"></div>
+
+                    <div class="center">
+                        <a class="btn btn-primary" ng-click="goBack()">
+                            Go Back
+                        </a>
+
+                        <a href="#/training" class="btn btn-secondary">
+                            Training
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+
+</div><!-- /.main-container -->
+
+<div ng-include="footer" ng-cloak></div>

@@ -1,0 +1,495 @@
+import java.text.SimpleDateFormat
+import java.util.Date;
+import org.gradle.api.internal.artifacts.publish.DefaultPublishArtifact
+import static groovy.io.FileType.FILES
+
+apply plugin: 'war'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'gretty'
+apply plugin: 'tomcat'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'eclipse'
+apply plugin: 'properties'
+apply plugin: 'propdeps'
+apply plugin: 'propdeps-maven'
+apply plugin: 'propdeps-idea'
+apply plugin: 'propdeps-eclipse'
+apply plugin: 'idea'
+apply plugin: 'artifactory'
+apply from: "$rootDir/gradle/sonar.gradle" 
+apply from: "$rootDir/gradle/grunt.gradle"
+apply from: 'tasks.gradle'
+
+def globalVersion = new Version('1.0.x-SNAPSHOT')
+
+version = globalVersion
+status = globalVersion.status
+group = 'com.feisystems'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+loadConfiguration()
+
+def loadConfiguration() {
+	def environment = hasProperty('env') ? env : 'local'
+	setProperty 'environment', environment
+}
+
+
+repositories {
+	 mavenCentral()
+     maven { url "http://maven.springframework.org/release" }
+	 maven { url 'http://repo.spring.io/milestone/'}
+     maven { url "http://maven.springframework.org/milestone" }
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+
+// ------- CXF SOAP CLIENT START -----------
+configurations {
+	jaxws
+}
+
+sourceSets {
+	main {
+		java { srcDir "$buildDir/generated" }
+	}
+	test {
+		java { srcDirs = [] }
+		groovy { srcDir 'tests' }
+		resources { srcDir 'resources' }
+	}
+}
+
+task wsimport  {
+	destDir = file("${buildDir}/generated")
+	wsdlSrc = file('src/main/resources/wsdl/RuleExecutionService.wsdl')
+	inputs.file wsdlSrc
+	outputs.dir destDir
+	doLast {
+		sourceSets.main.output.classesDir.mkdirs()
+		destDir.mkdirs()
+		ant {
+			taskdef(name:'wsimport',
+				classname:'com.sun.tools.ws.ant.WsImport',
+				classpath:configurations.jaxws.asPath)
+			wsimport(keep:true,
+				destdir: sourceSets.main.output.classesDir,
+				sourcedestdir: destDir,
+				//wsdl:'http://www.webservicex.net/CurrencyConvertor.asmx?wsdl')
+				wsdl: wsdlSrc)
+		}
+	}
+}
+wsimport.onlyIf { !(new File(buildDir, "generated").exists()) }
+compileJava.dependsOn(wsimport)
+
+// ------- CXF SOAP CLIENT END -----------
+
+
+buildscript {
+	repositories {
+		mavenCentral()
+		maven {
+			url "http://download.java.net/maven/2"
+		  }
+		maven { url 'http://repo.spring.io/plugins-release' }
+		jcenter()
+	}
+	dependencies {
+		classpath 'net.saliman:gradle-properties-plugin:1.2.0'
+		classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.6'
+		classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.1'
+		classpath 'org.akhikhl.gretty:gretty-plugin:+'
+		dependencies { classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:2.1.0' }
+	}	
+}
+
+artifactory {
+	contextUrl = "http://bhamdevrep001:8081/artifactory/"   //The base Artifactory URL if not overridden by the publisher/resolver
+	 publish {
+		 repository {
+			 repoKey = 'bham-local'
+			 username = "deployer"
+			 password = "Akacity77"
+			 maven = true
+			 ivy {
+				 ivyLayout = '[organization]/[module]/ivy-[revision].xml'
+				 artifactLayout = '[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]'
+				 mavenCompatible = false
+			 }
+		 }
+	 }
+	 resolve {
+		 repository {
+			 repoKey = 'bham'
+			 username = "deployer"
+			 password = "Akacity77"
+			 maven = true
+			 ivy {
+				 ivyLayout = '[organization]/[module]/ivy-[revision].xml'
+				 artifactLayout = '[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]'
+				 mavenCompatible = false
+			 }
+		 }
+	 }
+}
+
+/**  MYSQL Configuration **/
+configurations {
+	sql
+	runtimeOnly
+	all*.exclude group: 'commons-logging', module: 'commons-logging'
+}
+
+
+/*
+ * Gradle uses separate output directories for classes and resources.
+ * JPA requires classes and resources to reside in the same directory
+ */
+sourceSets.main.output.resourcesDir = sourceSets.main.output.classesDir // \build\resources\main = \build\classes\main
+sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir // \build\resources\test = \build\classes\test
+
+dependencies {
+
+	// Version Definitions
+	def tomcatVersion = '7.0.11'
+	def springVersion = '4.0.5.RELEASE'
+	def springSecurityVersion = '3.2.4.RELEASE'
+	def springDataVersion = '1.6.1.RELEASE'
+	def springIntegrationVersion = '4.0.2.RELEASE'
+	def velocityVersion = '1.7'
+	
+	groovy group:'org.codehaus.groovy', name:'groovy-all', version:'1.8.4'
+	jaxws 'com.sun.xml.ws:jaxws-tools:2.1.4'
+
+	// Container (Tomcat)
+	tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+		   "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+	tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+		exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+	}
+	
+	//iText
+	compile(group: 'com.itextpdf', name: 'itextpdf', version:'5.0.6') {
+		exclude(module: 'bcprov-jdk14')
+	}
+	
+	// CXF
+	compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxws', version:'3.0.1'
+	compile group: 'org.apache.cxf', name: 'cxf-rt-transports-http', version:'3.0.1'
+	runtime group: 'org.apache.cxf', name: 'cxf-rt-bindings-soap', version:'3.0.1'
+	compile group: 'org.apache.cxf', name: 'cxf-rt-rs-extension-providers', version:'3.0.1'
+	compile 'org.apache.cxf:cxf-rt-ws-security:3.0.1'
+	compile 'org.apache.wss4j:wss4j-ws-security-common:2.0.1'
+	compile 'javax.ws.rs:jsr311-api:1.1.1'
+	
+			
+	// Spring
+	compile "org.springframework:spring-core:$springVersion"
+	compile "org.springframework:spring-context:$springVersion"
+	compile "org.springframework:spring-context-support:$springVersion"
+	compile "org.springframework:spring-aop:$springVersion"
+	compile "org.springframework:spring-aspects:$springVersion"
+	compile "org.springframework:spring-jdbc:$springVersion"
+	compile "org.springframework:spring-orm:$springVersion"
+	compile "org.springframework:spring-webmvc:$springVersion"
+	
+	// Spring Data
+	compile "org.springframework.data:spring-data-jpa:$springDataVersion"
+
+	// Spring Security
+	compile "org.springframework.security:spring-security-web:$springSecurityVersion"
+	compile "org.springframework.security:spring-security-config:$springSecurityVersion"
+	
+	compile "org.springframework.integration:spring-integration-core:$springIntegrationVersion"
+	compile "org.springframework.integration:spring-integration-jdbc:$springIntegrationVersion"
+	compile "org.springframework.integration:spring-integration-mail:$springIntegrationVersion"
+	compile "org.springframework.integration:spring-integration-http:$springIntegrationVersion"
+	
+	compile "org.apache.velocity:velocity:$velocityVersion"
+
+	// Hibernate/JPA
+	compile group: 'org.hibernate', name: 'hibernate-core', version:'4.3.5.Final'
+	compile(group: 'org.hibernate', name: 'hibernate-entitymanager', version:'4.3.5.Final') {
+		exclude(module: 'cglib')
+		exclude(module: 'dom4j')
+	}
+	compile group: 'org.hibernate', name: 'hibernate-validator', version:'5.1.1.Final'
+	compile group: 'commons-collections', name: 'commons-collections', version:'3.2.1'
+	compile group: 'javax.validation', name: 'validation-api', version:'1.0.0.GA'
+	compile group: 'javax.transaction', name: 'jta', version:'1.1'
+
+	// Commons
+	compile "org.apache.commons:commons-dbcp2:2.0.1"
+	
+	compile group: 'commons-digester', name: 'commons-digester', version:'2.1'
+	compile group: 'commons-fileupload', name: 'commons-fileupload', version:'1.2.2'
+	compile group: 'commons-codec', name: 'commons-codec', version:'1.5'
+	
+	// Javax
+	compile group: 'javax.mail', name: 'mail', version:'1.4.1'
+	compile group: 'javax.activation', name: 'activation', version:'1.1.1'
+	compile group: 'javax.inject', name: 'javax.inject', version:'1'
+	
+	// Other
+	compile 'javax.servlet:javax.servlet-api:3.0.1'
+	compile 'org.eclipse.jetty:jetty-servlets:9.2.0.v20140526'
+	compile 'net.tanesha.recaptcha4j:recaptcha4j:0.0.7'
+	compile 'org.apfloat:apfloat:1.8.1'
+	
+	
+	compile group: 'joda-time', name: 'joda-time', version:'1.6'
+	compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.28'
+	compile group: 'org.modelmapper', name: 'modelmapper', version:'0.6.3'
+	
+	compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.5'
+	compile group: 'org.slf4j', name: 'jcl-over-slf4j', version:'1.7.5'
+	compile group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.7.5'
+	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
+	
+	compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.1'
+	
+	compile group: 'com.twilio.sdk', name: 'twilio-java-sdk', version:'3.4.2'  
+    compile group: 'nz.ac.waikato.cms.weka', name: 'weka-stable', version:'3.6.7'
+    compile group: 'org.drools', name: 'drools-core', version:'5.5.0.Final'
+    compile group: 'org.drools', name: 'drools-compiler', version:'5.5.0.Final'
+    
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version:'2.1.2'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:'2.1.2'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version:'2.1.2'
+    compile group: 'org.apache.solr', name: 'solr-solrj', version:'3.6.1'
+    
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-json-org', version:'2.3.2'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hppc', version:'2.3.2'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-joda', version:'2.3.2'
+    compile group: 'org.jadira.usertype', name: 'usertype.core', version:'3.1.0.CR10'
+    
+	runtime 'javax.annotation:jsr250-api:1.0'
+	runtime "org.codehaus.groovy:groovy:2.3.3"
+	runtime 'xerces:xercesImpl:2.10.0'
+	
+	// Test
+	testCompile group: 'org.mockito', name: 'mockito-all', version:'1.9.5'
+	testCompile(group: 'junit', name: 'junit', version:'4.11') {
+		exclude(module: 'hamcrest-core')
+		exclude(module: 'hamcrest-library')
+	}
+	
+	testCompile group: 'org.springframework', name: 'spring-test', version:'3.2.6.RELEASE'
+	testCompile group: 'org.hamcrest', name: 'hamcrest-core', version:'1.3'
+	testCompile group: 'org.hamcrest', name: 'hamcrest-library', version:'1.3'
+	testCompile group: 'com.jayway.jsonpath', name: 'json-path', version:'0.8.1'
+	testCompile group: 'com.jayway.jsonpath', name: 'json-path-assert', version:'0.8.1'
+	testRuntime group: 'org.eclipse.jetty', name: 'jetty-webapp', version:'8.1.3.v20120416'
+	
+    providedCompile group: 'junit', name: 'junit', version:'4.8.1'
+	sql 'mysql:mysql-connector-java:5.1.28'
+	// to run our App on Heroku
+	runtimeOnly "org.mortbay.jetty:jetty-runner:8.1.14.v20131031"
+}
+
+def sqlDir = new File('src/main/resources/sqlscripts')
+
+def db = [
+	moduleGroup: 'mysql',
+	moduleName: 'mysql-connector-java',
+	moduleVersion: '5.1.28',
+	driver: 'com.mysql.jdbc.Driver',
+	url: 'jdbc:mysql://'+serverName+':3306/'+myDatabase+'?allowMultiQueries=true',
+	allowMultiQueries: 'true',
+	user: mySqlUser,
+	password: mySqlPassword
+]
+
+task runSql << {
+	Properties properties = new Properties()
+	println 'serverName : ' + serverName
+	
+	if(serverName == 'localhost') {
+		
+		properties.load(new FileInputStream("src/main/environment/local/database.properties"))
+		
+	} else if(serverName == 'bhamdevbuild001') {
+		
+		properties.load(new FileInputStream("src/main/environment/dev/database.properties"))
+	}  	
+	
+	println 'hibernate.hbm2ddl.auto : ' + properties.getProperty('hibernate.hbm2ddl.auto')
+	
+	if(properties.getProperty('hibernate.hbm2ddl.auto') == 'create') {
+	
+		// This is needed to get mySql driver loaded onto the Groovy/Gradle classpath
+		configurations.sql.each { file ->
+		  gradle.class.classLoader.addURL(file.toURI().toURL())
+		}
+		
+		def sql = groovy.sql.Sql.newInstance(db.url, db.user, db.password, db.driver)
+	
+		// Files containing SQL commands are organized in file tree and sorted by name. Use Ant patterns to include/exclude.
+		FileTree sqlFileTree = fileTree(dir: sqlDir,
+								 include: "**/*.sql",
+								 exclude: ["socialHistoryStatusCodeLkp.sql", "procedureStatusCodeLkp.sql", "refrainPolicyCodeLkp.sql", "targetSiteCodeLkp.sql"])
+		//Iterate over the contents of a tree and execute sql.
+		sqlFileTree.each { file ->
+			sql.execute(file.text)
+		 }
+		sql.close()
+	
+	} else {
+		
+		println 'Insert statements will not be executed'
+		
+	}
+ }
+runSql.group = 'Service'
+runSql.description = 'Populates all the tables in the bham database with default data'
+
+task createSpringIntegrationTables << {
+	// This is needed to get mySql driver loaded onto the Groovy/Gradle classpath
+	configurations.sql.each { file ->
+	  gradle.class.classLoader.addURL(file.toURI().toURL())
+	}
+	
+	def sql = groovy.sql.Sql.newInstance(db.url, db.user, db.password, db.driver)
+
+	// Files containing SQL commands are organized in file tree and sorted by name. Use Ant patterns to include/exclude.
+	FileTree sqlFileTree = fileTree(dir: sqlDir,
+							 include: "**/SpringIntegration.sql")
+	
+	//Iterate over the contents of a tree and execute sql.
+	sqlFileTree.each { file ->
+		sql.execute(file.text)
+	 }
+	sql.close()
+}
+
+/**  TOMCAT Integration Testing **/
+[tomcatRun, tomcatRunWar,tomcatStop]*.stopPort = 8090
+[tomcatRun, tomcatRunWar,tomcatStop]*.stopKey = 'stopKey'
+
+task integrationTestTomcat(
+		type: Test, 
+		group: 'Service',
+		description:"Run integration test using Tomcat"
+	) {
+
+	include '**/*Integration*.*'
+
+	doFirst {
+		tomcatRun.daemon = true
+		tomcatRun.execute()
+	}
+
+	reports.junitXml.destination = "$buildDir/test-results/integration-test-results"
+	reports.html.destination = "$buildDir/reports/integrationTests"
+	
+	jacoco {
+		destinationFile = file("$buildDir/jacoco/jacocoIntegTest.exec")
+	}
+
+	doLast {
+		tomcatStop.execute()
+	}
+}
+
+	
+tomcatRunWar {
+	httpPort = 9001
+	ajpPort = 8010
+}
+
+tomcatRun {
+	httpPort = 9001
+	ajpPort = 8010
+}
+
+
+processResources.dependsOn copyConfiguration, createSpringIntegrationTables
+
+
+
+/** Unit Test Configuration **/
+test {
+	include '**/*Controller*.*'
+	include '**/*ServiceImpl*.*'
+	exclude '**/*Integration*.*'
+	
+	reports.junitXml.destination = "$buildDir/test-results/unit-test-results"
+	reports.html.destination = "$buildDir/reports/unitTests"
+	
+	jacoco {
+		destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+	}
+}
+
+war {
+	exclude 'source', 'vendor'
+}
+
+eclipse {
+	project.natures "org.springframework.ide.eclipse.core.springnature"
+}
+
+task copyToLib << {
+	copy {
+	  from configurations.runtimeOnly.copy().setTransitive(false)
+	  into "$buildDir/libs"
+	  rename { name ->
+		def artifacts = configurations.runtimeOnly.resolvedConfiguration.resolvedArtifacts
+		def artifact = artifacts.find { it.file.name == name }
+		"${artifact.name}.${artifact.extension}"
+	  }
+	}
+}
+
+task stage(dependsOn: ["clean", "war", "copyToLib"])
+
+
+
+class Version {
+	 String originalVersion
+	 String thisVersion
+	 String status
+	 Date buildTime
+ 
+	 Version(String versionValue) {
+		 buildTime = new Date()
+		 originalVersion = versionValue
+		 if (originalVersion.endsWith('-SNAPSHOT')) {
+			 status = 'integration'
+			 thisVersion = originalVersion.substring(0, originalVersion.length() - 'SNAPSHOT'.length()) + getTimestamp()
+		 } else {
+			 status = 'release'
+			 thisVersion = versionValue
+		 }
+	 }
+ 
+	 String getTimestamp() {
+		 // Convert local file timestamp to UTC
+		 def format = new SimpleDateFormat('yyyyMMddHHmmss')
+		 format.setCalendar(Calendar.getInstance(TimeZone.getTimeZone('UTC')));
+		 return format.format(buildTime)
+	 }
+ 
+	 String toString() {
+		 thisVersion
+	 }
+}
+
+task renameWar << {
+	copy {
+	  from "$buildDir/libs"
+	  into "$buildDir/libs"
+	  rename { name ->
+		  "bham.war"
+	  }
+	}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '1.10'
+}
+

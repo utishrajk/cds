@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-jdbc="http://www.springframework.org/schema/integration/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/integration
+	    http://www.springframework.org/schema/integration/spring-integration.xsd
+	    http://www.springframework.org/schema/integration/jdbc
+	    http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- The gateway is the entry point of the messaging system -->
+    <!-- The argument for sendVerificationToken is an EmailServiceTokenModel -->
+    <int:gateway id="emailGateway" service-interface="com.feisystems.bham.infrastructure.EmailServicesGateway"
+                 default-reply-timeout="60000">
+        <int:method name="sendVerificationToken" request-channel="emailChannel"
+                    request-timeout="60000"/>
+    </int:gateway>
+
+    <int:channel id="emailChannel">
+        <int:queue capacity="1000" message-store="emailStore"/>
+    </int:channel>
+    
+    <int:service-activator id="serviceActivator" input-channel="emailChannel"
+                           output-channel="nullChannel" ref="mailSenderService"
+                           method="sendEmail">
+       <int:poller fixed-delay="2000"/>                    
+    </int:service-activator>
+
+    <int:logging-channel-adapter id="loggingChannel" level="DEBUG"/>
+
+    <int-jdbc:message-store id="emailStore" data-source="dataSource" region="emailVerification"/>
+
+</beans>

@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+
+<html lang="en" >
+    <head>
+
+    <meta charset="utf-8" />
+    <title>BHCDS</title>
+
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+
+    <!-- ... -->
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <!--<link href="assets/css/bootstrap.min.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+
+    <link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.full.min.css" />
+    <link rel="stylesheet" href="assets/css/datepicker.css" />
+
+    <!-- fonts -->
+
+    <link rel="stylesheet" href="assets/css/ace-fonts.css" />
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!-- BHCDS styles-->
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>"/>
+    <% }); %>
+
+    <link rel="stylesheet"  type="text/css" href="assets/css/tree-control.css" />
+
+    <link rel="stylesheet"  type="text/css" href="assets/css/ngDialog.min.css" />
+    <link rel="stylesheet"  type="text/css" href="assets/css/ngDialog-theme-default.min.css" />
+    <link rel="stylesheet"  type="text/css" href="assets/css/ngDialog-theme-plain.min.css" />
+    <link rel="stylesheet"  type="text/css" href="assets/css/angular-growl.min.css" />
+        <link rel="stylesheet"  type="text/css" href="assets/css/ngProgress.css" />
+
+        <!--[if lte IE 8]>
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <![endif]-->
+
+
+
+    <!-- <link href="http://visjs.org/dist/vis.css" rel="stylesheet" type="text/css" /> -->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+
+    <script src="assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    
+    <META HTTP-EQUIV="Pragma" CONTENT="no-store, no-cache, must-revalidate"> 
+    <META HTTP-EQUIV="Expires" CONTENT="-1">
+
+</head>
+
+    <body  ng-app="bham" ng-controller="AppCtrl" >
+
+        <div ng-view></div>
+
+
+        <script type="text/ng-template" id="videopopup">
+            <div styll="padding-top:14px;">
+                <video width="100%" controls preload='metadata' >
+                    <source  src="assets/video/small.ogv" type="video/ogg">
+                    <source  src="assets/video/small.3gp" type="video/3gp">
+                    <source  src="assets/video/small.flv" type="video/flv">
+                    <source  src="assets/video/small.webm" type="video/webm">
+                    <source  src="assets/video/small.mp4" type="video/mp4">
+                    <p> Try this page in a modern browser! Or you can <a  href="assets/video/small.mp4">download the  video</a> instead.</p>
+                </video>
+            </div>
+            <div class="video-dialog">
+                <input type="checkbox" ng-model="neverShowTrainingVideo" ng-change="toggleVideo(neverShowTrainingVideo)"/> Never show this video again.
+
+                <button class="width-20 pull-right btn btn-sm btn-success" ng-click="closeThisDialog('')" style="padding-bottom:2px;">
+                    Skip video
+                </button>
+            </div>
+        </script>
+
+        <!--<section data-ng-controller="IdleCtrl">-->
+            <!--<p>-->
+                <!--<button type="button" class="btn btn-success" data-ng-hide="started" data-ng-click="start()">Start Demo</button>-->
+                <!--<button type="button" class="btn btn-danger" data-ng-show="started" data-ng-click="stop()">Stop Demo</button>-->
+            <!--</p>-->
+        <!--</section>-->
+
+        <script type="text/ng-template" id="warning-dialog.html">
+            <div class="modal-header">
+                <h3>You're Idle. Do Something!</h3>
+            </div>
+            <div ng-idle-countdown="countdown" ng-init="countdown=5" class="modal-body">
+                <progressbar max="5" value="5" animate="false" class="progress-striped active">You'll be logged out in {{countdown}} second(s).</progressbar>
+            </div>
+
+        </script>
+
+        <script type="text/ng-template" id="timedout-dialog.html">
+            <div class="modal-header">
+                <h3>You've Timed Out!</h3>
+            </div>
+            <div class="modal-body">
+                <p>
+                    You were idle too long. You have been logged out.
+                </p>
+            </div>
+        </script>
+
+        <!-- BHCDS ANGULARJS RELATED -->
+
+        <script src="assets/js/stacktrace.js"></script>
+
+        <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+        <script type="text/javascript" src="<%= file %>"></script>
+        <% }); %>
+
+        <!-- other scripts -->
+
+        <script type="text/javascript">
+            if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+        </script>
+
+        <!--<script src="assets/js/bootstrap.min.js"></script>-->
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="assets/js/typeahead-bs2.min.js"></script>
+
+        <!-- page specific plugin scripts -->
+
+        <!--[if lte IE 8]>
+        <script src="assets/js/excanvas.min.js"></script>
+        <![endif]-->
+
+        <!--
+        Commented this custom jquery-ui template
+        <script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+        -->
+
+        <script src="assets/js/jquery-ui-1.10.3.full.min.js"></script>
+        <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="assets/js/jquery.slimscroll.min.js"></script>
+        <script src="assets/js/jquery.easy-pie-chart.min.js"></script>
+        <script src="assets/js/jquery.sparkline.min.js"></script>
+
+        <script src="assets/js/flot/jquery.flot.min.js"></script>
+        <script src="assets/js/flot/jquery.flot.pie.min.js"></script>
+        <script src="assets/js/flot/jquery.flot.resize.min.js"></script>
+
+        <script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
+
+        <!-- ace scripts -->
+
+        <script src="assets/js/ace-elements.min.js"></script>
+        <script src="assets/js/ace.min.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,9 @@
+INSERT INTO `emotional_problems_code` (`id`,`code`,`code_system`,`code_system_name`,`code_system_version`,`display_name`,`original_text`,`version`) VALUES (1,'1','1','FEi',NULL,'Not at all',NULL,NULL);
+INSERT INTO `emotional_problems_code` (`id`,`code`,`code_system`,`code_system_name`,`code_system_version`,`display_name`,`original_text`,`version`) VALUES (2,'2','1','FEi',NULL,'Slightly',NULL,NULL);
+INSERT INTO `emotional_problems_code` (`id`,`code`,`code_system`,`code_system_name`,`code_system_version`,`display_name`,`original_text`,`version`) VALUES (3,'3','1','FEi',NULL,'Moderately',NULL,NULL);
+INSERT INTO `emotional_problems_code` (`id`,`code`,`code_system`,`code_system_name`,`code_system_version`,`display_name`,`original_text`,`version`) VALUES (4,'4','1','FEi',NULL,'Considerably',NULL,NULL);
+INSERT INTO `emotional_problems_code` (`id`,`code`,`code_system`,`code_system_name`,`code_system_version`,`display_name`,`original_text`,`version`) VALUES (5,'5','1','FEi',NULL,'Extremely',NULL,NULL);
+INSERT INTO `emotional_problems_code` (`id`,`code`,`code_system`,`code_system_name`,`code_system_version`,`display_name`,`original_text`,`version`) VALUES (6,'-1','1','FEi',NULL,'Not Applicable',NULL,NULL);
+INSERT INTO `emotional_problems_code` (`id`,`code`,`code_system`,`code_system_name`,`code_system_version`,`display_name`,`original_text`,`version`) VALUES (7,'-7','1','FEi',NULL,'Refused',NULL,NULL);
+INSERT INTO `emotional_problems_code` (`id`,`code`,`code_system`,`code_system_name`,`code_system_version`,`display_name`,`original_text`,`version`) VALUES (8,'-8','1','FEi',NULL,'Don\'t know',NULL,NULL);
+INSERT INTO `emotional_problems_code` (`id`,`code`,`code_system`,`code_system_name`,`code_system_version`,`display_name`,`original_text`,`version`) VALUES (9,'-9','1','FEi',NULL,'Missing',NULL,NULL);

@@ -1,0 +1,54 @@
+
+<div ng-include="headnavbar" ng-cloak></div>
+
+<div class="main-container" id="main-container" ng-class="{'display': enableDropDownMenu}" >
+        <script type="text/javascript">
+            try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        </script>
+
+        <div class="main-container-inner">
+            <div class="menu-toggler" id="menu-toggler" ng-click="toggleDropDownMenu()">
+                <span class="menu-text" ></span>
+            </div>
+
+            <div ng-include="sidenavbar" ng-cloak ></div>
+
+            <div class="main-content">
+
+                <div ng-include="breadcrums" ng-cloak></div>
+
+                <div class="inflexxion-page-content">
+
+                    <h1 class="inflexxion-page-header">
+                        Training Video
+                    </h1>
+
+
+                    <div class="space-4"></div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                                        <video width="60%" controls preload='metadata' >
+                                            <source  src="assets/video/small.ogv" type="video/ogg">
+                                            <source  src="assets/video/small.3gp" type="video/3gp">
+                                            <source  src="assets/video/small.flv" type="video/flv">
+                                            <source  src="assets/video/small.webm" type="video/webm">
+                                            <source  src="assets/video/small.mp4" type="video/mp4">
+                                            <p class="inflexxion-arial-12"> Try this page in a modern browser! Or you can <a  href="assets/video/small.mp4">download the  video</a> instead.</p>
+                                        </video>
+
+                            <!-- PAGE CONTENT ENDS -->
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.page-content -->
+
+                <!--<div ng-include="loginpage" ></div>-->
+
+            </div><!-- /.main-content -->
+
+        </div><!-- /.main-container-inner -->
+
+    </div><!-- /.main-container -->
+
+<div ng-include="footer" ng-cloak></div>

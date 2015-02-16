@@ -1,0 +1,683 @@
+<!--Medical Status-->
+
+<div class="hr"></div>
+
+<div class="form-group" >
+
+    <label class="col-sm-12 control-label inflexxion-input-lable ">
+        <div class="inflexxion-label-align data-element-subheader">Medical Status</div>
+    </label>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable " >
+        <div class="inflexxion-label-align">3. How many days have you experienced medical problems in the last 30?</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <input type="text" class="input-small-width" name="m6_days_medical_problem" ng-model="patient.m6_days_medical_problem" ng-change="validateNumberOrX('m6_days_medical_problem')" /> <span class="input-hint" >Enter a number 0-30 or X for refused</span>
+            <!--<span ng-show=" m6_days_medical_problem &&  (patient.m6_days_medical_problem != null)" class="red">Invalid value.</span>-->
+            <span ng-show="(patient.m6_days_medical_problem == null )|| (m6_days_medical_problem &&  (patient.m6_days_medical_problem != null))" class="red"> This question is required.</span>
+        </div>
+    </div>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable " >
+        <div class="inflexxion-label-align">4. How troubled or bothered have you been by these medical problems in the past 30 days?</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <select  ng-model="patient.m7_patient_rating_Code"  name="m7_patient_rating_Code" required>
+        <option value="">Choose one</option>
+        <option ng-repeat="m in medicalStatus" value="{{m.code}}" ng-selected="m.code == patient.m7_patient_rating_Code"  >{{m.displayName}}</option>
+        </select>
+        <span class="red" ng-show="showError(patientForm.m7_patient_rating_Code, 'required') "> This question is required.</span>
+    </div>
+    </div>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable " >
+        <div class="inflexxion-label-align">5. How important to you now is treatment for these medical problems?</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <select  name="m8_patient_rating_Code" ng-model="patient.m8_patient_rating_Code"  required>
+                <option value="">Choose one</option>
+                <option ng-repeat="m in medicalStatus" value="{{m.code}}" ng-selected="m.code == patient.m8_patient_rating_Code" >{{m.displayName}}</option>
+            </select>
+            <span class="red" ng-show="showError(patientForm.m8_patient_rating_Code, 'required')"> This question is required.</span>
+        </div>
+    </div>
+
+</div>
+
+<!--Employment Support Status-->
+
+<div class="form-group" >
+
+    <div class="hr"></div>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable ">
+        <div class="inflexxion-label-align data-element-subheader">Employment Support Status</div>
+    </label>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align"> 6. How much money did you receive from illegal sources in the past 30 days?</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <b>$</b>&nbsp;<input type="text" class="input-small-width" name="e17_income_illegal" ng-model="patient.e17_income_illegal" required ng-change="validateIllegalSourceOfIncome()"/><b>.00</b> &nbsp;&nbsp;
+            <span class="input-hint">Enter a whole number between 0 and 99999</span>
+            <span ng-show="illigalSource && ( patient.e17_income_illegal != null) " class="patient-form-error">Invalid number </span>
+            <span ng-show="patient.e17_income_illegal == null" class="red"> This question is required.</span>
+        </div>
+    </div>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">7. How many days have you experienced employment problems in past 30 days?</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <input type="text" class="input-small-width" name="e19_days_employment_problem" ng-model="patient.e19_days_employment_problem" ng-change="validateNumberOrX('e19_days_employment_problem')" />
+            <span class="input-hint">Enter a number 0-30 or X for refused</span>
+            <!--<span ng-show=" e19_days_employment_problem && ( patient.e19_days_employment_problem != null)" class="red">Invalid value.</span>-->
+            <span ng-show="(patient.e19_days_employment_problem == null )|| (e19_days_employment_problem && ( patient.e19_days_employment_problem != null))" class="red"> This question is required.</span>
+        </div>
+    </div>
+
+</div>
+
+<!--Drug / Alcohol Use-->
+<div class="hr"></div>
+
+<div class="form-group" >
+
+    <label class="col-sm-12 control-label inflexxion-input-lable ">
+        <div class="inflexxion-label-align data-element-subheader">Drug / Alcohol Use</div>
+    </label>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">8. Answer the questions below:</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+
+        <span ng-show="isInvalidAlcoholToxicationNumberOfDays  " class="red dataElement-input">Alcohol - to intoxication (3 drinks in a setting or 5 in a day) Should be a number between 0 and 30. <br/></span>
+
+        <span ng-show="isInvalidHeroinNumberOfDays " class="red dataElement-input">Heroin Should be a number between 0 and 30. <br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.d3c_route_of_intake_type_Code, 'required') ">Heroin field is required.<br/> </span>
+
+        <span ng-show="isInvalidMethadoneNumberOfDays " class="red dataElement-input">Methadone Should be a number between 0 and 30.<br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.d4c_route_of_intake_type_Code, 'required') ">Methadone field is required.<br/> </span>
+
+        <span ng-show=" isInvalidOpiatesAnalgesicsNumberOfDays " class="red dataElement-input"> Other opiates/analgesics (EG: pain medications) Should be a number between 0 and 30.<br/> </span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.d5c_route_of_intake_type_Code, 'required') ">Other opiates/analgesics (EG: pain medications) field is required.<br/> </span>
+
+    </div>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <table class="table-striped table-hover no-bottom-margin">
+                <thead>
+                <tr>
+                    <th style="width:470px;"></th>
+                    <th style="width:85px;">Days in the past 30</th>
+                    <th style="width:90px;">Route of Administration</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: ( isInvalidAlcoholToxicationNumberOfDays )}">
+                            Alcohol - to intoxication (3 drinks in a setting or 5 in a day)
+                        </span>
+                    </td>
+                    <td class="td-padding"><input type="text"  required class="input-in-table" name="d2a_intoxication_30" ng-change="onNumberOfDaysChange('d2a_intoxication_30')" ng-model="patient.d2a_intoxication_30"/></td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: ( (showError(patientForm.d3c_route_of_intake_type_Code, 'required'))  || (isInvalidHeroinNumberOfDays ) )}">
+                            Heroin
+                        </span>
+                    </td>
+                    <td class="td-padding"><input type="text"  ng-change="onNumberOfDaysChange('d3a_heroin_30')"  class="input-in-table" ng-model="patient.d3a_heroin_30" name="d3a_heroin_30"/></td>
+                    <td>
+                        <select  name="d3c_route_of_intake_type_Code" ng-model="patient.d3c_route_of_intake_type_Code" required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in asiRoute" value="{{r.code}}" ng-selected="r.code == patient.d3c_route_of_intake_type_Code"  >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: ( (showError(patientForm.d4c_route_of_intake_type_Code, 'required')) || ( isInvalidMethadoneNumberOfDays) )}">
+                            Methadone
+                        </span>
+                    </td>
+                    <td class="td-padding"><input type="text" ng-change="onNumberOfDaysChange('d4a_methadone_30')" name="d4a_methadone_30"  class="input-in-table" ng-model="patient.d4a_methadone_30"></td>
+                    <td>
+                        <select  name="d4c_route_of_intake_type_Code" ng-model="patient.d4c_route_of_intake_type_Code" required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in asiRoute" value="{{r.code}}" ng-selected="r.code == patient.d4c_route_of_intake_type_Code"  >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: ( isInvalidOpiatesAnalgesicsNumberOfDays) || ( showError(patientForm.d5c_route_of_intake_type_Code, 'required')) }">
+                            Other opiates/analgesics (EG: pain medications)
+                        </span>
+                    </td>
+                    <td class="td-padding"><input type="text" ng-change="onNumberOfDaysChange('d5a_opiates_30')" name="d5a_opiates_30" class="input-in-table" ng-model="patient.d5a_opiates_30" required /></td>
+                    <td>
+                        <select  name="d5c_route_of_intake_type_Code" ng-model="patient.d5c_route_of_intake_type_Code" required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="r in asiRoute" value="{{r.code}}" ng-selected="r.code == patient.d5c_route_of_intake_type_Code"  >{{r.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="form-group" >
+
+    <div class="hr"></div>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable ">
+        <div class="inflexxion-label-align data-element-subheader">Legal Status</div>
+    </label>
+
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">
+            9. Are you presently awaiting charges, trial, or sentence?
+            <span ng-show="showError(patientForm.l24_is_waiting_trial_Code, 'required')" class="red nobold">This question is required</span>
+        </div>
+    </label>
+
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14">
+        <label class="inline dataElement-input">
+            <input type="radio" ng-model="patient.l24_is_waiting_trial_Code"  name="l24_is_waiting_trial_Code" class="ace "  value="YES" required/>
+            <span class="lbl inflexxion-arial-14 "> Yes</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio"   class="ace" ng-model="patient.l24_is_waiting_trial_Code"  name="l24_is_waiting_trial_Code"  value="NO" required/>
+            <span class="lbl inflexxion-arial-14 "> No</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio"   class="ace" ng-model="patient.l24_is_waiting_trial_Code"  name="l24_is_waiting_trial_Code"  value="NOT ANSWERED" required/>
+            <span class="lbl inflexxion-arial-14 "> Not answered</span>
+        </label>
+        <br />
+    </div>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">10. How many days in the past 30 have you engaged in illegal activity for profit?</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <input type="text" class="input-small-width" name="l27_days_illegal" ng-model="patient.l27_days_illegal" ng-change="validateNumberOrX('l27_days_illegal')" />
+            <span class="input-hint">Enter a number 0-30 or X for refused</span>
+            <!--<span ng-show=" l27_days_illegal && (patient.l27_days_illegal!= null) " class="red">Invalid value.</span>-->
+            <span ng-show="patient.l27_days_illegal == null || (l27_days_illegal && (patient.l27_days_illegal!= null)) " class="red"> This question is required.</span>
+        </div>
+    </div>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align" class="red">11. How serious do you feel your present legal problems are?</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <select  name="l28_patient_rating_Code"  ng-model="patient.l28_patient_rating_Code" required>
+                <option value="">Choose one</option>
+                <option ng-repeat="m in medicalStatus" value="{{m.code}}" ng-selected="m.code == patient.l28_patient_rating_Code"  >{{m.displayName}}</option>
+            </select>
+            <span class="red" ng-show="showError(patientForm.l28_patient_rating_Code, 'required') "> This question is required.</span>
+        </div>
+    </div>
+    <br/> <br/>
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">12. How important to you now is counseling or referral for these legal problems?</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <select  name="l29_patient_rating_Code"  ng-model="patient.l29_patient_rating_Code" required>
+                <option value="">Choose one</option>
+                <option ng-repeat="m in medicalStatus" value="{{m.code}}" ng-selected="m.code == patient.l29_patient_rating_Code"  >{{m.displayName}}</option>
+            </select>
+            <span class="red" ng-show="showError(patientForm.l29_patient_rating_Code, 'required') "> This question is required.</span>
+        </div>
+    </div>
+</div>
+
+<!--Family / Social Relationships-->
+
+<div class="form-group" >
+
+    <div class="hr"></div>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable ">
+        <div class="inflexxion-label-align data-element-subheader">Family / Social Relationships</div>
+    </label>
+
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">
+            13. Are you satisfied with your current marital status?
+            <span ng-show="showError(patientForm.maritalStatus, 'required')" class="red nobold">This question is required</span>
+        </div>
+    </label>
+
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14">
+        <label class="inline dataElement-input">
+            <input type="radio"   ng-model="patient.f3_is_satisfied_marital_Code" class="ace "  name="maritalStatus" value="YES" required/>
+            <span class="lbl inflexxion-arial-14 "> Yes</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio"   ng-model="patient.f3_is_satisfied_marital_Code" class="ace" name="maritalStatus"  value="NO" required/>
+            <span class="lbl inflexxion-arial-14 "> No</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio"   ng-model="patient.f3_is_satisfied_marital_Code" class="ace" name="maritalStatus"  value="NOT APPLICABLE" required/>
+            <span class="lbl inflexxion-arial-14 "> Indifferent</span>
+        </label>
+        <br />
+        <label class="inline  dataElement-input">
+            <input type="radio"   ng-model="patient.f3_is_satisfied_marital_Code" class="ace" name="maritalStatus"  value="NOT ANSWERED" required/>
+            <span class="lbl inflexxion-arial-14 ">Not answered</span>
+        </label>
+    </div>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">14. Have you had significant periods in which you have experienced serious problems with:</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <span class="red dataElement-input" ng-show="showError(patientForm.f18a_is_mother_30_Code, 'required')">Mother field is required.<br/> </span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.f19a_is_father_30_Code, 'required') ">Father field is required.  <br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.f20a_is_sibling_30_Code, 'required') ">Brothers/sisters field is required.  <br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.f21a_is_spouse_30_Code, 'required') ">Sexual Partners/Spouse field is required.  <br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.f22a_is_children_30_Code, 'required') ">Children field is required.  <br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.f23a_is_other_30_Code, 'required') ">Other Significant Family field is required.  <br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.f24a_is_friends_30_Code, 'required')">Close Friends field is required.  <br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.f25a_is_neighbor_30_Code, 'required') ">Neighbors field is required.  <br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.f26a_is_co_worker_30_Code, 'required') ">Co-workers field is required.  <br/></span>
+    </div>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <table class="table-striped table-hover no-bottom-margin">
+                <thead>
+                <tr>
+                    <th style="width:430px;"></th>
+                    <th style="width:85px;">Past 30 Days</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: showError(patientForm.f18a_is_mother_30_Code, 'required')} "  >Mother</span>
+                    </td>
+                    <td class="td-padding" >
+                        <select  name="f18a_is_mother_30_Code"  ng-model="patient.f18a_is_mother_30_Code" required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.f18a_is_mother_30_Code"  >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: showError(patientForm.f19a_is_father_30_Code, 'required') }">Father</span>
+                    </td>
+                    <td class="td-padding">
+                        <select  name="f19a_is_father_30_Code" ng-model="patient.f19a_is_father_30_Code"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.f19a_is_father_30_Code" >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: showError(patientForm.f20a_is_sibling_30_Code, 'required')}" >Brothers/sisters</span>
+                    </td>
+                    <td class="td-padding">
+                        <select  name="f20a_is_sibling_30_Code" ng-model="patient.f20a_is_sibling_30_Code"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.f20a_is_sibling_30_Code" >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: showError(patientForm.f21a_is_spouse_30_Code, 'required') }" >Sexual Partners/Spouse</span>
+                    </td>
+                    <td class="td-padding">
+                        <select  name="f21a_is_spouse_30_Code" ng-model="patient.f21a_is_spouse_30_Code" required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.f21a_is_spouse_30_Code" >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable"  ng-class="{red: showError(patientForm.f22a_is_children_30_Code, 'required') }" >Children</span>
+                    </td>
+                    <td class="td-padding">
+                        <select  name="f22a_is_children_30_Code" ng-model="patient.f22a_is_children_30_Code"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.f22a_is_children_30_Code" >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: showError(patientForm.f23a_is_other_30_Code, 'required') }" >Other Significant Family </span>
+                    </td>
+                    <td class="td-padding">
+                        <select  name="f23a_is_other_30_Code" ng-model="patient.f23a_is_other_30_Code"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}"  ng-selected="y.code == patient.f23a_is_other_30_Code" >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: showError(patientForm.f24a_is_friends_30_Code, 'required')}">Close Friends</span>
+                    </td>
+                    <td class="td-padding">
+                        <select  name="f24a_is_friends_30_Code" ng-model="patient.f24a_is_friends_30_Code"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.f24a_is_friends_30_Code" >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: showError(patientForm.f25a_is_neighbor_30_Code, 'required') }" >Neighbors</span>
+                    </td>
+                    <td class="td-padding">
+                        <select  name="f25a_is_neighbor_30_Code" ng-model="patient.f25a_is_neighbor_30_Code"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.f25a_is_neighbor_30_Code"  >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: showError(patientForm.f26a_is_co_worker_30_Code, 'required') }" >Co-workers</span>
+                    </td>
+                    <td class="td-padding">
+                        <select  name="f26a_is_co_worker_30_Code" ng-model="patient.f26a_is_co_worker_30_Code"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.f26a_is_co_worker_30_Code"  >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">15. Has anyone ever abused you?</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <span class="red dataElement-input" ng-show="showError(patientForm.f28b_is_abused_p_lifetime_Code, 'required') ">Physically (caused you physical harm) field is required.<br/> </span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.f29b_is_abused_s_lifetime_Code, 'required') ">Sexually (force sexual advances or sexual acts) field is required.  <br/></span>
+    </div>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <table class="table-striped table-hover no-bottom-margin">
+                <thead>
+                <tr>
+                    <th style="width:430px;"></th>
+                    <th style="width:70px;">Past 30 Days</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable"  ng-class="{red: showError(patientForm.f28b_is_abused_p_lifetime_Code, 'required') }" >Physically (caused you physical harm)</span>
+                    </td>
+                    <td class="td-padding" >
+                        <select  name="f28b_is_abused_p_lifetime_Code" ng-model="patient.f28b_is_abused_p_lifetime_Code" required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.f28b_is_abused_p_lifetime_Code" >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr >
+                    <td >
+                        <span class="inflexxion-label-align inflexxion-input-lable" ng-class="{red: showError(patientForm.f29b_is_abused_s_lifetime_Code, 'required') }">Sexually (force sexual advances or sexual acts)</span>
+                    </td>
+                    <td class="td-padding">
+                        <select  name="f29b_is_abused_s_lifetime_Code" ng-model="patient.f29b_is_abused_s_lifetime_Code"  required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.f29b_is_abused_s_lifetime_Code"  >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <label class="col-sm-12 control-label inflexxion-input-lable" >
+            <div class="inflexxion-label-align">16. How many days in the past 30 have you had serious conflicts with your family?</div>
+        </label>
+
+        <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+            <div class="dataElement-input">
+                <input type="text" class="input-small-width" name="f30_days_conflict_family" ng-model="patient.f30_days_conflict_family" ng-change="validateNumberOrX('f30_days_conflict_family')" />
+                <span class="input-hint">Enter a number 0-30 or X for refused</span>
+                <!--<span ng-show=" f30_days_conflict_family && (patient.f30_days_conflict_family != null)  " class="red">Invalid value.</span>-->
+                <span ng-show="((patient.f30_days_conflict_family == null) || (f30_days_conflict_family && (patient.f30_days_conflict_family != null)) )" class="red"> This question is required.</span>
+            </div>
+        </div>
+
+        <label class="col-sm-12 control-label inflexxion-input-lable" >
+            <div class="inflexxion-label-align">17. How troubled or bothered have you been in the past 30 days by family problems?</div>
+        </label>
+
+        <div class="col-sm-12 no-padding-left inflexxion-arial-14s">
+            <div class="dataElement-input">
+                <select  name="f32_patient_rating_Code" ng-model="patient.f32_patient_rating_Code"  required>
+                    <option value="">Choose one</option>
+                    <option ng-repeat="m in medicalStatus" value="{{m.code}}" ng-selected="m.code == patient.f32_patient_rating_Code" >{{m.displayName}}</option>
+                </select>
+                <span class="red" ng-show="showError(patientForm.f32_patient_rating_Code, 'required') "> This question is required. </span>
+            </div>
+        </div>
+        <div></div>
+        <label class="col-sm-12 control-label inflexxion-input-lable" >
+            <div class="inflexxion-label-align">18. How important to you now is treatment or counseling for family problems?</div>
+        </label>
+
+        <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+            <div class="dataElement-input">
+                <select  name="f34_patient_rating_Code" ng-model="patient.f34_patient_rating_Code"  required>
+                    <option value="">Choose one</option>
+                    <option ng-repeat="m in medicalStatus" value="{{m.code}}" ng-selected="m.code == patient.f34_patient_rating_Code"  >{{m.displayName}}</option>
+                </select>
+                <span class="red" ng-show="showError(patientForm.f34_patient_rating_Code, 'required') "> This question is required. </span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!--Psychiatric Status-->
+<div class="hr"></div>
+
+<div class="form-group" >
+
+    <label class="col-sm-12 control-label inflexxion-input-lable ">
+        <div class="inflexxion-label-align data-element-subheader">Psychiatric Status</div>
+    </label>
+
+    <label class="col-sm-12 control-label inflexxion-input-lable" >
+        <div class="inflexxion-label-align">19. Have you had a significant period of time in which you have:</div>
+    </label>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <span class="red dataElement-input" ng-show="showError(patientForm.p4a_is_depression_30_Code, 'required') ">Experienced serious depression? field is required.<br/> </span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.p5a_is_anxiety_30_Code, 'required') "> Experienced serious anxiety or tension? field is required.  <br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.p8a_is_violent_30_Code, 'required') "> Experienced trouble controlling violent behavior including episodes of rage, or violence field is required. <br/> </span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.p9a_is_suicidal_30_Code, 'required') "> Experienced serious thoughts of suicide? field is required.  <br/></span>
+        <span class="red dataElement-input" ng-show="showError(patientForm.p11a_is_prescribed_30_Code, 'required') "> Been prescribed medication for psychological and emotional problems field is required.  <br/></span>
+    </div>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <table class="table-striped table-hover no-bottom-margin">
+                <thead>
+                <tr>
+                    <th style="width:430px;"></th>
+                    <th style="width:70px;">Past 30 Days</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr >
+                    <td class="inflexxion-label-align inflexxion-input-lable">
+                        <span   ng-class="{red: showError(patientForm.p4a_is_depression_30_Code, 'required') }" >
+                            Experienced serious depression?
+                        </span>
+                    </td>
+                    <td class="td-padding" >
+                        <select  name="p4a_is_depression_30_Code"  ng-model="patient.p4a_is_depression_30_Code" required>
+                            <option value="">Choose one</option>
+                            <option ng-repeat="y in yesNoNA" value="{{y.code}}"  ng-selected="y.code == patient.p4a_is_depression_30_Code"  >{{y.displayName}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr >
+                    <td class="inflexxion-label-align inflexxion-input-lable">
+                        <span   ng-class="{red: showError(patientForm.p5a_is_anxiety_30_Code, 'required') }" >
+                            Experienced serious anxiety or tension?
+                        </span>
+                    </td>
+                    <td class="td-padding">
+                        <select  name="p5a_is_anxiety_30_Code" ng-model="patient.p5a_is_anxiety_30_Code" required>
+                            <option value="">Choose one</option>
+                        <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.p5a_is_anxiety_30_Code"  >{{y.displayName}}</option>
+                    </select>
+                </td>
+            </tr>
+
+                <tr >
+                <td class="inflexxion-label-align inflexxion-input-lable" >
+                    <span   ng-class="{red: showError(patientForm.p8a_is_violent_30_Code, 'required') }" >
+                        Experienced trouble controlling violent behavior including episodes of rage, or violence?
+                    </span>
+                </td>
+                <td class="td-padding">
+                    <select  name="p8a_is_violent_30_Code"  ng-model="patient.p8a_is_violent_30_Code" required>
+                        <option value="">Choose one</option>
+                        <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.p8a_is_violent_30_Code" >{{y.displayName}}</option>
+                    </select>
+                </td>
+                </tr>
+
+                <tr >
+                <td class="inflexxion-label-align inflexxion-input-lable">
+                    <span   ng-class="{red: showError(patientForm.p9a_is_suicidal_30_Code, 'required') }" >
+                            Experienced serious thoughts of suicide?
+                    </span>
+                </td>
+                <td class="td-padding">
+                    <select  name="p9a_is_suicidal_30_Code" ng-model="patient.p9a_is_suicidal_30_Code" required>
+                        <option value="">Choose one</option>
+                        <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.p9a_is_suicidal_30_Code" >{{y.displayName}}</option>
+                    </select>
+                </td>
+                </tr>
+
+                <tr >
+                <td class="inflexxion-label-align inflexxion-input-lable">
+                    <span   ng-class="{red: showError(patientForm.p11a_is_prescribed_30_Code, 'required') }" >
+                            Been prescribed medication for psychological and emotional problems?
+                    </span>
+                </td>
+                <td class="td-padding">
+                    <select  name="p11a_is_prescribed_30_Code" ng-model="patient.p11a_is_prescribed_30_Code" required>
+                        <option value="">Choose one</option>
+                        <option ng-repeat="y in yesNoNA" value="{{y.code}}" ng-selected="y.code == patient.p11a_is_prescribed_30_Code" >{{y.displayName}}</option>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+</div>
+
+<!--Prior Treatment-->
+
+<div class="hr"></div>
+
+<div class="form-group" >
+
+    <label class="col-sm-12 control-label inflexxion-input-lable ">
+        <div class="inflexxion-label-align data-element-subheader">Prior Treatment</div>
+    </label>
+
+    <div class="">
+        <label class="col-sm-12 control-label inflexxion-input-lable" >
+            <div class="inflexxion-label-align">20. How many prior treatment episodes have you had for alcohol and/or drugs?</div>
+        </label>
+    </div>
+
+    <div class="col-sm-12 no-padding-left inflexxion-arial-14 ">
+        <div class="dataElement-input">
+            <select  name="episodeCode"  ng-model="patient.episodeCode" required>
+                <option value="">Choose one</option>
+                <option ng-repeat="p in priorTreatment" value="{{p.code}}" ng-selected="p.code == patient.episodeCode" >{{p.displayName}}</option>
+            </select>
+            <span class="red" ng-show="showError(patientForm.episodeCode, 'required') "> This question is required. </span>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-sm-12 no-padding-left inflexxion-arial-14">
+    <span class="red" ng-show="isRecommendationNotAvailable">Error getting Recommendations.</span>
+</div>
+<!--button-->
+<div class="col-sm-6 no-padding-left inflexxion-arial-14 inflexxion-form-actions ">
+    <a class="btn btn-primary"  style="width:190px;" type="button" ng-click="getASIRecommendations()" ng-disabled="canSaveASI()" id="patient-save-btn">
+        GET RECOMMENDATIONS
+    </a>
+    <a class="btn btn-secondary" ng-click="reset()" id="patient-back-btn">
+        CLEAR
+    </a>
+</div>

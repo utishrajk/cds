@@ -1,0 +1,144 @@
+<!--<div ng-include="headnavbar" ng-cloak></div>-->
+
+<!--<div class="main-container" id="main-container">-->
+    <!--<script type="text/javascript">-->
+        <!--try{ace.settings.check('main-container' , 'fixed')}catch(e){}-->
+    <!--</script>-->
+
+    <!--<div class="main-container-inner">-->
+        <!--<a class="menu-toggler" id="menu-toggler" href="" ng-class="{'display': enableDropDownMenu}" ng-click="toggleDropDownMenu()">-->
+            <!--<span class="menu-text"  ></span>-->
+        <!--</a>-->
+
+        <!--<div ng-include="sidenavbar" ng-cloak ></div>-->
+
+        <!--<div class="main-content">-->
+
+            <!--<div ng-include="breadcrums" ng-cloak></div>-->
+
+            <!--<div class="page-content">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12">-->
+                        <!--&lt;!&ndash; PAGE CONTENT BEGINS &ndash;&gt;-->
+                        <!--<div class="table-responsive">-->
+                            <!--<div class="table-header">-->
+                                <!--&nbsp;-->
+                            <!--</div>-->
+                            <!--<div class="modal-footer no-margin-top">-->
+                                <!--<div class="col-sm-4 " >-->
+                                    <!--<div class="dataTables_info pull-left no-margi">-->
+                                        <!--<label>-->
+                                            <!--Display-->
+                                            <!--<select size="1" ng-model="pageSize" ng-change="onPageSizeChange()" >-->
+                                                <!--<option value="10">10</option>-->
+                                                <!--<option value="25">25</option>-->
+                                                <!--<option value="50">50</option>-->
+                                                <!--<option value="100">100</option>-->
+                                            <!--</select>-->
+                                            <!--Records-->
+                                        <!--</label>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-8">-->
+                                    <!--<div class="action-buttons field-height">-->
+                                        <!--<label>Search</label>-->
+                                        <!--<select size="1" ng-model="searchBy" ng-change="onSearch()" >-->
+                                            <!--<option value="">-- All columns --</option>-->
+                                            <!--<option value="username">username</option>-->
+                                            <!--<option value="description">description</option>-->
+                                        <!--</select>-->
+                                        <!--<input type="text" name="search" ng-model="criteria" ng-change="onSearch()" placeholder="Search table" size="15" />-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="modal-body no-padding" >-->
+                                <!--<table id="sample-table-1" class="table table-striped table-bordered table-hover no-bottom-margin">-->
+                                    <!--<thead>-->
+                                        <!--<tr>-->
+                                            <!--<th ng-click="sort('username')">-->
+                                                <!--Username  <i ng-class="{'icon-chevron-up': isSortUp('username'), 'icon-chevron-down': isSortDown('username')}"></i>-->
+                                            <!--</th>-->
+                                            <!--<th ng-click="sort('description')">-->
+                                                <!--Description <i ng-class="{'icon-chevron-up': isSortUp('description'), 'icon-chevron-down': isSortDown('description')}"></i>-->
+                                            <!--</th>-->
+                                            <!--<th ng-click="sort('ipAddress')">-->
+                                                <!--IP Address <i ng-class="{'icon-chevron-up': isSortUp('ipAddress'), 'icon-chevron-down': isSortDown('ipAddress')}"></i>-->
+                                            <!--</th>-->
+                                            <!--<th ng-click="sort('timestamp')">-->
+                                                <!--Date  <i ng-class="{'icon-chevron-up': isSortUp('timestamp'), 'icon-chevron-down': isSortDown('timestamp')}"></i>-->
+                                            <!--</th>-->
+                                            <!--<th class="activity-action-column">Actions</th>-->
+                                        <!--</tr>-->
+                                    <!--</thead>-->
+                                    <!--<tbody>-->
+                                    <!--<tr ng-repeat="activity in filteredActivities = ( activities |filter:composedCriteria | orderBy:natural(sortField):reverse )  | pagination:(pageNo-1):pageSize">-->
+                                        <!--<td> {{ activity.username}}</td>-->
+                                        <!--<td> {{ activity.description }} </td>-->
+                                        <!--<td> {{ activity.ipAddress }}</td>-->
+                                        <!--<td> {{ activity.timestamp }}</td>-->
+                                        <!--<td class="activity-action-column center">-->
+                                            <!--<show-activity activity="activity"  id="activity-show-{{$index}}" ></show-activity>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr ng-show="filteredActivities.length == 0">-->
+                                        <!--<td colspan="8" class="center"> No Activity found </td>-->
+                                    <!--</tr>-->
+                                    <!--</tbody>-->
+                                <!--</table>-->
+                                <!--<div class="modal-footer no-margin-top"  >-->
+                                    <!--<div class="col-sm-4" ng-hide="isDemographics">-->
+                                                         <!--<span ng-show="filteredActivities.length > 0 " >-->
+                                                            <!--<div class="dataTables_info pull-left no-margi"> Showing {{startRecord}} to {{showPageSize}} of {{filteredActivities.length}} Activities </div>-->
+                                                         <!--</span>-->
+                                    <!--</div>-->
+
+                                    <!--<div class="col-sm-8" ng-hide="isDemographics">-->
+                                                        <!--<span ng-show="filteredActivities.length > 0" >-->
+                                                             <!--<span style="display: inline-block;height: 3em; text-align: left;">-->
+                                                                 <!--<span ng-if="paginationIndexError" class="red" style=" position: relative; top: 5%; padding-right: 0.5em;"> {{paginationIndexError}}</span>-->
+                                                             <!--</span>-->
+
+                                                             <!--<span class="pagination pull-right no-margin pagination-highlight">-->
+                                                               <!--<span class="label label-lg arrowed pointercursor" ng-disable="pageNo==firstPage" ng-class="{'label-primary': pageNo!=firstPage}">-->
+                                                                    <!--<span ng-click="setActivePage(firstPage, 0)">-->
+                                                                        <!--<i class="icon-single-angle-left"> </i>-->
+                                                                        <!--First-->
+                                                                    <!--</span>-->
+                                                                <!--</span>-->
+                                                                 <!--<span class="label label-lg pointercursor" ng-disable="pageNo==firstPage" ng-class="{'label-primary': pageNo!=firstPage}" >-->
+                                                                    <!--<span ng-click="setActivePage(pageNo, -1)">-->
+                                                                        <!--<i class=""> </i>-->
+                                                                        <!--Previous-->
+                                                                    <!--</span>-->
+                                                                <!--</span>-->
+                                                               <!--<span> <input type="text" ng-model="pageNo" size="2" style="height:24px;"> of {{lastPage}}</span>-->
+
+                                                                  <!--<span class="label label-lg pointercursor" ng-disable="pageNo==lastPage" ng-class="{'label-primary': pageNo!=lastPage}" >-->
+                                                                    <!--<span ng-click="setActivePage(pageNo, 1)">-->
+                                                                        <!--<i class=""></i>-->
+                                                                        <!--Next-->
+                                                                    <!--</span>-->
+                                                                <!--</span>-->
+
+                                                                 <!--<span class="label label-lg arrowed-right pointercursor" ng-disable="pageNo==lastPage" ng-class="{'label-primary': pageNo!=lastPage}" >-->
+                                                                    <!--<span ng-click="setActivePage(lastPage, 0)">-->
+                                                                        <!--<i class="icon-single-angle-right"></i>-->
+                                                                        <!--Last-->
+                                                                    <!--</span>-->
+                                                                <!--</span>-->
+                                                            <!--</span>-->
+                                                        <!--</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; PAGE CONTENT ENDS &ndash;&gt;-->
+                    <!--</div>&lt;!&ndash; /.col &ndash;&gt;-->
+                <!--</div>&lt;!&ndash; /.row &ndash;&gt;-->
+            <!--</div>&lt;!&ndash; /.page-content &ndash;&gt;-->
+        <!--</div>&lt;!&ndash; /.main-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.main-container-inner &ndash;&gt;-->
+
+<!--</div>&lt;!&ndash; /.main-container &ndash;&gt;-->
+
+<!--<<div ng-include="footer" ng-cloak></div>-->

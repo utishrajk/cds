@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BHCDS</title>
+  </head>
+  <body>
+        <table>
+          <tr>
+            <td>
+              <p>
+                  Dear ${model.getFullName()},
+                  <br>
+                  <br>
+                  Your password on BHCDS has been reset. If you did not request a password reset please contact support@bham.com
+                  <br>
+                  <br>
+                  Thank you,
+                  <br>
+                  <br>
+                  The Behavioral Health: Clinical Decision Support (BHCDS) Support Team
+                  <br>
+              </p>
+            </td>
+          </tr>
+        </table>
+  </body>
+</html>

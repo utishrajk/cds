@@ -1,0 +1,141 @@
+
+/*
+ * ****************************
+ * ****************************
+ *  GRADLE CALLING GRUNT TASKS
+ * ***************************
+ * ***************************
+ */
+
+import com.fei.systems.client.GruntTask
+
+task webdriverManagerUpdate(
+	type: Exec,
+	group:"Grunt",
+	description:"ChromeDriver and Selenium Standalone Server") {
+
+		commandLine = ["webdriver-manager.cmd", "update"]
+		inputs.file "package.json"
+		outputs.dir "node_modules"
+	}
+
+task protractorInstall(
+	type: Exec,
+	group:"Grunt",
+	description:"Installs Protractor for e2e test") {
+
+		commandLine = ["npm.cmd", "install -g protractor"]
+		inputs.file "package.json"
+		outputs.dir "node_modules"
+}
+	
+task end2End(
+	type: Exec,
+	group:"Grunt",
+	description:"Run integration test with protractor") {
+
+		commandLine = ["protractor.cmd", "protractor\\debugConf.js"]
+		inputs.file "package.json"
+		outputs.dir "node_modules"
+}
+
+task bowerInstall(
+	type: Exec,
+	group:"Grunt",
+	description:"Installs packages for frontend web project") {
+
+		commandLine = ["bower.cmd", "install"]
+		inputs.file "bower.json"
+}
+		
+task npmInstall(
+	type: Exec,
+	group:"Grunt",
+	description:"Installs all Node.js dependencies defined in package.json") {
+
+		commandLine = ["npm.cmd", "install"]
+		inputs.file "package.json"
+		outputs.dir "node_modules"
+}
+	
+task jshintAll(
+	type: GruntTask,
+	group: 'Grunt',
+	description: 'Lint all the JS files') { gruntArgs = "jshint-all" }
+
+		
+task grunt(
+	type: GruntTask,
+	group: 'Grunt',
+	description: 'Runs all the tasks') { gruntArgs = "default" }
+		
+task buildAll(
+	type: GruntTask,
+	group: 'Grunt',
+	description: 'This task run all the build') { gruntArgs = "build-all" }
+		
+task buildCI(
+	type: GruntTask,
+	group: 'Grunt',
+	description: 'This run all the task for the CI') { gruntArgs = "build-ci" }
+
+task buildDist(
+	type: GruntTask,
+	group: 'Grunt',
+	description: 'The `build` task gets your app ready to run for distribution') { gruntArgs = "build-dist" }
+
+task buildDebug(
+	type: GruntTask,
+	group: 'Grunt',
+	description: 'The `build` task gets your app ready to run for development and testing') { gruntArgs = "build-debug" }
+		
+task compile(
+	type: GruntTask,
+	group: 'Grunt',
+	description: 'Runs recess:compile, copy:compile_assets, ngmin, concat:compile_js, uglify, index:compile') { gruntArgs = "compile" }
+		
+task karmaWatch(
+	type: GruntTask,
+	group: 'Grunt',
+	description: 'Runs karma in watch mode for unit testing') { gruntArgs = "karma-watch" }
+	
+task karmaUnit(
+	type: GruntTask,
+	group: 'Grunt',
+	description: 'Runs karma for unit testing') { gruntArgs = "karma:unit" }
+
+	
+task cleanTarget(
+	type: GruntTask,
+	group: 'Grunt',
+	description: 'Delete the target folder') { gruntArgs = "clean" }
+		
+
+task FEJenkins(
+	group: 'Grunt',
+	description: 'Test all the frontend tasks for the pipeline',
+	dependsOn: ["npmInstall", "buildCI", "webdriverManagerUpdate"]){
+	
+};
+
+
+task debugTomcatRunWar(
+	group: 'Grunt-Gradle',
+	description:"Generate the angular debug project which is used to create the war and run it on tomcat.",
+	dependsOn: ["clean", "buildDebug", "tomcatRunWar"])
+
+task distTomcatRunWar(
+	group: 'Grunt-Gradle',
+	description:"Generate the angular dist project which is used to create the war and run it on tomcat.",
+	dependsOn: ["clean", "buildDist", "tomcatRunWar"])
+
+task CITomcatRunWar(
+	group: 'Grunt-Gradle',
+	description:"Run buildCI task and generate the angular dist project which is used to create the war and run it on tomcat.",
+	dependsOn: ["clean", "buildCI", "tomcatRunWar"])
+
+task CIWar(
+	group: 'Grunt-Gradle',
+	description:"Run buildCI task and generate the angular dist project which is used to create the war/artifact to be deployed/archived.",
+	dependsOn: ["clean", "buildCI", "war"])
+

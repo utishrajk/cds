@@ -1,0 +1,682 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+				  xmlns:tns="http://recommendation.service.bham.feisystems.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+				  xmlns:ns1="http://schemas.xmlsoap.org/soap/http"
+				  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+			      xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" 
+    			  xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy"
+    			  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
+    			  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				  name="RecommendationServiceImplService" targetNamespace="http://recommendation.service.bham.feisystems.com/">
+  <wsdl:types>
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://recommendation.service.bham.feisystems.com/" attributeFormDefault="unqualified" 
+			   elementFormDefault="unqualified" targetNamespace="http://recommendation.service.bham.feisystems.com/">
+	  <xs:element name="RecommendationServiceResponse" type="tns:recommendationServiceResponse"/>
+	  <xs:element name="Variables" type="tns:abstractVariableContainer"/>
+	  <xs:element name="saveAssessments" type="tns:saveAssessments"/>
+	  <xs:element name="saveAssessmentsResponse" type="tns:saveAssessmentsResponse"/>
+	  <xs:complexType name="saveAssessments">
+	    <xs:sequence>
+	      <xs:element minOccurs="0" name="arg0" type="tns:abstractVariableContainer"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="abstractVariableContainer">
+	    <xs:sequence>
+	      <xs:choice minOccurs="0">
+	        <xs:element name="ASI" type="tns:asiVariableContainer"/>
+	        <xs:element name="GPRA" type="tns:gpraVariableContainer"/>
+	      </xs:choice>
+	      <xs:element name="requestId" type="xs:string"/>
+	      <xs:element name="staffId" type="xs:string"/>
+	      <xs:element name="uniqueClientNumber" type="xs:string"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="asiVariableContainer">
+	    <xs:sequence>
+	      <xs:element name="e19_days_employment_problem" type="xs:int"/>
+	      <xs:element name="d2a_intoxication_30" type="xs:int"/>
+	      <xs:element name="legal_score" type="xs:float"/>
+	      <xs:element name="medical_score" type="xs:float"/>
+	      <xs:element name="family_score" type="xs:float"/>
+	      <xs:element name="f28b_is_abused_p_lifetime" type="tns:enumResponse"/>
+	      <xs:element name="f29b_is_abused_s_lifetime" type="tns:enumResponse"/>
+	      <xs:element name="p9a_is_suicidal_30" type="tns:enumResponse"/>
+	      <xs:element name="p5a_is_anxiety_30" type="tns:enumResponse"/>
+	      <xs:element name="p4a_is_depression_30" type="tns:enumResponse"/>
+	      <xs:element name="p8a_is_violent_30" type="tns:enumResponse"/>
+	      <xs:element name="p11a_is_prescribed_30" type="tns:enumResponse"/>
+	      <xs:element name="gender_code" type="tns:enumGenderCode"/>
+	      <xs:element name="d3a_heroin_30" type="xs:int"/>
+	      <xs:element name="d4a_methadone_30" type="xs:int"/>
+	      <xs:element name="d5a_opiates_30" type="xs:int"/>
+	      <xs:element name="d3c_route_of_intake_type_code" type="tns:enumAsiRoute"/>
+	      <xs:element name="d4c_route_of_intake_type_code" type="tns:enumAsiRoute"/>
+	      <xs:element name="d5c_route_of_intake_type_code" type="tns:enumAsiRoute"/>
+		  <!-- Age is optional, as WITS don't send age above 89 years due to HIPAA Regulations --> 
+    	  <xs:element minOccurs="0" name="age" type="xs:int"/>
+	      <xs:element name="zip3" type="xs:int"/>
+	      <xs:element name="state" type="xs:string"/>
+	      <xs:element name="priorEpisode" type="xs:int"/>
+	      <xs:element name="m6_days_medical_problem" type="tns:enumDays"/>
+	      <xs:element name="m7_patient_rating_code" type="tns:enumPatientRating"/>
+	      <xs:element name="m8_patient_rating_code" type="tns:enumPatientRating"/>
+	      <xs:element name="f3_is_satisfied_marital" type="tns:enumResponse"/>
+	      <xs:element name="f30_days_conflict_family" type="tns:enumDays"/>
+	      <xs:element name="f32_patient_rating_code" type="tns:enumPatientRating"/>
+	      <xs:element name="f34_patient_rating_code" type="tns:enumPatientRating"/>
+	      <xs:element name="f18a_is_mother_30" type="tns:enumResponse"/>
+	      <xs:element name="f19a_is_father_30" type="tns:enumResponse"/>
+	      <xs:element name="f20a_is_sibling_30" type="tns:enumResponse"/>
+	      <xs:element name="f21a_is_spouse_30" type="tns:enumResponse"/>
+	      <xs:element name="f22a_is_children_30" type="tns:enumResponse"/>
+	      <xs:element name="f23a_is_other_30" type="tns:enumResponse"/>
+	      <xs:element name="f24a_is_friends_30" type="tns:enumResponse"/>
+	      <xs:element name="f25a_is_neighbor_30" type="tns:enumResponse"/>
+	      <xs:element name="f26a_is_co_worker_30" type="tns:enumResponse"/>
+	      <xs:element name="l24_is_waiting_trial" type="tns:enumResponse"/>
+	      <xs:element name="l27_days_illegal" type="tns:enumDays"/>
+	      <xs:element name="l28_patient_rating_code" type="tns:enumPatientRating"/>
+	      <xs:element name="l29_patient_rating_code" type="tns:enumPatientRating"/>
+	      <xs:element name="e17_income_illegal" type="xs:int"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType final="extension restriction" name="gpraVariableContainer">
+	    <xs:sequence>
+	      <xs:element name="anxiety_day_count" type="tns:anxietyDayCount"/>
+		  <!-- Age is optional, as WITS don't send age above 89 years due to HIPAA Regulations --> 
+    	  <xs:element minOccurs="0" name="age" type="xs:int"/>
+	      <xs:element name="cd_gpra_ivw_gender_id" type="tns:cdGpraIvwGenderId"/>
+	      <xs:element name="cd_gpra_ivw_health_id" type="tns:cdGpraIvwHealthId"/>
+	      <xs:element name="cd_gpra_ivw_psych_impact_id" type="tns:cdGpraIvwPsychImpactId"/>
+	      <xs:element name="codeine_cd_gpra_ivw_route_id" type="tns:codeineCdGpraIvwRouteId"/>
+	      <xs:element name="codeine_day_count" type="tns:codeineDayCount"/>
+	      <xs:element name="crime_Count" type="tns:crimeCount"/>
+	      <xs:element name="darvon_cd_gpra_ivw_route_id" type="tns:darvonCdGpraIvwRouteId"/>
+	      <xs:element name="darvon_day_count" type="tns:darvonDayCount"/>
+	      <xs:element name="demerol_cd_gpra_ivw_route_id" type="tns:demerolCdGpraIvwRouteId"/>
+	      <xs:element name="demerol_day_count" type="tns:demerolDayCount"/>
+	      <xs:element name="depression_day_count" type="tns:depressionDayCount"/>
+	      <xs:element name="diluadid_cd_gpra_ivw_route_id" type="tns:diluadidCdGpraIvwRouteId"/>
+	      <xs:element name="diluadid_day_count" type="tns:diluadidDayCount"/>
+	      <xs:element name="er_physical_ind" type="tns:erPhysicalInd"/>
+	      <xs:element name="heroin_cd_gpra_ivw_route_id" type="tns:heroinCdGpraIvwRouteId"/>
+	      <xs:element name="heroin_day_count" type="tns:heroinDayCount"/>
+	      <xs:element name="inpat_physical_ind_1" type="tns:inpatPhysicalInd1"/>
+	      <xs:element name="methadone_cd_gpra_ivw_route_id" type="tns:methadoneCdGpraIvwRouteId"/>
+	      <xs:element name="methadone_day_count" type="tns:methadoneDayCount"/>
+	      <xs:element name="morphine_cd_gpra_ivw_route_id" type="tns:morphineCdGpraIvwRouteId"/>
+	      <xs:element name="morphine_day_count" type="tns:morphineDayCount"/>
+	      <xs:element name="outpat_physical_ind" type="tns:outpatPhysicalInd"/>
+	      <xs:element name="oxyco_cd_gpra_ivw_route_id" type="tns:oxycoCdGpraIvwRouteId"/>
+	      <xs:element name="oxyco_day_count" type="tns:oxycoDayCount"/>
+	      <xs:element name="percocet_cd_gpra_ivw_route_id" type="tns:percocetCdGpraIvwRouteId"/>
+	      <xs:element name="percocet_day_count" type="tns:percocetDayCount"/>
+	      <xs:element name="pregnant_ind1" type="tns:pregnantInd1"/>
+	      <xs:element name="psychol_emot_med_day_count" type="tns:psycholEmotMedDayCount"/>
+	      <xs:element name="suicide_day_count" type="tns:suicideDayCount"/>
+	      <xs:element name="tylenol_cd_gpra_ivw_route_id" type="tns:tylenolCdGpraIvwRouteId"/>
+	      <xs:element name="tylenol_day_count" type="tns:tylenolDayCount"/>
+	      <xs:element name="use_alc_day_count" type="tns:useAlcDayCount"/>
+	      <xs:element name="violent_behavior_day_count" type="tns:violentBehaviorDayCount"/>
+	      <xs:element name="witsVariableContainer" type="tns:gpraVariableContainer"/>
+	      <xs:element name="emotMedication" type="tns:psycholEmotMedication"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="anxietyDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="abstractDayCount">
+	    <xs:sequence>
+	      <xs:element name="days" type="tns:enumDays"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="cdGpraIvwGenderId">
+	    <xs:sequence>
+	      <xs:element minOccurs="0" name="genderCode" type="tns:enumGenderCode"/>
+	      <xs:element minOccurs="0" name="refusedMissing" type="tns:enumRefusedMissing"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="cdGpraIvwHealthId">
+	    <xs:sequence>
+	      <xs:element name="healthStatus" type="tns:enumHealthStatus"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="cdGpraIvwPsychImpactId">
+	    <xs:sequence>
+	      <xs:element name="psycholImpact" type="tns:enumPsycholImpact"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="codeineCdGpraIvwRouteId">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractRoute">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="abstractRoute">
+	    <xs:sequence>
+	      <xs:element name="route" type="tns:enumRoute"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="codeineDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="crimeCount">
+	    <xs:sequence>
+	      <xs:element minOccurs="0" name="count" type="xs:int"/>
+	      <xs:element minOccurs="0" name="refusedDknowMissing" type="tns:enumRefusedDknowMissing"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="darvonCdGpraIvwRouteId">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractRoute">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="darvonDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="demerolCdGpraIvwRouteId">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractRoute">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="demerolDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="depressionDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="diluadidCdGpraIvwRouteId">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractRoute">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="diluadidDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="erPhysicalInd">
+	    <xs:sequence>
+	      <xs:element minOccurs="0" name="yesNo" type="tns:enumYesNo"/>
+	      <xs:element minOccurs="0" name="refusedDknowMissing" type="tns:enumRefusedDknowMissing"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="heroinCdGpraIvwRouteId">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractRoute">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="heroinDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="inpatPhysicalInd1">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractInpatOutpat">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="abstractInpatOutpat">
+	    <xs:sequence>
+	      <xs:element minOccurs="0" name="yesNo" type="tns:enumYesNo"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="methadoneCdGpraIvwRouteId">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractRoute">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="methadoneDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="morphineCdGpraIvwRouteId">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractRoute">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="morphineDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="outpatPhysicalInd">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractInpatOutpat">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="oxycoCdGpraIvwRouteId">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractRoute">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="oxycoDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="percocetCdGpraIvwRouteId">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractRoute">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="percocetDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="pregnantInd1">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractInpatOutpat">
+	        <xs:sequence>
+	          <xs:element minOccurs="0" name="notApplicable" type="tns:enumNotApplicable"/>
+	        </xs:sequence>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="psycholEmotMedDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="suicideDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="tylenolCdGpraIvwRouteId">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractRoute">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="tylenolDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="useAlcDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="violentBehaviorDayCount">
+	    <xs:complexContent>
+	      <xs:extension base="tns:abstractDayCount">
+	        <xs:sequence/>
+	      </xs:extension>
+	    </xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="psycholEmotMedication">
+	    <xs:sequence>
+	      <xs:element minOccurs="0" name="days" type="tns:enumDays"/>
+	      <xs:element minOccurs="0" name="refusedDknowMissing" type="tns:enumRefusedDknowMissing"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="saveAssessmentsResponse">
+	    <xs:sequence>
+	      <xs:element minOccurs="0" name="return" type="tns:recommendationServiceResponse"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="recommendationServiceResponse">
+	    <xs:sequence>
+	      <xs:element minOccurs="0" name="requestId" type="xs:string"/>
+	      <xs:element minOccurs="0" name="staffId" type="xs:string"/>
+	      <xs:element minOccurs="0" name="message" type="xs:string"/>
+	      <xs:element minOccurs="0" name="status" type="xs:string"/>
+	      <xs:element minOccurs="0" name="uniqueClientNumber" type="xs:string"/>
+	    </xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="simpleSoapExceptionBean">
+	    <xs:sequence/>
+	  </xs:complexType>
+	  <xs:simpleType name="enumResponse">
+	    <xs:restriction base="xs:string">
+	      <xs:enumeration value="YES"/>
+	      <xs:enumeration value="NO"/>
+	      <xs:enumeration value="NOT APPLICABLE"/>
+	      <xs:enumeration value="NOT ANSWERED"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumGenderCode">
+	    <xs:restriction base="xs:string">
+	      <xs:enumeration value="FE"/>
+	      <xs:enumeration value="MA"/>
+	      <xs:enumeration value="TG"/>
+	      <xs:enumeration value="UN"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumAsiRoute">
+	    <xs:restriction base="xs:string">
+	      <xs:enumeration value="IJ"/>
+	      <xs:enumeration value="IT"/>
+	      <xs:enumeration value="N"/>
+	      <xs:enumeration value="NJ"/>
+	      <xs:enumeration value="OR"/>
+	      <xs:enumeration value="SM"/>
+	      <xs:enumeration value="X"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumDays">
+	    <xs:restriction base="xs:int">
+	      <xs:enumeration value="0"/>
+	      <xs:enumeration value="1"/>
+	      <xs:enumeration value="2"/>
+	      <xs:enumeration value="3"/>
+	      <xs:enumeration value="4"/>
+	      <xs:enumeration value="5"/>
+	      <xs:enumeration value="6"/>
+	      <xs:enumeration value="7"/>
+	      <xs:enumeration value="8"/>
+	      <xs:enumeration value="9"/>
+	      <xs:enumeration value="10"/>
+	      <xs:enumeration value="11"/>
+	      <xs:enumeration value="12"/>
+	      <xs:enumeration value="13"/>
+	      <xs:enumeration value="14"/>
+	      <xs:enumeration value="15"/>
+	      <xs:enumeration value="16"/>
+	      <xs:enumeration value="17"/>
+	      <xs:enumeration value="18"/>
+	      <xs:enumeration value="19"/>
+	      <xs:enumeration value="20"/>
+	      <xs:enumeration value="21"/>
+	      <xs:enumeration value="22"/>
+	      <xs:enumeration value="23"/>
+	      <xs:enumeration value="24"/>
+	      <xs:enumeration value="25"/>
+	      <xs:enumeration value="26"/>
+	      <xs:enumeration value="27"/>
+	      <xs:enumeration value="28"/>
+	      <xs:enumeration value="29"/>
+	      <xs:enumeration value="30"/>
+	      <xs:enumeration value="-7"/>
+	      <xs:enumeration value="-8"/>
+	      <xs:enumeration value="-9"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumPatientRating">
+	    <xs:restriction base="xs:int">
+	      <xs:enumeration value="1"/>
+	      <xs:enumeration value="2"/>
+	      <xs:enumeration value="3"/>
+	      <xs:enumeration value="4"/>
+	      <xs:enumeration value="5"/>
+	      <xs:enumeration value="6"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumRefusedMissing">
+	    <xs:restriction base="xs:int">
+	      <xs:enumeration value="-7"/>
+	      <xs:enumeration value="-9"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumHealthStatus">
+	    <xs:restriction base="xs:int">
+	      <xs:enumeration value="1"/>
+	      <xs:enumeration value="2"/>
+	      <xs:enumeration value="3"/>
+	      <xs:enumeration value="4"/>
+	      <xs:enumeration value="5"/>
+	      <xs:enumeration value="-7"/>
+	      <xs:enumeration value="-8"/>
+	      <xs:enumeration value="-9"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumPsycholImpact">
+	    <xs:restriction base="xs:int">
+	      <xs:enumeration value="1"/>
+	      <xs:enumeration value="2"/>
+	      <xs:enumeration value="3"/>
+	      <xs:enumeration value="4"/>
+	      <xs:enumeration value="5"/>
+	      <xs:enumeration value="-1"/>
+	      <xs:enumeration value="-7"/>
+	      <xs:enumeration value="-8"/>
+	      <xs:enumeration value="-9"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumRoute">
+	    <xs:restriction base="xs:int">
+	      <xs:enumeration value="1"/>
+	      <xs:enumeration value="2"/>
+	      <xs:enumeration value="3"/>
+	      <xs:enumeration value="4"/>
+	      <xs:enumeration value="5"/>
+	      <xs:enumeration value="-1"/>
+	      <xs:enumeration value="-7"/>
+	      <xs:enumeration value="-8"/>
+	      <xs:enumeration value="-9"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumRefusedDknowMissing">
+	    <xs:restriction base="xs:int">
+	      <xs:enumeration value="-7"/>
+	      <xs:enumeration value="-8"/>
+	      <xs:enumeration value="-9"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumYesNo">
+	    <xs:restriction base="xs:int">
+	      <xs:enumeration value="1"/>
+	      <xs:enumeration value="0"/>
+	      <xs:enumeration value="-7"/>
+	      <xs:enumeration value="-8"/>
+	      <xs:enumeration value="-9"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="enumNotApplicable">
+	    <xs:restriction base="xs:int">
+	      <xs:enumeration value="-1"/>
+	    </xs:restriction>
+	  </xs:simpleType>
+	  <xs:element name="SimpleSoapException" nillable="true" type="tns:simpleSoapExceptionBean"/>
+	</xs:schema>
+	  </wsdl:types>
+	  <wsdl:message name="saveAssessmentsResponse">
+	    <wsdl:part element="tns:saveAssessmentsResponse" name="parameters">
+	    </wsdl:part>
+	  </wsdl:message>
+	  <wsdl:message name="SimpleSoapException">
+	    <wsdl:part element="tns:SimpleSoapException" name="SimpleSoapException">
+	    </wsdl:part>
+	  </wsdl:message>
+	  <wsdl:message name="saveAssessments">
+	    <wsdl:part element="tns:saveAssessments" name="parameters">
+	    </wsdl:part>
+	  </wsdl:message>
+	  <wsdl:portType name="RecommendationService">
+	    <wsdl:operation name="saveAssessments">
+	      <wsdl:input message="tns:saveAssessments" name="saveAssessments">
+	    </wsdl:input>
+	      <wsdl:output message="tns:saveAssessmentsResponse" name="saveAssessmentsResponse">
+	    </wsdl:output>
+	      <wsdl:fault message="tns:SimpleSoapException" name="SimpleSoapException">
+	    </wsdl:fault>
+	    </wsdl:operation>
+	  </wsdl:portType>
+	  <wsdl:binding name="RecommendationServiceImplServiceSoapBinding" type="tns:RecommendationService">
+	    <wsp:PolicyReference URI="#RecommendationBindingPolicy"/>	    
+	    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+	    <wsdl:operation name="saveAssessments">
+	      <soap:operation soapAction="" style="document"/>
+	      <wsdl:input name="saveAssessments">
+	        <soap:body use="literal"/>
+	        <wsp:PolicyReference URI="#RecommendationBinding_Recommendation_Input_Policy"/>
+	      </wsdl:input>
+	      <wsdl:output name="saveAssessmentsResponse">
+	        <soap:body use="literal"/>
+	        <wsp:PolicyReference URI="#RecommendationBinding_Recommendation_Output_Policy"/>
+	      </wsdl:output>
+	      <wsdl:fault name="SimpleSoapException">
+	        <soap:fault name="SimpleSoapException" use="literal"/>
+	      </wsdl:fault>
+	    </wsdl:operation>
+	  </wsdl:binding>  
+	  <wsdl:service name="RecommendationServiceImplService">
+	    <wsdl:port binding="tns:RecommendationServiceImplServiceSoapBinding" name="RecommendationServiceImplPort">
+	      <soap:address location="http://localhost:9001/bham/soap/RecommendationService"/>
+	    </wsdl:port>
+	  </wsdl:service>
+  	 
+   <wsp:Policy wsu:Id="RecommendationBindingPolicy">
+      <wsp:ExactlyOne>
+         <wsp:All>
+            <wsam:Addressing wsp:Optional="false"/>
+               <!--wsp:Policy/>
+            </wsam:Addressing-->
+            <sp:AsymmetricBinding>
+               <wsp:Policy>
+                  <sp:InitiatorToken>
+                     <wsp:Policy>
+                        <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                           <wsp:Policy>
+                              <sp:WssX509V3Token10/>
+                           </wsp:Policy>
+                        </sp:X509Token>
+                     </wsp:Policy>
+                  </sp:InitiatorToken>
+                  <sp:RecipientToken>
+                     <wsp:Policy>
+                        <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
+                           <wsp:Policy>
+                              <sp:WssX509V3Token10/>
+                              <sp:RequireIssuerSerialReference/>
+                           </wsp:Policy>
+                        </sp:X509Token>
+                     </wsp:Policy>
+                  </sp:RecipientToken>
+                  <sp:Layout>
+                     <wsp:Policy>
+                        <sp:Strict/>
+                     </wsp:Policy>
+                  </sp:Layout>
+                  <sp:IncludeTimestamp/>
+                  <sp:OnlySignEntireHeadersAndBody/>
+                  <sp:AlgorithmSuite>
+                     <wsp:Policy>
+                        <sp:Basic128/>
+                     </wsp:Policy>
+                  </sp:AlgorithmSuite>
+                  <sp:EncryptSignature/>
+               </wsp:Policy>
+            </sp:AsymmetricBinding>
+            <sp:Wss10>
+               <wsp:Policy>
+                  <sp:MustSupportRefIssuerSerial/>
+               </wsp:Policy>
+            </sp:Wss10>
+         </wsp:All>
+      </wsp:ExactlyOne>
+   </wsp:Policy>
+   <wsp:Policy wsu:Id="RecommendationBinding_Recommendation_Input_Policy">
+      <wsp:ExactlyOne>
+         <wsp:All>
+            <sp:EncryptedParts>
+               <sp:Body/>
+            </sp:EncryptedParts>
+            <sp:SignedParts>
+               <sp:Body/>
+               <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="AckRequested" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+               <sp:Header Name="SequenceAcknowledgement" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+               <sp:Header Name="Sequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+               <sp:Header Name="CreateSequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+            </sp:SignedParts>
+         </wsp:All>
+      </wsp:ExactlyOne>
+   </wsp:Policy>
+   <wsp:Policy wsu:Id="RecommendationBinding_Recommendation_Output_Policy">
+      <wsp:ExactlyOne>
+         <wsp:All>
+            <sp:EncryptedParts>
+               <sp:Body/>
+            </sp:EncryptedParts>
+            <sp:SignedParts>
+               <sp:Body/>
+               <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing"/>
+               <sp:Header Name="AckRequested" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+               <sp:Header Name="SequenceAcknowledgement" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+               <sp:Header Name="Sequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+               <sp:Header Name="CreateSequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+            </sp:SignedParts>
+         </wsp:All>
+      </wsp:ExactlyOne>
+   </wsp:Policy>
+  
+</wsdl:definitions>

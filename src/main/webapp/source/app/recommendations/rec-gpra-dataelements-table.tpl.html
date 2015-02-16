@@ -1,0 +1,51 @@
+<div class="modal-body no-padding clear-all" >
+    <table id="sample-table-1" class="table table-striped table-bordered table-hover no-bottom-margin rec-table">
+        <thead>
+            <tr class="inflexxion-arial-14"><td colspan="2" class="rec-table-link" ><a href="#/dataelements/{{dataElements.requestId}}">Back to Data Elements</a>  </td></tr>
+            <tr class="inflexxion-arial-14"><th >Field</th><th >Answer</th></tr>
+        </thead>
+        <tbody>
+
+            <tr class="inflexxion-arial-12"><td class="rec-table-field bold"> What is your age? </td><td class="rec-table-answer"> <span ng-show="dataElements.ageFlag"  class="red">*</span> {{ dataElements.age}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > What is your gender? </td><td> <span ng-show="dataElements.genderCodeFlag"  class="red" >*</span> {{ dataElements.genderDisplayName}}</td> </tr>
+
+            <tr  class="inflexxion-arial-12 rec-table-row-border" ><td colspan="2" class="bold" >During the past 30 days, how many days have you used any of the following:</td> </tr>
+
+            <tr class="inflexxion-arial-12"><td class="bold" > Heroin (smack, H, Junk, Skag) - number of days </td><td> <span ng-show="dataElements.heroinDayCountFlag"  class="red" >*</span> {{ getDayCountDisplayName( dataElements.heroinDayCount) }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Heroin (smack, H, Junk, Skag) - route </td><td> <span  ng-show="dataElements.heroinRouteCodeFlag"  class="red" >*</span>  {{ dataElements.heroinRouteDisplayName }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Morphine - number of days </td><td> <span  ng-show="dataElements.morphineCountFlag"  class="red" >*</span>  {{getDayCountDisplayName( dataElements.morphineCount) }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Morphine - route </td><td> <span  ng-show="dataElements.morphineRouteCodeFlag"  class="red" >*</span> {{ dataElements.methadoneRouteDisplayName }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Diluadid - number of days </td><td> <span  ng-show="dataElements.diluadidCountFlag"  class="red" >*</span>  {{ getDayCountDisplayName( dataElements.diluadidCount) }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Diluadid - route </td><td> <span  ng-show="dataElements.diluadidRouteCodeFlag"  class="red" >*</span>  {{ dataElements.diluadidRouteDisplayName }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Demerol - number of days </td><td>  <span ng-show="dataElements.demerolCountFlag"  class="red" >*</span> {{ getDayCountDisplayName(dataElements.demerolCount) }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Demerol - route </td><td>  <span  ng-show="dataElements.demerolRouteCodeFlag"  class="red" >*</span> {{ dataElements.demerolRouteDisplayName}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Percocet - number of days</td><td>  <span  ng-show="dataElements.percocetCountFlag"  class="red" >*</span>  {{ getDayCountDisplayName( dataElements.percocetCount) }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Percocet - route</td><td>  <span  ng-show="dataElements.percocetRouteCodeFlag"  class="red" >*</span> {{ dataElements.percocetRouteDisplayName }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Darvon - number of days </td><td> <span ng-show="dataElements.darvonCountFlag"  class="red" >*</span>  {{ getDayCountDisplayName( dataElements.darvonCount)}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Darvon - route</td><td> <span ng-show="dataElements.darvonRouteCodeFlag"  class="red" >*</span>  {{ dataElements.darvonRouteDisplayName }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Codeine - number of days</td><td> <span  ng-show="dataElements.codeineCountFlag"  class="red" >*</span> {{getDayCountDisplayName( dataElements.codeineCount)}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Codeine - route</td><td> <span ng-show="dataElements.codeineRouteCodeFlag"  class="red" >*</span> {{ dataElements.codeineRouteDisplayName}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Tylenol 2, 3, 4 - number of days </td><td>  <span  ng-show="dataElements.tylenolCountFlag"  class="red" >*</span> {{ getDayCountDisplayName(dataElements.tylenolCount) }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Tylenol 2, 3, 4 - route </td><td> <span  ng-show="dataElements.tylenolRouteCodeFlag"  class="red" >*</span>  {{ dataElements.tylenolRouteDisplayName }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Oxycontin/Oxycodone - number of days </td><td> <span  ng-show="dataElements.oxycontinCountFlag"  class="red" >*</span> {{ getDayCountDisplayName(dataElements.oxycontinCount)}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Oxycontin/Oxycodone - route </td><td> <span  ng-show="dataElements.oxycontinRouteCodeFlag"  class="red" >*</span>  {{ dataElements.oxycontinRouteDisplayName }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Non-prescription methadone - number of day </td><td> <span ng-show="dataElements.methadoneCountFlag"  class="red" >*</span>  {{ getDayCountDisplayName(dataElements.methadoneCount) }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Non-prescription methadone - route </td><td> <span ng-show="dataElements.methadoneRouteCodeFlag"  class="red" >*</span>  {{dataElements.methadoneRouteDisplayName}}</td> </tr>
+
+            <tr class="inflexxion-arial-12 rec-table-row-border "><td class="bold" > How would you rate your overall health right now?</td><td>  <span  ng-show="dataElements.healthIndicatorCodeFlag"  class="red" >*</span>  {{ dataElements.healthIndicatorCodeDisplayName}}</td> </tr>
+
+            <tr class="inflexxion-arial-12 rec-table-row-border"><td colspan="2" class="bold" > Have you had a significant period of time in which you have:</td> </tr>
+
+            <tr class="inflexxion-arial-12"><td class="bold" > Experienced serious depression? - number of days </td><td> <span ng-show="dataElements.depressionCountFlag"  class="red" >*</span>   {{ getDayCountDisplayName(dataElements.depressionCount)}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Experienced serious anxiety or tension? - number of days </td><td> <span  ng-show="dataElements.anxietyCountFlag"  class="red" >*</span>   {{ getDayCountDisplayName(dataElements.anxietyCount)}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Experienced trouble controlling violent behavior including episodes of rage, or violence? - number of days </td><td>  <span  ng-show="dataElements.violentCountFlag"  class="red" >*</span>    {{ getDayCountDisplayName(dataElements.violentCount)}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" > Been prescribed medication for psychological and emotional problems? - number of days </td><td>  <span ng-show="dataElements.psychMedicationCountFlag"  class="red" >*</span>   {{ getDayCountDisplayName(dataElements.psychMedicationCount) }}</td> </tr>
+
+            <tr class="inflexxion-arial-12 rec-table-row-border"><td class="bold" > How much have you been bothered by these psychological or emotional problems in the past 30 days? </td><td> <span ng-show="dataElements.emotionalProblemsCodeFlag"  class="red" >*</span>  {{ dataElements.emotionalProblemsDisplayName}}</td> </tr>
+
+        </tbody>
+        <tfoot>
+            <tr><td colspan="2" class="rec-table-link"><a href="#/dataelements/{{dataElements.requestId}}">Back to Data Elements</a></td></tr>
+        </tfoot>
+    </table>
+</div>

@@ -1,0 +1,15 @@
+<div style="display:block;" >
+    <select name="month" ng-model="dateFields.month" ng-options="month.value as month.name for month in months" ng-blur="checkDate()" ng-required="isrequired" >
+        <option value="" >Month</option>
+    </select>&nbsp;
+    <select name="day" ng-model="dateFields.day" ng-options="day for day in days" ng-blur="checkDate()" ng-required="isrequired">
+        <option value="" >Day</option>
+    </select>&nbsp;
+    <select name="year" ng-model="dateFields.year" ng-options="y for y in years" ng-blur="checkDate()" ng-required="isrequired" >
+        <option value="" >Year</option>
+    </select>
+    <span ng-show="requiredFieldError " class="common-form-error"> This field is required.</span>
+    <span ng-show="invalidDateError" class="common-form-error"> Invalid date.</span>
+    <span ng-show="isUnderAge" class="common-form-error"> Should be at least 18 years of age.</span>
+    <span ng-show="isFutureDate" class="common-form-error"> Date should not be in the future.</span>
+</div>

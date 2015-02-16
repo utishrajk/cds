@@ -1,0 +1,86 @@
+
+<div ng-include="headnavbar" ng-cloak></div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="" ng-class="{'display': enableDropDownMenu}" ng-click="toggleDropDownMenu()">
+            <span class="menu-text" ></span>
+        </a>
+
+        <div ng-include="sidenavbar" ng-cloak ></div>
+
+        <div class="main-content">
+
+            <div ng-include="breadcrums" ng-cloak></div>
+
+            <div class="page-content">
+                <div class="inflexxion-page-content">
+                    <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+
+                        <div class="error-container">
+                            <div class="well">
+                                <h1 class="grey lighter smaller">
+                                    <span class="blue bigger-125">
+                                        <!--<i class="icon-random"></i>-->
+                                    {{errorCode}}
+                                    </span>
+                                    {{errorMessage}}
+                                </h1>
+
+                                <!--<hr />-->
+                                <!--<h3 class="lighter smaller">-->
+                                    <!--But we are working-->
+                                    <!--<i class="icon-wrench icon-animated-wrench bigger-125"></i>-->
+                                    <!--on it!-->
+                                <!--</h3>-->
+
+                                <div class="space"></div>
+
+                                <div>
+                                    <!--<h4 class="lighter smaller">Meanwhile, try one of the following:</h4>-->
+
+                                    <!--<ul class="list-unstyled spaced inline bigger-110 margin-15">-->
+                                        <!--<li>-->
+                                            <!--<i class="icon-hand-right blue"></i>-->
+                                            <!--Give us more info on how this specific error occurred!-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                </div>
+
+                                <hr />
+                                <div class="space"></div>
+
+                                <div class="center">
+                                    <a class="btn btn-primary" ng-click="goBack()">
+                                        Go Back
+                                    </a>
+
+                                    <a href="#/training" class="btn btn-secondary">
+                                        Training
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+               </div>
+
+            </div><!-- /.page-content -->
+
+            <!--<div ng-include="loginpage" ></div>-->
+
+        </div><!-- /.main-content -->
+
+    </div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+
+<div ng-include="footer" ng-cloak></div>

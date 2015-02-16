@@ -1,0 +1,611 @@
+@import '/src/main/webapp/source/assets/css/less/mixins.less';
+@import '/src/main/webapp/source/assets/css/less/buttons.less';
+@import '/src/main/webapp/source/assets/css/less/variables.less';
+@import '/src/main/webapp/source/assets/css/less/bootstrap/mixins.less';
+@import '/src/main/webapp/source/assets/css/less/bootstrap/variables.less';
+
+@invalidColor: red;
+@tableBorderMargin: 0;
+
+@highlight-border-color: #307ecc;
+@highlight-border-width : 3px;
+@highlight-border-style : solid;
+
+@rightAlign: right;
+@leftAlign: left;
+
+@infrontZ-Index: 9999;
+@behindZ-Index: 99999999;
+
+@statusWidth: 20%;
+@nameWidth: 25%;
+@dateWidth: 20;
+
+@searchHeight: 31px;
+@actionColumnWidth: 15%;
+
+@validationBorderWidth:6px;
+@validColor: #2ecc71;
+@invalidColor: #e74c3c;
+
+@inflexxionLightGreen: #a8ba3a;
+
+@inflexxionDarkBlue: #335c65;
+
+.no-bottom-margin {
+  margin-bottom: @tableBorderMargin;
+}
+
+.captionID {
+  text-align: @rightAlign;
+}
+
+.dataID {
+  text-align: @leftAlign;
+}
+
+.common-form-error {
+  color: @invalidColor;
+  .inflexxion-arial-12
+}
+
+.patient-form-error {
+  color: @invalidColor;
+  .inflexxion-arial-12;
+}
+
+:focus ~ .patient-form-error {
+  display: none;
+}
+
+:focus ~ .common-form-error {
+  display: none;
+}
+
+.inflexxion-arial-14 {
+  font-family: 'Arial';
+  font-size: 14px;
+}
+
+.inflexxion-arial-12 {
+  font-family: 'Arial';
+  font-size: 12px;
+}
+
+.inflexxion-public-pages {
+  padding: 10px 120px 10px 277px;
+}
+
+.highlight{
+  border: @highlight-border-color  @highlight-border-width @highlight-border-style;
+}
+
+.behind {
+  position:relative;
+  z-index: behindZ-Index
+}
+
+.infront {
+  position:relative;
+  z-index: @infrontZ-Index
+}
+
+
+.recommendation-info-header{
+  font-size: 24px;
+  font-style: normal;
+  font-weight: bold;
+}
+.treatmentplans-table-name-width{
+  width:@nameWidth;
+}
+
+.treatmentplans-table-date-column-width{
+  width:@dateWidth;
+}
+
+.treatmentplans-table-status-column-width{
+  width:@statusWidth;
+}
+
+.showProfileMenu{
+  display: block;
+}
+
+.hideProfileMenu{
+  display: none;
+}
+
+//Ensures that all the input and select fields have the same height
+.field-height select, .field-height input {
+   height: @searchHeight;
+ }
+
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+  display: none;
+}
+
+#service-chart svg {
+  height: 300px;
+}
+
+.pointercursor {
+  cursor: pointer;
+}
+
+.feedback {
+  tr { line-height: 40px; }
+}
+
+.servicerating {
+  font-size: 175%;
+  padding: 0 0.5em;
+}
+
+.servicerating > a {
+  text-decoration: none;
+}
+
+.servicerating .rating-highlight, .rating.rating-highlight:hover {
+  color: #F4914E;
+}
+
+.servicerating .rating-normal, .rating.rating-normal:hover {
+  color: #1878D9;
+}
+
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-star:before {
+  content: "\f005";
+}
+
+.fa-star-o:before {
+  content: "\f006";
+}
+
+.action-column-width{
+  width:@actionColumnWidth;
+}
+
+.dropdown-preview {
+  margin:0 5px;
+  display:inline-block;
+}
+.dropdown-preview  > .dropdown-menu {
+  display: block;
+  position: static;
+  margin-bottom: 5px;
+}
+
+.rating-column-width {
+  width:25%;
+}
+
+.activity-action-column {
+  width:5%;
+}
+
+.no-entry{
+  padding-left:4px;
+}
+
+.inflexxion-banner-background {
+  background: @inflexxionDarkBlue;
+}
+
+.inflexxion-widget-background {
+  background: #7895a3;
+}
+
+// Navigation List Font
+.inflexxion-header-font {
+  .inflexxion-arial-14;
+  font-weight: bold;
+  color: @inflexxionDarkBlue;
+}
+
+.nav-list>li>a {
+  .inflexxion-arial-14;
+}
+
+.nav-list>li.active>a, .nav-list>li.active>a:hover, .nav-list>li.active>a:focus, .nav-list>li.active>a:active {
+  .inflexxion-arial-14;
+   font-weight: bold;
+}
+
+.login-form-width {
+  width: 500px;
+}
+
+.inflexxion-dark-green {
+  color: @inflexxionDarkBlue;
+}
+
+.inflexxion-light-green {
+  color:@inflexxionLightGreen;
+}
+
+.main {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin: 0;
+  height: 80%;
+  width:100%;
+}
+
+.footer {
+  padding-top: 75px;
+  height: 0;
+  width: 0;
+}
+
+.footer .footer-inner {
+  text-align: center;
+  position: absolute;
+  z-index: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.footer .footer-inner .footer-content {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  padding: 8px;
+  color: @inflexxionDarkBlue;
+}
+
+
+.footer .footer-inner .footer-content a{
+  color: @inflexxionDarkBlue;
+  text-decoration: none;
+  background: 0 0;
+}
+
+.inflexxion-foot-link {
+  font-family:Arial;
+  font-size: 12px;
+}
+
+.video-dialog {
+  width:100%;
+  height: 20px;
+}
+
+.disable-hyperlink {
+  pointer-events: none;
+  cursor: default;
+  color:#808080;
+}
+
+.header-title {
+
+}
+
+.navbar-title {
+  float: left;
+  height: 55px;
+  color: #fff;
+  font-size: 30px;
+  text-shadow: none;
+  text-decoration: none;
+  font-family: Arial;
+  font-weight: bold;
+  padding: 7px 0 7px 0;
+}
+
+.header-title a:active , .header-titlee  a:hover, .header-title  a:visited, .header-title  a:link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.inflexxion-page-header {
+  padding-bottom: 30px;
+  font-family: Arial;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: bold;
+  color: @inflexxionDarkBlue;
+}
+
+.inflexxion-sub-header {
+  padding-bottom: 30px;
+  font-family: Arial;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: bold;
+  color: @inflexxionDarkBlue;
+}
+
+.inflexxion-page-content {
+  background: #fff;
+  margin: 0;
+  padding: 0px 87px 10px;
+}
+
+.inflexxion-input-lable {
+  padding-left: 0;
+  padding-right: 0;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: bold;
+  color: @inflexxionDarkBlue;
+}
+
+.inflexxion-label-align {
+  text-align: left;
+  padding-left: 15px;
+}
+
+.inflexxion-form-actions {
+  padding-top: 10px;
+
+}
+
+.inflexxion-form-action-btn {
+  padding-left: 74px;
+}
+
+.inflexxion-breadcrumbs {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid @inflexxionDarkBlue;
+  padding-left: 10px;
+}
+
+.inflexxion-breadcrumbs-link span a, .inflexxion-breadcrumbs-link span{
+  color: @inflexxionDarkBlue;
+  font-size: 14px;
+  font-family: Arial;
+}
+
+.nav-list>li .submenu>li.active>a {
+  color: @inflexxionLightGreen;
+}
+
+
+.inflexxion-user-info {
+  padding-top: 6px;
+  max-width: 250px;
+  font-size: 12px;
+  font-family: Arial;
+}
+
+
+
+
+.no-padding-left{
+  padding-left: 0;
+}
+
+.inflexxion-dataelements-description {
+  padding-left: 15px;
+  font-size: 14px;
+  font-family: Arial;
+}
+
+// Inflexxion Button Styles
+.btn-primary {
+  .btn-color(#91a226,#91a226);
+  .btn-other(1px,Arial,bold,90px);
+}
+.btn-secondary {
+  .btn-color(@inflexxionDarkBlue,@inflexxionDarkBlue);
+  .btn-other(1px,Arial,bold,90px);
+}
+.btn-other(@padding, @family, @weight, @width) {
+  padding:@padding @padding;
+  font-family: @family;
+  font-weight: @weight;
+  width: @width;
+}
+
+.inflexxion-document-library {
+  margin-left:-33px;
+}
+
+.inflexxion-login-title {
+  font-family: Arial;
+  font-size: 23px;
+  font-weight: bold;
+  color: @inflexxionDarkBlue;
+}
+
+.inflexxion-loginform-header{
+  color: @inflexxionDarkBlue;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+// Override Side Nav bar properties
+.nav-list > li.active:after {
+  border: solid #ffffff;
+  border-width: 0 0px 0 0;
+}
+
+.nav-list li.active>a:after {
+  border-right-color: #ffffff;
+}
+
+.nav-list > li > a:focus {
+  background-color: #f9f9f9;
+  color: #1963aa;
+}
+
+.nav-list > li > a:hover:before {
+  background-color: #f9f9f9;
+}
+
+.nav-list>li {
+  border-bottom: 1px solid @inflexxionDarkBlue;
+}
+
+.nav-list>li .submenu>li>a {
+  border-top: 0px;
+  border-bottom: 0px;
+}
+
+.nav-list > li > .submenu:before {
+  border-width: 0 0 0 0px;
+}
+
+
+.menu-min .nav-list > li > a > .menu-text {
+  font-size: 14px;
+  font-weight: normal;
+  font-family: Arial;
+}
+
+.contact-header {
+  padding-bottom: 0;
+}
+
+.faq-ol {
+  margin: 0 0 10px 17px;
+}
+
+.feedback-action-btn {
+  float: left;
+  padding-left:0;
+  padding-top: 10px;
+}
+
+.docLib-border {
+  border-bottom: 1px dashed black;
+  margin-bottom: 0;
+}
+
+
+.data-element-subheader {
+  font-size: 16px;
+}
+
+.inflexxion-input-align {
+  padding-left: 28px;
+}
+
+.input-small-width{
+  width: 60px;
+}
+
+.input-hint{
+  color:#808080;
+}
+
+.input-in-table{
+  width:80px;
+}
+
+.td-padding {
+  padding:4px;
+}
+
+.dataElement-input{
+  padding-left: 38px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+td select {
+  padding-left: 5px;
+}
+
+.td-vertical-line{
+  border-left: solid 1px #333333;
+  padding-left: 12px;
+}
+
+.normal{
+  font-weight: normal;
+}
+
+.rec-table {
+  width:900px;
+}
+
+.rec-table-row-border{
+  border-top: 2px solid black;
+}
+
+.rec-pdf-btn {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+.rec-pdf-btn-container {
+  height: 50px;
+  background: #f5f5f5;
+  border:1px solid #e5e5e5;
+}
+
+.rec-table-link {
+  background: #f5f5f5;
+  font-family: 'Arial';
+  font-size: 14px;
+}
+.float-left{
+  float: left;
+}
+
+.float-right{
+  float:right;
+}
+
+.rec-dataelements-table-label {
+  width:900px;
+  display:block;
+}
+
+.clear-all{
+  clear:both;
+}
+
+.rec-table-field{
+  width: 750px;
+}
+
+.rec-table-answer{
+  width: 150px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.nobold{
+  font-weight: normal;
+}
+
+
+.leftAlignNoPadding {
+  text-align: left;
+  padding-top: 5px;
+}
+
+.noleftpadding {
+  padding-left: 0;
+}

@@ -1,0 +1,79 @@
+
+<div ng-include="headnavbar" ng-cloak></div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="" ng-class="{'display': enableDropDownMenu}" ng-click="toggleDropDownMenu()">
+            <span class="menu-text" ></span>
+        </a>
+
+        <div ng-include="sidenavbar" ng-cloak ></div>
+
+        <div class="main-content">
+
+            <div ng-include="breadcrums" ng-cloak></div>
+
+            <div class="inflexxion-page-content">
+
+                <h1 class="inflexxion-page-header">
+                    FAQs
+                </h1>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+
+                        <div class="inflexxion-arial-12">
+
+                            <ol class="faq-ol">
+                                <li><a href="" ng-click="goToBookmark('#ans1')">Registering on CDS</a></li>
+                                <li><a href="" ng-click="goToBookmark('#ans2')">What is the cost of using CDS</a></li>
+                                <li><a href="" ng-click="goToBookmark('#ans3')">Lorem ipsum…</a></li>
+                                <li><a href="" ng-click="goToBookmark('#ans4')">Lorem ipsum…</a></li>
+                            </ol>
+
+                            <br/>
+
+                            <strong><a id="ans1">1. Registering on {sitename}</a></strong>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis lectus metus, at posuere
+                                neque. Sed pharetra nibh eget orci convallis at posuere leo convallis. Sed blandit augue vitae augue
+                                scelerisque bibendum. Vivamus sit amet libero turpis, non venenatis urna. In blandit, odio convallis
+                                suscipit venenatis, ante ipsum cursus augue.</p>
+
+                            <p><a href="">Back to top</a></p>
+
+                            <strong><a id="ans2">2. What is the cost of using the {sitename}?</a></strong>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis lectus metus, at posuere
+                                neque. Sed pharetra nibh eget orci convallis at posuere leo convallis. Sed blandit augue vitae augue
+                                scelerisque bibendum. Vivamus sit amet libero turpis, non venenatis urna. In blandit, odio convallis
+                                suscipit venenatis, ante ipsum cursus augue.</p>
+
+                            <p><a href="">Back to top</a></p>
+
+                            <strong><a id="ans3">3. Lorem ipsum?</a></strong>
+                            <p>Vivamus sit amet libero turpis, non venenatis urna. In blandit, odio convallis suscipit venenatis, ante
+                                ipsum cursus augue.</p>
+
+                            <p><a href="">Back to top</a></p>
+
+                            <strong><a id="ans4">4. Lorem ipsum?</a></strong>
+                            <p>Vivamus sit amet libero turpis, non venenatis urna. In blandit, odio convallis suscipit venenatis, ante
+                                ipsum cursus augue.</p>
+
+                            <p><a href="">Back to top</a></p>
+
+                        </div>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+
+<div ng-include="footer" ng-cloak></div>

@@ -1,0 +1,74 @@
+
+<div ng-include="headnavbar" ng-cloak></div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="" ng-class="{'display': enableDropDownMenu}" ng-click="toggleDropDownMenu()">
+            <span class="menu-text" ></span>
+        </a>
+
+        <div ng-include="sidenavbar" ng-cloak ></div>
+
+        <div class="main-content">
+
+            <div ng-include="breadcrums" ng-cloak></div>
+
+            <div class="page-content">
+
+                <div class="inflexxion-page-content">
+
+                    <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+
+                        <div class="error-container">
+                            <div class="well">
+                                <h1 class="grey lighter smaller">
+                                    <span class="blue bigger-125">
+                                        <i class="icon-sitemap"></i>
+                                        Access Denied
+                                    </span>
+                                </h1>
+
+                                <hr />
+
+                                <div>
+                                    <div class="space"></div>
+
+                                </div>
+
+                                <hr />
+                                <div class="space"></div>
+
+                                <div class="center">
+                                    <a class="btn btn-primary" ng-click="goBack()">
+                                        Go Back
+                                    </a>
+
+                                    <a href="#/training" class="btn btn-secondary">
+                                        Training
+                                    </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div>
+
+            </div><!-- /.row -->
+        </div><!-- /.page-content -->
+
+            <!--<div ng-include="loginpage" ></div>-->
+
+        </div><!-- /.main-content -->
+
+    <!--</div>&lt;!&ndash; /.main-container-inner &ndash;&gt;-->
+</div><!-- /.main-container -->
+
+<div ng-include="footer" ng-cloak></div>

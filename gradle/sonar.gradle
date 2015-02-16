@@ -1,0 +1,24 @@
+apply plugin: 'sonar-runner'
+apply plugin: 'jacoco'
+
+jacoco {
+	toolVersion = "0.7.0.201403182114"
+}
+
+sonarRunner {
+	sonarProperties {
+		property 'sonar.projectName', 'bham'
+		property 'sonar.projectDescription', 'Behavioral health advisory module'
+
+		//Configuration for the MySql sonar database
+		property "sonar.host.url", "http://bhamdevbuild001:9000/"
+		property "sonar.jdbc.url", "jdbc:mysql://bhamdevbuild001/sonar"
+		property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+		property "sonar.jdbc.username", "sonar"
+		property "sonar.jdbc.password", "sonar"
+		property 'sonar.sourceEncoding', 'UTF-8'
+		property 'sonar.skipPackageDesign', 'true'
+		property "sonar.jacoco.reportPath", "$buildDir/jacoco/jacocoTest.exec"
+		property "sonar.jacoco.itReportPath", "$buildDir/jacoco/jacocoIntegTest.exec"
+	}
+}

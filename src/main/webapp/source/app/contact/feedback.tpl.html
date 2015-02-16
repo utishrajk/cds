@@ -1,0 +1,132 @@
+
+<div ng-include="headnavbar" ng-cloak></div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="" ng-class="{'display': enableDropDownMenu}" ng-click="toggleDropDownMenu()">
+            <span class="menu-text" ></span>
+        </a>
+
+        <div ng-include="sidenavbar" ng-cloak ></div>
+
+        <div class="main-content">
+
+            <div ng-include="breadcrums" ng-cloak></div>
+
+            <div class="inflexxion-page-content">
+
+                <h1 class="inflexxion-page-header">
+                    Feedback
+                </h1>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+
+                        <div class="inflexxion-arial-12">
+
+                            <p >
+                                <span style="float:left;">Account or customer service questions? <a href="#/contactus">Contact Us</a></span>
+                                <span  style="float:right;">Did you check <a href="#/faqs">FAQs</a> first?</span>
+                            </p>
+
+                            <br/><br/><br/>
+
+                            <p>Please choose one option to help us direct your feedback to the appropriate person.</p>
+
+                            <form name="feedbackForm" class="form-horizontal" role="form">
+                                <div growl></div>
+                                <div class="form-group">
+                                    <div class="col-sm-9">
+                                        <div class="control-group">
+                                            <div class="radio">
+                                                <label>
+                                                    <input ng-model="feedback.type" name="type" type="radio" required class="ace" value="Technical problem  (something isn't working as expected) "/>
+                                                    <span class="lbl inflexxion-arial-12"> Technical problem (something isn't working as expected) </span>
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input ng-model="feedback.type" name="type" type="radio" class="ace" required value="Comment/Question (Non-technical) "/>
+                                                    <span class="lbl inflexxion-arial-12"> Comment / Question (Non-technical) </span>
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input ng-model="feedback.type" name="type" type="radio" class="ace" required value="Not sure" />
+                                                    <span class="lbl inflexxion-arial-12"> Not sure </span>
+                                                </label>
+                                            </div>
+                                            <span ng-show="isDirty(feedbackForm.type) && showError(feedbackForm.type, 'required')" class="common-form-error">This field is required.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+                                <br/>
+
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <div class="widget-box">
+                                            <div class="widget-header header-color-blue">
+                                                <h4> Tell us:</h4>
+
+                                                <div class="widget-toolbar">
+                                                </div>
+                                            </div>
+                                            <div class="widget-body">
+                                                <div class="widget-main">
+                                                    <div>
+                                                        <textarea id="form-field-11" rows="5" ng-model="feedback.comments" ng-maxlength="300" name="comments" required class="autosize-transition form-control inflexxion-arial-12" placeholder="Type your comments in this box. Please provide as much detail as possible so that we can help make this better."></textarea>
+                                                        <span ng-show="isDirty(feedbackForm.comments) &&  showError(feedbackForm.comments, 'required')" class="common-form-error">This field is required.</span>
+                                                        <span ng-show="showError(feedbackForm.comments, 'maxlength')" class="patient-form-error">Comments should not be more than 80 characters. </span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-4"></div>
+
+                                <br/>
+                                <div class="form-group">
+                                    <span style="padding-left: 15px;" for="feedbackEmail"> Enter you email: </span>
+                                    <span class="input-icon input-icon-right">
+                                            <input type="email" name="email"  ng-pattern="emailPattern" id="feedbackEmail" ng-model="feedback.email" required/>
+                                        </span>
+                                    <span ng-show="isDirty(feedbackForm.email) &&  showError(feedbackForm.email, 'required')" class="common-form-error">This field is required.</span>
+                                    <span ng-show="feedbackForm.email.$error['pattern']" class="patient-form-error">Invalid email</span>
+                                </div>
+
+
+
+                                <div class="">
+                                    <div class="feedback-action-btn">
+                                        <button class="btn btn-primary" type="button" ng-disabled="!(feedbackForm.$dirty && feedbackForm.$valid)" ng-click="save()">
+                                            SUBMIT
+                                        </button>
+                                        <button class="btn btn-secondary" type="reset" ng-click="reset()">
+                                            RESET
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+
+<div ng-include="footer" ng-cloak></div>

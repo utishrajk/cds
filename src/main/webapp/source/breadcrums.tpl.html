@@ -1,0 +1,27 @@
+<div class="breadcrumbs inflexxion-breadcrumbs " id="breadcrumbs">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('breadcrumbs', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <ul class="breadcrumb">
+        <!--<li class="inflexxion-breadcrumbs-link" >-->
+            <!--<span><a href="#/dataelements">Patient Data Elements</a> </span>-->
+        <!--</li>-->
+        <li ng-repeat="breadcrumb in breadcrumbs()" class="inflexxion-breadcrumbs-link">
+             <span ng-if="$last ">
+                   <span ng-bind="breadcrumb.name"></span>
+             </span>
+             <span ng-if="$index < ( breadcrumbs().length - 1 )">
+                   <a href="#{{breadcrumb.path}}"  ><span ng-bind="breadcrumb.name"> </span></a>&nbsp;
+             </span>
+        </li>
+    </ul>
+    <!-- .breadcrumb -->
+
+    <div class="nav-search" id="nav-search">
+    </div>
+    <!-- #nav-search -->
+</div>

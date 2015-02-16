@@ -1,0 +1,61 @@
+<div class="modal-body no-padding clear-all" >
+    <table id="sample-table-1" class="table table-striped table-bordered table-hover no-bottom-margin rec-table">
+        <thead>
+            <tr class="inflexxion-arial-14"><td colspan="2" class="rec-table-link" ><a href="#/dataelements/{{dataElements.requestId}}">Back to Data Elements</a></td></tr>
+            <tr class="inflexxion-arial-14"><th >Field</th><th >Answer</th></tr>
+        </thead>
+        <tbody>
+
+            <tr class="inflexxion-arial-12"><td class="rec-table-field bold"> What is your age? </td><td class="rec-table-answer"> <span ng-show="dataElements.ageFlag"  class="red" >*</span>  {{ dataElements.age}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold"> What is your gender? </td><td> <span ng-show="dataElements.genderCodeFlag"  class="red" >*</span>  {{ dataElements.genderDisplayName}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold"> How many days have you experienced medical problems in the last 30?</td><td> <span  ng-show="dataElements.m6_days_medical_problemFlag"  class="red" >*</span>  {{ dataElements.m6_days_medical_problem}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold">How troubled or bothered have you been by these medical problems in the past 30 days?</td><td> <span ng-show="dataElements.m7_patient_rating_CodeFlag"  class="red" >*</span>  {{ dataElements.m7_patient_rating_DisplayName}}  </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold">How important to you now is treatment for these medical problems?</td>   <td> <span ng-show="dataElements.m8_patient_rating_CodeFlag"  class="red" >*</span>  {{ dataElements.m8_patient_rating_DisplayName}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >How much money did you receive from illegal sources in the past 30 days?</td>  <td>  <span  ng-show="dataElements.e17_income_illegalFlag"  class="red" >*</span>  {{ dataElements.e17_income_illegal}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >How many days have you experienced employment problems in past 30 days?</td>   <td>  <span  ng-show="dataElements.e19_days_employment_problemFlag"  class="red" >*</span>  {{ dataElements.e19_days_employment_problem}}   </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Alcohol - to intoxication (3 drinks in a setting or 5 in a day) - days in the last 30</td><td>  <span ng-show="dataElements.d2a_intoxication_30Flag"  class="red" >*</span>  {{ dataElements.d2a_intoxication_30}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Alcohol - route of administration</td><td> </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Heroin - days in the last 30</td><td> <span  ng-show="dataElements.d3a_heroin_30Flag"  class="red" >*</span> {{ dataElements.d3a_heroin_30}}   </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Heroin - route of administration</td><td>  <span  ng-show="dataElements.d3c_route_of_intake_type_CodeFlag"  class="red" >*</span> {{ dataElements.d3c_route_of_intake_type_DisplayName}}  </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Methadone - days in the last 30</td><td> <span  ng-show="dataElements.d4a_methadone_30Flag"  class="red" >*</span> {{ dataElements.d4a_methadone_30}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Methadone - route of administration</td><td>   <span  ng-show="dataElements.d4c_route_of_intake_type_CodeFlag"  class="red" >*</span> {{ dataElements.d4c_route_of_intake_type_DisplayName}}  </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Other opiates/analgesics - days in the last 30</td> <td> <span  ng-show="dataElements.d5a_opiates_30Flag"  class="red" >*</span> {{ dataElements.d5a_opiates_30}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Other opiates/analgesics - route of administration30</td> <td> <span  ng-show="dataElements.d5c_route_of_intake_type_CodeFlag"  class="red" >*</span>  {{ dataElements.d5c_route_of_intake_type_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Are you presently awaiting charges, trial, or sentence?</td> <td>  <span  ng-show="dataElements.l24_is_waiting_trial_CodeFlag"  class="red" >*</span>  {{ dataElements.l24_is_waiting_trial_DisplayName}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >How many days in the past 30 have you engaged in illegal activity for profit?</td><td>  <span ng-show="dataElements.l27_days_illegalFlag"  class="red" >*</span> {{ dataElements.l27_days_illegal}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >How serious do you feel your present legal problems are?</td><td> <span ng-show="dataElements.l28_patient_rating_CodeFlag"  class="red" >*</span> {{ dataElements.l28_patient_rating_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >How important to you now is counseling or referral for these legal problems?</td>  <td> <span  ng-show="dataElements.l29_patient_rating_CodeFlag"  class="red" >*</span>  {{ dataElements.l29_patient_rating_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Are you satisfied with your current marital status?</td><td> <span  ng-show="dataElements.f3_is_satisfied_marital_CodeFlag"  class="red" >*</span> {{ dataElements.f3_is_satisfied_marital_DisplayName}}  </td> </tr>
+
+            <tr class="inflexxion-arial-12 rec-table-row-border bold" ><td>Have you had significant periods in which you have experienced serious problems with:</td><td></td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Mother - in the past 30 days</td><td> <span ng-show="dataElements.f18a_is_mother_30_CodeFlag"  class="red" >*</span>  {{ dataElements.f18a_is_mother_30_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Father - in the past 30 days</td><td> <span  ng-show="dataElements.f19a_is_father_30_CodeFlag"  class="red" >*</span> {{ dataElements.f19a_is_father_30_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Brother/Sisters  - in the past 30 days</td><td>  <span  ng-show="dataElements.f20a_is_sibling_30_CodeFlag"  class="red" >*</span>  {{ dataElements.f20a_is_sibling_30_DisplayName}}  </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Sexual Partners/Spouse - in the past 30 days</td><td> <span  ng-show="dataElements.f21a_is_spouse_30_CodeFlag"  class="red" >*</span> {{ dataElements.f21a_is_spouse_30_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Children - in the past 30 days</td><td> <span  ng-show="dataElements.f22a_is_children_30_CodeFlag"  class="red" >*</span>  {{ dataElements.f22a_is_children_30_DisplayName}}  </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Other significant family - in the past 30 days</td><td>  <span  ng-show="dataElements.f23a_is_other_30_CodeFlag"  class="red" >*</span> {{dataElements.f23a_is_other_30_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Close friends  - in the past 30 days</td><td>  <span  ng-show="dataElements.f24a_is_friends_30_CodeFlag"  class="red" >*</span> {{ dataElements.f24a_is_friends_30_DisplayName }}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Neighbors  - in the past 30 days</td><td> <span ng-show="dataElements.f25a_is_neighbor_30_CodeFlag"  class="red" >*</span> {{ dataElements.f25a_is_neighbor_30_DisplayName}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Coworkers  - in the past 30 days</td><td> <span ng-show="dataElements.f26a_is_co_worker_30_CodeFlag"  class="red" >*</span>   {{dataElements.f26a_is_co_worker_30_DisplayName}} </td> </tr>
+
+            <tr  class="inflexxion-arial-12 rec-table-row-border" ><td class="bold" >Has anyone ever abused you physical?</td> <td> <span ng-show="dataElements.f28b_is_abused_p_lifetime_CodeFlag"  class="red" >*</span> {{ dataElements.f28b_is_abused_p_lifetime_DisplayName}}</td></tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Has anyone ever abused you sexually?</td><td> <span ng-show="dataElements.f29b_is_abused_s_lifetime_CodeFlag"  class="red" >*</span> {{ dataElements.p5a_is_anxiety_30_DisplayName}}  </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >How many days in the past 30 have you had serious conflicts with your family?</td>   <td>  <span  ng-show="dataElements.f30_days_conflict_familyFlag"  class="red" >*</span> {{ dataElements.f30_days_conflict_family}}</td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >How troubled or bothered have you been in the past 30 days by family problems?</td>  <td>  <span  ng-show="dataElements.f32_patient_rating_CodeFlag"  class="red" >*</span>  {{ dataElements.f32_patient_rating_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >How important to you now is treatment or counseling for family problems?</td><td>  <span  ng-show="dataElements.f34_patient_rating_CodeFlag"  class="red" >*</span>   {{ dataElements.f34_patient_rating_DisplayName}} </td> </tr>
+
+            <tr  class="inflexxion-arial-12 rec-table-row-border" ><td colspan="2" class="bold" >Have you had a significant period of time in which you have:</td> </tr>
+
+            <tr class="inflexxion-arial-12"><td class="bold" >Experienced serious depression? in the past 30 days</td><td> <span  ng-show="dataElements.p4a_is_depression_30_CodeFlag"  class="red" >*</span> {{dataElements.p4a_is_depression_30_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Experienced serious anxiety or tension? in the past 30 days</td><td> <span  ng-show="dataElements.p5a_is_anxiety_30_CodeFlag"  class="red" >*</span> {{dataElements.p5a_is_anxiety_30_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Experienced trouble controlling violent behavior including episodes of rage, or violence? in the past 30 days</td><td> <span ng-show="dataElements.p8a_is_violent_30_CodeFlag"  class="red" >*</span> {{ dataElements.p8a_is_violent_30_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Experienced serious thoughts of suicide? in the past 30 days</td><td> <span  ng-show="dataElements.p9a_is_suicidal_30_CodeFlag"  class="red" >*</span> {{ dataElements.p9a_is_suicidal_30_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12"><td class="bold" >Been prescribed medication for psychological and emotional problems? in the past 30 days</td><td> <span ng-show="dataElements.p11a_is_prescribed_30_CodeFlag"  class="red" >*</span> {{ dataElements.p11a_is_prescribed_30_DisplayName}} </td> </tr>
+            <tr class="inflexxion-arial-12 rec-table-row-border"><td class="bold" >How many prior treatment episodes have you had for alcohol and/or drugs?</td><td> <span  ng-show="dataElements.episodeCodeFlag"  class="red" >*</span> {{ dataElements.episodeDisplayName}} </td> </tr>
+
+        </tbody>
+        <tfoot>
+            <tr><td colspan="2" class="rec-table-link"><a href="#/dataelements/{{dataElements.requestId}}">Back to Data Elements</a></td></tr>
+        </tfoot>
+    </table>
+</div>

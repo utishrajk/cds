@@ -1,0 +1,248 @@
+
+<div class="longin-layout" >
+        <div class="row" >
+            <div class="col-sm-10 col-sm-offset-1">
+
+                <div class="login-container" style="width:500px;">
+                    <div class="center ">
+                        <h1>
+                            <span class="inflexxion-login-title">{{projectName}}</span>
+                        </h1>
+                    </div>
+                    <div class="position-relative" >
+                        <div id="signup-box" class="signup-box widget-box no-border" >
+                            <div class="widget-body" style="border: 1px solid #ccc; background:#e4e6e9; ">
+                                <div class="widget-main" style="padding:15px;">
+                                    <h4 class="header lighter bigger">
+                                        <span class="inflexxion-loginform-header">Registration</span>
+                                    </h4>
+                                    <div class="inflexxion-arial-14"> All fields are required</div>
+                                    <div class="space-6"></div>
+                                    <form data-ng-submit="register()" novalidate autocomplete="off" name="registerForm" class="formValidation form-horizontal field-height">
+                                        <fieldset class="inflexxion-arial-14">
+
+                                            <label class="block clearfix"> <b>First Name</b>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="text"  id="firstName" name="firstName" data-ng-model="registerUser.firstName" ng-minlength="2" ng-maxlength="50" class="form-control" placeholder="First Name" required/>
+                                                    <span ng-show="isDirty(registerForm.firstName) && showError(registerForm.firstName, 'required')" class="patient-form-error">This field is required.</span>
+                                                    <span ng-show="isDirty(registerForm.firstName) && showError(registerForm.firstName, 'minlength')" class="patient-form-error">First name should be at least 2 characters. </span>
+                                                    <span ng-show="isDirty(registerForm.firstName) && showError(registerForm.firstName, 'maxlength')" class="patient-form-error">First name should be less than 50 characters. </span>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Last Name</b>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="text"  id="lastName" name="lastName" data-ng-model="registerUser.lastName" ng-minlength="2" ng-maxlength="50" class="form-control" placeholder="Last Name" required/>
+                                                    <span ng-show="isDirty(registerForm.lastName) && showError(registerForm.lastName, 'required')" class="patient-form-error">This field is required.</span>
+                                                    <span ng-show="isDirty(registerForm.lastName) && showError(registerForm.lastName, 'minlength')" class="patient-form-error">Last name should be at least 2 characters. </span>
+                                                    <span ng-show="isDirty(registerForm.lastName) && showError(registerForm.lastName, 'maxlength')" class="patient-form-error">Last name should be less than 50 characters. </span>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"><b>Staff Id</b></label>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="text"  id="staffId" name="staffId" data-ng-model="registerUser.staffId" ng-minlength="2" ng-maxlength="50" class="form-control" placeholder="Staff Id" required/>
+                                                    <span ng-show="isDirty(registerForm.staffId) && showError(registerForm.staffId, 'required')" class="patient-form-error">This field is required.</span>
+                                                    <span ng-show="isDirty(registerForm.staffId) && showError(registerForm.staffId, 'minlength')" class="patient-form-error">Last name should be at least 2 characters. </span>
+                                                    <span ng-show="isDirty(registerForm.staffId) && showError(registerForm.staffId, 'maxlength')" class="patient-form-error">Last name should be less than 50 characters. </span>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Phone</b>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="text" id="phone" name="phone" data-ng-model="registerUser.mailingAddressTelephoneNumber" class="form-control" placeholder="Phone" required />
+                                                    <span ng-show="isDirty(registerForm.phone) && showError(registerForm.phone, 'required')" class="patient-form-error">This field is required.</span>
+                                                    <span ng-show="isDirty(registerForm.phone) && !isPhoneNumber" class="patient-form-error">Invalid phone number. </span>
+                                                    <span ng-show="isDirty(registerForm.phone) && !isValidPhoneNumberLength" class="patient-form-error">US Phone number must be 10-digit number. </span>                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Date of Birth</b>
+                                                <span class="block input-icon input-icon-right">
+
+                                                     <!--<datedropdown ng-model="caremanager.dateOfBirth" isrequired="true" futuredatevalidation="true" agevalidation="true" isvaliddate="isvaliddate"></datedropdown>-->
+
+                                                     <datedropdown ng-model="registerUser.dateOfBirth" isrequired="true" futuredatevalidation="true"  togglerequiredfielderror="false" agevalidation="true" isvaliddate="isvaliddate"></datedropdown>
+
+                                                    <!--<datedropdown ng-model="registerUser.dateOfBirth" isrequired="true" futuredatevalidation="true"  togglerequiredfielderror="false" agevalidation="true" isvaliddate="isvaliddate"></datedropdown>-->
+
+                                                     <!--<datedropdown ng-model="caremanager.dateOfBirth" isrequired="true" futuredatevalidation="true" agevalidation="true" isvaliddate="isvaliddate"></datedropdown>-->
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Email</b>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="email"  id="email" name="email" ng-pattern="emailPattern" data-ng-model="registerUser.email" class="form-control" placeholder="Email" required/>
+                                                    <span ng-show="isDirty(registerForm.email) && showError(registerForm.email, 'required')" class="patient-form-error">This field is required.</span>
+                                                    <span ng-show="isDirty(registerForm.email) && registerForm.email.$error['pattern']" class="patient-form-error">Invalid email.</span>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Password</b>: should have a minimum of twelve characters, and at least one each of upper-case letters, lower-case letters, numbers, and special characters.
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password" id="credential" name="credential" ng-pattern="passwordPattern" class="form-control" ng-minlength="8" data-ng-model="registerUser.credential" placeholder="Password" required ng-change="comparePasswords()"/>
+                                                    <span ng-show="isDirty(registerForm.credential) &&  showError(registerForm.credential, 'required')" class="patient-form-error">This field is required</span>
+                                                    <span ng-show="isDirty(registerForm.credential) &&  showError(registerForm.credential, 'minlength')" class="patient-form-error">Password should be at least 8 characters. </span>
+                                                    <span ng-show="isDirty(registerForm.credential) &&  registerForm.credential.$error['pattern']" class="patient-form-error">Password should have a minimum of twelve characters, and at least one each of upper-case letters, lower-case letters, numbers, and special characters.</span>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Confirm Password</b>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password" id="confirmPassword" name="confirmPassword" ng-pattern="passwordPattern" class="form-control" ng-minlength="8" data-ng-model="registerUser.confirmPassword" placeholder="Confirm Password" required ng-change="comparePasswords()"/>
+                                                    <span ng-show="isDirty(registerForm.confirmPassword) && showError(registerForm.confirmPassword, 'required')" class="patient-form-error">This field is required.</span>
+                                                    <span ng-show="isDirty(registerForm.confirmPassword) && showError(registerForm.confirmPassword, 'minlength')" class="patient-form-error">Confirm Password should be at least 8 characters.</span>
+                                                     <span ng-show="isDirty(registerForm.confirmPassword) && registerForm.confirmPassword.$error['pattern']" class="patient-form-error">Password should have a minimum of twelve characters, and at least one each of upper-case letters, lower-case letters, numbers, and special characters.</span>
+                                                    <span ng-show="isDirty(registerForm.confirmPassword) && passwordsMatch" class="patient-form-error">Passwords do not match.</span>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Security Question 1</b>
+                                                <span class="block input-icon input-icon-right">
+                                                    <select ng-model="registerUser.securityQuestion1Code" name="securityQuestion1Code" id="securityQuestion1Code" required ng-change="onSecurityQuestion1Change()">
+                                                        <option value="">-- Choose Security Question 1 --</option>
+                                                        <option ng-repeat="s in tempSecurityQuestions1" value="{{s.code}}">{{s.displayName}}</option>
+                                                    </select>
+                                                    <span ng-show="isDirty(registerForm.securityQuestion1Code) && showError(registerForm.securityQuestion1Code, 'required')" class="patient-form-error">This field is required.</span>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Security Answer 1</b>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password"  id="securityAnswer1" name="securityAnswer1" data-ng-model="registerUser.securityAnswer1" class="form-control"  required/>
+                                                    <span ng-show="isDirty(registerForm.securityAnswer1) &&  showError(registerForm.securityAnswer1, 'required')" class="patient-form-error">This field is required.</span>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Security Question 2</b>
+                                                <span class="block input-icon input-icon-right">
+                                                    <select ng-model="registerUser.securityQuestion2Code" name="securityQuestion2Code" id="securityQuestion2Code" required ng-change="onSecurityQuestion2Change()">
+            ``                                            <option value="">-- Choose Security Question 2 --</option>
+                                                        <option ng-repeat="s in tempSecurityQuestions2" value="{{s.code}}">{{s.displayName}}</option>
+                                                    </select>
+                                                    <span ng-show="isDirty(registerForm.securityQuestion2Code) &&  showError(registerForm.securityQuestion2Code, 'required')" class="patient-form-error">This field is required.</span>
+                                                    <span ng-show="isDirty(registerForm.securityQuestion2Code) &&  questionsMatch" class="patient-form-error">Security questions must be different</span>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Security Answer 2</b>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password"  id="securityAnswer2" name="securityAnswer2" data-ng-model="registerUser.securityAnswer2" class="form-control" required/>
+                                                    <span ng-show="isDirty(registerForm.securityAnswer2) &&  showError(registerForm.securityAnswer2, 'required')" class="patient-form-error">This field is required.</span>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix"> <b>Type the code below</b>
+                                                <div re-captcha ng-model="registerUser.captcha"></div>
+                                            </label>
+
+                                            <label class="block clearfix">
+                                                <span class="">
+                                                    <input type="checkbox" name="acceptTerms" value="acceptTerms" data-ng-model="registerUser.acceptTermsOfUse" style="height:15px; padding:0;margin:0;"required/>
+                                                    Accept <a href="" ng-click="openTermOfUs()">terms of use</a> and <a href="" ng-click="openPrivacyPolicy()">privacy policy</a>
+                                                </span>
+                                            </label>
+
+                                            <div class="common-form-error" ng-show="registererror" class="red">{{registerErrorMsg}}</div>
+                                            <div class="common-form-error" ng-show="isDirty(registerForm) && (!isValidPhoneNumberLength || !isPhoneNumber || !registerForm.$valid || passwordsMatch || questionsMatch || (getAge(registerUser.dateOfBirth) < 18) || !isvaliddate)">There are errors on this page. Please correct to continue.</div>
+
+                                            <div class="space-10"></div>
+                                            <div class="clearfix">
+
+                                                <button type="submit" ng-disabled="!isValidPhoneNumberLength || !isPhoneNumber || !registerForm.$valid || passwordsMatch || questionsMatch || (getAge(registerUser.dateOfBirth) < 18) || !isvaliddate" class="width-45 pull-left btn btn-sm btn-success btn-primary">
+                                                    REGISTER
+                                                </button>
+
+                                                <a href="#/login" data-ng-click="resetMessages()"  class=" width-45 pull-right btn btn-sm btn-secondary">
+                                                    CANCEL
+                                                </a>
+
+
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <div data-ng-show="error" class="text-center text-danger">
+                                    <strong>{{error}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br/><br/><br/>
+            </div>
+        </div>
+    </div>
+
+<div ng-include="footer" ng-cloak></div>
+
+
+<script type="text/ng-template" id="termofus">
+    <div class="inflexxion-arial-12">
+
+        <h1 class="inflexxion-page-header contact-header">Terms Of Use </h1>
+        <hr/>
+
+        <p>This Web Site (“Behavioral Health: Clinical Decisions Support”) is an interactive health website offered by Inflexxion, Inc. (hereinafter "Inflexxion").  As used in these Terms of Use, the terms “we,” “us” and “our” refer to Inflexxion. This web site does not provide clinical advice. The content of this Web Site is for informational purposes only, and is not intended to be a substitute for professional clinical advice, diagnosis or treatment. Reliance on any information provided on this Web Site is at your own risk. </p>
+
+        <h3 class="inflexxion-sub-header contact-header">Permitted Uses</h3>
+
+        <p>Inflexxion grants you a non-exclusive, non-transferable, limited license to access and use the information, documents, text, images, software, and other available content on the Web Site (the “Content”) solely in accordance with these Terms of Use. Subject to these Terms of Use, you may view, download and print the Content solely for your noncommercial and informational use. </p>
+
+        <h3 class="inflexxion-sub-header contact-header">Prohibited Uses</h3>
+
+        <p>You agree not to reproduce, distribute, modify, post, transmit, sell or otherwise make available any of the Content. You agree not to use the Web Site for any purpose that is unlawful or prohibited by these Terms of Use. You may not use any robot, spider, or other automatic device, or manual process, to monitor or copy all or part of the Web Site or Content, without the prior written permission of Inflexxion. You may not access or use the Web Site in any manner that could impair, damage or disable any Inflexxion computer system or network, or interfere with the proper working of any Inflexxion computer system or network. You may not gain, or attempt to gain, unauthorized access to any parts of the Web Site or any Inflexxion computer system or network.</p>
+
+        <h3 class="inflexxion-sub-header contact-header">Changes to Website and These Terms of Use </h3>
+
+
+        <p>We may change the Web Site or the Content at any time, and we may terminate your access to and use of the Web Site at any time, with or without cause, in our sole discretion. We may change any of the Terms of Use contained herein at any time. Changes will become effective immediately upon posting on the website. If substantive changes have been made, registered users will be prompted when logging in to accept a new version of the Terms of Use. Non-registered users constitute their acceptance of any changes to the Terms of Use by continuing to use the site.</p>
+
+        <h3 class="inflexxion-sub-header contact-header">Passwords </h3>
+
+        <p>Access to and use of password protected or secure areas of the Web Site is restricted to authorized users only. You may not share your password(s), account information, or access to the Web Site. You are responsible for maintaining the confidentiality of password(s) and account information, and you are responsible for all activities that occur under your password(s) or account(s) or as a result of your access to the Web Site. You agree to notify Inflexxion immediately of any unauthorized use of your password(s) or account(s).</p>
+
+        <h3 class="inflexxion-sub-header contact-header">Disclaimer  </h3>
+
+        <p>The Web Site and Content are provided “AS IS.” We, to the fullest extent permitted by law, disclaim all warranties of any kind (express, implied or otherwise) regarding the Web Site and the Content, including but not limited to any implied warranties of merchantability, fitness for a particular purpose, ownership, and non-infringement. We do not make any warranty about the accuracy, reliability, completeness, timeliness, or quality of the Web Site or the Content. We do not warrant that the Web Site will operate without error or interruption. Inflexxion shall have no responsibility for any damage to your computer system or loss of data that results from the download or use of Content. </p>
+
+        <h3 class="inflexxion-sub-header contact-header">Contact Information </h3>
+
+        <a href="mailto:BHCDS@inflexxion.com?Subject=" target="_top">BHCDS@inflexxion.com</a><br/>
+        Phone: (800) 848-3895 </b>
+
+        <br/><br/>
+    </div>
+</script>
+
+
+<script type="text/ng-template" id="privacypolicy">
+    <div class="inflexxion-arial-12">
+
+        <h1 class="inflexxion-page-header contact-header" >Privacy Policy</h1>
+        <hr/>
+
+        <p>The privacy, confidence, and trust of individuals who use the “Behavioral Health: Clinical Decisions Support” program are very important to us. No personal health information is collected at this site unless it is provided voluntarily by an individual while participating in an activity that asks for the information.   We also collect statistical information that helps us understand how people are using the website so we can continually improve our services.  The “Behavioral Health: Clinical Decisions Support” program is being used in a research study which has been approved by an accredited Institutional Review Board (IRB). Participant consent is being gathered.  The IRB has approved the study and the data safety monitoring procedures associated with it.  In the “Behavioral Health: Clinical Decisions Support” application, patient data elements are entered by the participant via a secured web browsing session and transferred to a secured database.  When entering data, the browsing session is protected by SSL.  This type of information is then transferred to an encrypted database, which is only accessible by authorized personnel. Communication between the web server and the database server is encrypted using SSL. </p>
+
+        <h3 class="inflexxion-sub-header contact-header">Compliance</h3>
+
+        <p>Inflexxion is in material compliance with applicable privacy requirements because it (1) Has the approval of an accredited IRB to conduct this research study and its associated data safety procedures, and (2) Protects patient data elements received in “Behavioral Health: Clinical Decisions Support” by utilizing a secured web browsing session, and data encryption to protect its database.  </p>
+
+        <h3 class="inflexxion-sub-header contact-header">Website Security</h3>
+
+        <p>Inflexxion is committed to the security of the information that is either available from or collected by “Behavioral Health: Clinical Decisions Support”.  Inflexxion has taken multiple steps to safeguard the integrity of its telecommunications and computing infrastructure, including but not limited to, authentication, monitoring, auditing, and encryption.</p>
+
+        <h3 class="inflexxion-sub-header contact-header">Email Disclaimer</h3>
+        <p>Inflexxion’s Privacy Policy has no application to proprietary information, ideas or other intellectual property that you send to Inflexxion via email or otherwise. If you want to keep such information private or proprietary, then do not include them in an email to Inflexxion.</p>
+
+        <h3 class="inflexxion-sub-header contact-header">Contact Information</h3>
+
+        <p>Inflexxion welcomes comments regarding this Privacy Policy. Please convey any questions or concerns to:</p>
+
+        <a href="mailto:BHCDS@inflexxion.com?Subject=" target="_top">BHCDS@inflexxion.com</a><br/>
+        Phone: (800) 848-3895 <br/>
+
+        <br/><br/>
+
+    </div>
+</script>

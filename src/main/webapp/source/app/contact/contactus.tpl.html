@@ -1,0 +1,83 @@
+<div ng-include="headnavbar" ng-cloak></div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="" ng-class="{'display': enableDropDownMenu}" ng-click="toggleDropDownMenu()">
+            <span class="menu-text" ></span>
+        </a>
+
+        <div ng-include="sidenavbar" ng-cloak ></div>
+
+        <div class="main-content">
+
+            <div ng-include="breadcrums" ng-cloak></div>
+
+            <div class="inflexxion-page-content">
+
+                <h1 class="inflexxion-page-header">
+                    Contact Us
+                </h1>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+
+                        <div class="inflexxion-arial-12">
+
+                            <div>
+                                <div style="float:left;width:50%;">
+                                    <p><strong>Main Office:</strong></p>
+
+                                    Inflexxion, Inc. <br/>
+                                    320 Needham Street <br/>
+                                    Suite 100 <br/>
+                                    Newton, MA 02464 <br/>
+
+                                    <br/><br/>
+
+                                    <p><strong>Phone:</strong><br/>
+                                        1.800.###.####</p>
+
+                                    <br/>
+
+                                    <p><strong>Fax:</strong><br/>
+                                        1.800.###.####.</p>
+
+                                    <br/>
+
+                                    <p><strong>Website:</strong><br/>
+                                        www.Inflexxion.com</p>
+                                    <br/><br/>
+                                </div>
+
+                                <div style="float:right;width:50%;">
+
+                                    <p><strong>Email Contact:</strong></p>
+
+                                    <a href="mailto:techsupport@product.com?Subject=Support" target="_top">techsupport@<product>.com</a><br/>
+                                    <p>Technical support for problems with the website</p>
+
+                                    <a href="mailto:Feedback@product.com?Subject=Support" target="_top">Feedback@<product>.com</a><br/>
+                                    <p>Suggest changes for this website</p>
+
+                                    <a href="mailto:info@product.com?Subject=Support" target="_top">info@<product>.com</a><br/>
+                                    <p>General questions</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container-inner -->
+
+</div><!-- /.main-container -->
+<div ng-include="footer" ng-cloak></div>

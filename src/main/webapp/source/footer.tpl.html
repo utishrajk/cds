@@ -1,0 +1,32 @@
+
+
+<div class="footer">
+    <div class="footer-inner">
+        <div class="footer-content" >
+            <div class="inflexxion-foot-link">
+
+                <div ng-switch="isLogin()" >
+                    <div ng-switch-when="true" >
+                        <a href="#/aboutus"  ng-class="{'disable-hyperlink': currentFooterPage == 'aboutus' }"  > About Us </a><span>|</span>
+                        <a href="#/termofuse"  ng-class="{'disable-hyperlink': currentFooterPage == 'termofuse' }"   > Terms of Use </a> <span>|</span>
+                        <a href="#/privacypolicy"  ng-class="{'disable-hyperlink': currentFooterPage == 'privacypolicy' }"  > Privacy Policy </a><span>|</span>
+                        <a href="#/contactus"  ng-class="{'disable-hyperlink': currentFooterPage == 'contactus' }"  > Contact Us </a><span>|</span>
+                        <a href="#/generalfeedback"  ng-class="{'disable-hyperlink': currentFooterPage == 'feedback' }"  > Feedback </a> <span>|</span>
+                        <a href="#/faqs"  ng-class="{'disable-hyperlink': currentFooterPage == 'faqs' }"  > FAQs </a>
+                        <br/> &copy;2014 Inflexxion, Inc. All rights reserved
+                    </div>
+                    <div ng-switch-when="false" >
+                        <a href="#/aboutuspublic"  ng-class="{'disable-hyperlink': currentFooterPage == 'aboutus' }"  > About Us </a><span>|</span>
+                        <a href="#/termofusepublic"  ng-class="{'disable-hyperlink': currentFooterPage == 'termofuse' }"   > Terms of Use </a> <span>|</span>
+                        <a href="#/privacypolicypublic"  ng-class="{'disable-hyperlink': currentFooterPage == 'privacypolicy' }"  > Privacy Policy </a><span>|</span>
+                        <a href="#/contactuspublic"  ng-class="{'disable-hyperlink': currentFooterPage == 'contactus' }"  > Contact Us </a><span>|</span>
+                        <a href="#/generalfeedbackpublic"  ng-class="{'disable-hyperlink': currentFooterPage == 'feedback' }"  > Feedback </a> <span>|</span>
+                        <a href="#/faqspublic"  ng-class="{'disable-hyperlink': currentFooterPage == 'faqs' }"  > FAQs </a>
+                        <br/> &copy;2014 Inflexxion, Inc. All rights reserved
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
